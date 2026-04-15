@@ -6,8 +6,6 @@ import editModeDevPlugin from './plugins/visual-editor/vite-plugin-edit-mode.js'
 import iframeRouteRestorationPlugin from './plugins/vite-plugin-iframe-route-restoration.js';
 import selectionModePlugin from './plugins/selection-mode/vite-plugin-selection-mode.js';
 
-const isDev = process.env.NODE_ENV !== 'production';
-
 const configHorizonsViteErrorHandler = `
 const observer = new MutationObserver((mutations) => {
 	for (const mutation of mutations) {
@@ -233,34 +231,41 @@ logger.error = (msg, options) => {
 	loggerError(msg, options);
 }
 
-export default defineConfig({
-	customLogger: logger,
-	plugins: [
-		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin(), selectionModePlugin()] : []),
-		react(),
-		addTransformIndexHtml
-	],
-	server: {
-		cors: true,
-		headers: {
-			'Cross-Origin-Embedder-Policy': 'credentialless',
+export default defineConfig(({ command }) => {
+	const isDev = command === 'serve';
+
+	return {
+		customLogger: logger,
+		plugins: [
+			// Only enable the visual-editor/dev plugins when running `vite dev`.
+			// `process.env.NODE_ENV` is not reliably set in all build environments (e.g. Cloudflare),
+			// which can accidentally ship dev-only behavior into production builds.
+			...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin(), selectionModePlugin()] : []),
+			react(),
+			addTransformIndexHtml
+		],
+		server: {
+			cors: true,
+			headers: {
+				'Cross-Origin-Embedder-Policy': 'credentialless',
+			},
+			allowedHosts: true,
 		},
-		allowedHosts: true,
-	},
-	resolve: {
-		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
-		alias: {
-			'@': path.resolve(__dirname, './src'),
+		resolve: {
+			extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
+			alias: {
+				'@': path.resolve(__dirname, './src'),
+			},
 		},
-	},
-	build: {
-		rollupOptions: {
-			external: [
-				'@babel/parser',
-				'@babel/traverse',
-				'@babel/generator',
-				'@babel/types'
-			]
+		build: {
+			rollupOptions: {
+				external: [
+					'@babel/parser',
+					'@babel/traverse',
+					'@babel/generator',
+					'@babel/types'
+				]
+			}
 		}
-	}
+	};
 });
