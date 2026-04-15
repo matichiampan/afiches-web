@@ -162,61 +162,63 @@ if (window.navigation && window.self !== window.top) {
 }
 `;
 
-const addTransformIndexHtml = {
-	name: 'add-transform-index-html',
-	transformIndexHtml(html) {
-		const tags = [
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configHorizonsRuntimeErrorHandler,
-				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configHorizonsViteErrorHandler,
-				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: {type: 'module'},
-				children: configHorizonsConsoleErrroHandler,
-				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configWindowFetchMonkeyPatch,
-				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configNavigationHandler,
-				injectTo: 'head',
-			},
-		];
-
-		if (!isDev && process.env.TEMPLATE_BANNER_SCRIPT_URL && process.env.TEMPLATE_REDIRECT_URL) {
-			tags.push(
+function createTransformIndexHtmlPlugin(isDev) {
+	return {
+		name: 'add-transform-index-html',
+		transformIndexHtml(html) {
+			const tags = [
 				{
 					tag: 'script',
-					attrs: {
-						src: process.env.TEMPLATE_BANNER_SCRIPT_URL,
-						'template-redirect-url': process.env.TEMPLATE_REDIRECT_URL,
-					},
+					attrs: { type: 'module' },
+					children: configHorizonsRuntimeErrorHandler,
 					injectTo: 'head',
-				}
-			);
-		}
+				},
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configHorizonsViteErrorHandler,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: {type: 'module'},
+					children: configHorizonsConsoleErrroHandler,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configWindowFetchMonkeyPatch,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configNavigationHandler,
+					injectTo: 'head',
+				},
+			];
 
-		return {
-			html,
-			tags,
-		};
-	},
-};
+			if (!isDev && process.env.TEMPLATE_BANNER_SCRIPT_URL && process.env.TEMPLATE_REDIRECT_URL) {
+				tags.push(
+					{
+						tag: 'script',
+						attrs: {
+							src: process.env.TEMPLATE_BANNER_SCRIPT_URL,
+							'template-redirect-url': process.env.TEMPLATE_REDIRECT_URL,
+						},
+						injectTo: 'head',
+					}
+				);
+			}
+
+			return {
+				html,
+				tags,
+			};
+		},
+	};
+}
 
 console.warn = () => {};
 
@@ -242,7 +244,7 @@ export default defineConfig(({ command }) => {
 			// which can accidentally ship dev-only behavior into production builds.
 			...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin(), selectionModePlugin()] : []),
 			react(),
-			addTransformIndexHtml
+			createTransformIndexHtmlPlugin(isDev)
 		],
 		server: {
 			cors: true,
