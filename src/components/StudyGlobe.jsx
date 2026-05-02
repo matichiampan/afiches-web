@@ -14,6 +14,12 @@ const HIGHLIGHTED_COUNTRIES = [
     labels: { es: 'Argentina', en: 'Argentina', pt: 'Argentina' },
   },
   {
+    id: 'Bolivia',
+    color: '#A3E635',
+    rotate: [64, 17],
+    labels: { es: 'Bolivia', en: 'Bolivia', pt: 'Bolívia' },
+  },
+  {
     id: 'Chile',
     color: '#60A5FA',
     rotate: [71, 35],
@@ -54,6 +60,12 @@ const HIGHLIGHTED_COUNTRIES = [
     color: '#34D399',
     rotate: [86, -15],
     labels: { es: 'Honduras', en: 'Honduras', pt: 'Honduras' },
+  },
+  {
+    id: 'Mexico',
+    color: '#FB7185',
+    rotate: [102, -23],
+    labels: { es: 'México', en: 'Mexico', pt: 'México' },
   },
 ];
 
