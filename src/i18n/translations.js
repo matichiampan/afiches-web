@@ -52,8 +52,7 @@ export const translations = {
       statsLabels: ['Entrevistas', 'Temas', 'Subtemas', 'Verbatims', 'Margen de error'],
     },
     portfolio: {
-      description: 'Investigaciones propias y trabajos realizados para clientes. Publicamos los estudios que podemos compartir con acceso libre y descarga directa.',
-      description2: 'Encuestas de opinión, estudios cualitativos y análisis de coyuntura. Cada informe incluye ficha técnica, metodología y base de datos cuando corresponde.',
+      description: 'Accedé a nuestros últimos informes.',
       view: 'VER',
       download: 'DESCARGAR',
     },
@@ -128,8 +127,7 @@ export const translations = {
       statsLabels: ['Interviews', 'Themes', 'Subthemes', 'Verbatims', 'Margin of error'],
     },
     portfolio: {
-      description: 'Original research and work done for clients. We publish the studies we can share, with open access and direct download.',
-      description2: 'Opinion surveys, qualitative studies and situation analyses. Each report includes technical sheet, methodology and dataset where applicable.',
+      description: 'Access our latest reports.',
       view: 'VIEW',
       download: 'DOWNLOAD',
     },
@@ -204,8 +202,7 @@ export const translations = {
       statsLabels: ['Entrevistas', 'Temas', 'Subtemas', 'Verbatims', 'Margem de erro'],
     },
     portfolio: {
-      description: 'Pesquisas próprias e trabalhos realizados para clientes. Publicamos os estudos que podemos compartilhar com acesso livre e download direto.',
-      description2: 'Pesquisas de opinião, estudos qualitativos e análises de conjuntura. Cada relatório inclui ficha técnica, metodologia e base de dados quando aplicável.',
+      description: 'Acesse nossos últimos relatórios.',
       view: 'VER',
       download: 'BAIXAR',
     },

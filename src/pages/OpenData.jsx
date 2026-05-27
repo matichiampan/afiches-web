@@ -9,38 +9,35 @@ import { useIsMobile } from '../hooks/useIsMobile';
 const DOCS = [
   {
     id: 1,
-    title: 'Crisis en Venezuela',
-    subtitle: 'Percepciones regionales: Venezuela, Colombia, Brasil y Argentina',
-    category: 'INVESTIGACIÓN',
-    year: '2025',
-    size: '—',
-    fileUrl: '/docs/crisis-venezuela.pdf',
-    cardColor: '#7C3AED',
-    stackColors: ['#F97316', '#DDD6FE'],
-    number: '01',
-  },
-  {
-    id: 2,
     title: "Reporte Fintech Q2'26",
     subtitle: 'Informe Afiches, segundo trimestre de 2026',
     category: 'FINTECH',
-    year: '2026',
     size: '532 KB',
     fileUrl: '/docs/reporte-fintech-q2-26.pdf',
     cardColor: '#F97316',
     stackColors: ['#7C3AED', '#DDD6FE'],
-    number: '02',
+    number: '01',
   },
   {
-    id: 3,
+    id: 2,
     title: 'Reporte de seguridad',
     subtitle: 'Informe Afiches 2026',
     category: 'SEGURIDAD',
-    year: '2026',
     size: '259 KB',
     fileUrl: '/docs/reporte-seguridad-afiches-2026.pdf',
     cardColor: '#0369A1',
     stackColors: ['#22D46A', '#BAE6FD'],
+    number: '02',
+  },
+  {
+    id: 3,
+    title: 'Crisis en Venezuela',
+    subtitle: 'Percepciones regionales: Venezuela, Colombia, Brasil y Argentina',
+    category: 'INVESTIGACIÓN',
+    size: '—',
+    fileUrl: '/docs/crisis-venezuela.pdf',
+    cardColor: '#7C3AED',
+    stackColors: ['#F97316', '#DDD6FE'],
     number: '03',
   },
 ];
@@ -56,9 +53,6 @@ function DocCard({ doc, stacked = false, viewLabel, downloadLabel }) {
         <span className="text-xs font-bold tracking-widest px-3 py-1 rounded-full"
           style={{ background: 'rgba(255,255,255,0.15)', color: '#F0EBE1' }}>
           {doc.category}
-        </span>
-        <span className="text-xs font-bold" style={{ color: 'rgba(240,235,225,0.55)' }}>
-          ( {doc.year} )
         </span>
       </div>
 
@@ -191,19 +185,13 @@ export default function OpenData() {
           style={{ padding: isMobile ? '32px 20px' : '56px 48px' }}
         >
           <p style={{
-            fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)',
-            color: 'rgba(240,235,225,0.75)',
-            lineHeight: 1.7,
-            marginBottom: 16,
+            fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+            color: 'var(--cream)',
+            fontWeight: 800,
+            lineHeight: 1.12,
+            maxWidth: 520,
           }}>
             {t.portfolio.description}
-          </p>
-          <p style={{
-            fontSize: '0.88rem',
-            color: 'rgba(240,235,225,0.35)',
-            lineHeight: 1.6,
-          }}>
-            {t.portfolio.description2}
           </p>
         </motion.div>
 
