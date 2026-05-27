@@ -4,3 +4,5 @@
 /*.html
   Cache-Control: no-store
 
+/docs/*.pdf
+  Cache-Control: no-store
