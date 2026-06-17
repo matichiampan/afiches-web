@@ -9,6 +9,17 @@ import { useIsMobile } from '../hooks/useIsMobile';
 const DOCS = [
   {
     id: 1,
+    title: 'Opinión pública Argentina',
+    subtitle: 'Informe Afiches, junio de 2026',
+    category: 'OPINION PUBLICA',
+    size: '516 KB',
+    fileUrl: '/docs/opinion-publica-argentina-junio-2026.pdf',
+    cardColor: '#BE123C',
+    stackColors: ['#22D46A', '#BAE6FD'],
+    number: '01',
+  },
+  {
+    id: 2,
     title: "Reporte Fintech Q2'26",
     subtitle: 'Informe Afiches, segundo trimestre de 2026',
     category: 'FINTECH',
@@ -16,10 +27,10 @@ const DOCS = [
     fileUrl: '/docs/reporte-fintech-q2-2026-afiches.pdf',
     cardColor: '#F97316',
     stackColors: ['#7C3AED', '#DDD6FE'],
-    number: '01',
+    number: '02',
   },
   {
-    id: 2,
+    id: 3,
     title: 'Reporte de seguridad',
     subtitle: 'Informe Afiches 2026',
     category: 'SEGURIDAD',
@@ -27,10 +38,10 @@ const DOCS = [
     fileUrl: '/docs/reporte-seguridad-afiches-2026.pdf',
     cardColor: '#0369A1',
     stackColors: ['#22D46A', '#BAE6FD'],
-    number: '02',
+    number: '03',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Crisis en Venezuela',
     subtitle: 'Percepciones regionales: Venezuela, Colombia, Brasil y Argentina',
     category: 'INVESTIGACIÓN',
@@ -38,7 +49,7 @@ const DOCS = [
     fileUrl: '/docs/crisis-venezuela.pdf',
     cardColor: '#7C3AED',
     stackColors: ['#F97316', '#DDD6FE'],
-    number: '03',
+    number: '04',
   },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
