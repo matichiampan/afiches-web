@@ -490,7 +490,7 @@ export default function OpenData() {
 
   return (
     <div style={{ background: 'var(--bg)' }}>
-      <SectionIntro number="01" title={labels.sectionTitle} accent="#22D46A" marqueeColor="#22D46A" />
+      <SectionIntro number="03" title={labels.sectionTitle} accent="#22D46A" marqueeColor="#22D46A" />
 
       <section style={{ padding: isMobile ? '28px 20px 44px' : '42px 48px 68px' }}>
         <div style={{ maxWidth: 1360, margin: '0 auto' }}>
