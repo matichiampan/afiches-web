@@ -9,6 +9,10 @@ const CLIENTS_MAIN = [
   { src: '/logos/logo-def.png',              alt: 'DEF' },
 ];
 
+const CLIENTS_WIDE = [
+  { src: '/logos/logo-claim.png', alt: 'Orja', surface: 'light' },
+];
+
 const CLIENTS_MEDIA = [
   { src: '/logos/infobae.png', alt: 'Infobae' },
 ];
@@ -28,8 +32,10 @@ function Card({ children }) {
   );
 }
 
-function LogoCard({ src, alt, delay, variant = 'md' }) {
+function LogoCard({ src, alt, delay, variant = 'md', surface = 'dark' }) {
   const isLg = variant === 'lg';
+  const isWide = variant === 'wide';
+  const isLight = surface === 'light';
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -37,14 +43,14 @@ function LogoCard({ src, alt, delay, variant = 'md' }) {
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
       style={{
-        background: 'rgba(255,255,255,0.05)',
-        border: '1px solid rgba(255,255,255,0.085)',
+        background: isLight ? '#f7f9fb' : 'rgba(255,255,255,0.05)',
+        border: isLight ? '1px solid rgba(255,255,255,0.16)' : '1px solid rgba(255,255,255,0.085)',
         borderRadius: 18,
-        padding: isLg ? '10px 12px' : '22px 22px',
+        padding: isLg ? '10px 12px' : isWide ? '18px 24px' : '22px 22px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: isLg ? 290 : 112,
+        minHeight: isLg ? 290 : isWide ? 148 : 112,
         width: '100%',
         overflow: 'visible',
       }}
@@ -53,10 +59,10 @@ function LogoCard({ src, alt, delay, variant = 'md' }) {
         src={src}
         alt={alt}
         style={{
-          width: isLg ? '100%' : 'auto',
-          height: isLg ? '100%' : 68,
+          width: isLg || isWide ? '100%' : 'auto',
+          height: isLg ? '100%' : isWide ? 'auto' : 68,
           maxWidth: '100%',
-          maxHeight: isLg ? 250 : 'none',
+          maxHeight: isLg ? 250 : isWide ? 116 : 'none',
           objectFit: 'contain',
           display: 'block',
           borderRadius: isLg ? 14 : 0,
@@ -100,9 +106,20 @@ export default function Clients() {
             {CLIENTS_MAIN.map((c, i) => (
               <LogoCard key={c.alt} src={c.src} alt={c.alt} delay={i * 0.08} />
             ))}
+            {CLIENTS_WIDE.map((c, i) => (
+              <div key={c.alt} style={{ gridColumn: '1 / -1' }}>
+                <LogoCard
+                  src={c.src}
+                  alt={c.alt}
+                  delay={0.16 + i * 0.08}
+                  variant="wide"
+                  surface={c.surface}
+                />
+              </div>
+            ))}
             {CLIENTS_MEDIA.map((c, i) => (
               <div key={c.alt} style={{ gridColumn: '1 / -1' }}>
-                <LogoCard src={c.src} alt={c.alt} delay={0.16 + i * 0.08} variant="lg" />
+                <LogoCard src={c.src} alt={c.alt} delay={0.24 + i * 0.08} variant="lg" />
               </div>
             ))}
           </div>

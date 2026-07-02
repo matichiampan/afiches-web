@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "afiches-web",
+  "compatibility_date": "2026-07-02",
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "afiches-report-leads",
+      "database_id": "eb856b46-6b07-420c-8ec1-24e0db5dc3bc"
+    }
+  ]
+}

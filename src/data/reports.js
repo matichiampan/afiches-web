@@ -1,0 +1,107 @@
+export const reports = [
+  {
+    id: 1,
+    slug: 'opinion-publica-argentina-junio-2026',
+    title: 'Opinion publica Argentina',
+    subtitle: 'Informe Afiches, junio de 2026',
+    category: 'OPINION PUBLICA',
+    period: 'Junio 2026',
+    geography: 'Argentina',
+    sample: '1.110 respuestas',
+    fileUrl: '/docs/opinion-publica-argentina-junio-2026.pdf',
+    cardColor: '#BE123C',
+    accentColor: '#22D46A',
+    stackColors: ['#22D46A', '#BAE6FD'],
+    number: '01',
+    summary: 'Un mapa de clima social, agenda publica y percepciones ciudadanas construido sobre una muestra nacional.',
+    highlights: ['Ficha tecnica visible', 'Cruces demograficos', 'Lectura de agenda publica'],
+    dashboardReady: false,
+    teaserStats: [
+      { label: 'Respuestas', value: '1.110' },
+      { label: 'Pais', value: 'AR' },
+      { label: 'Periodo', value: 'Jun 26' },
+    ],
+  },
+  {
+    id: 2,
+    slug: 'reporte-fintech-q2-2026',
+    title: "Reporte Fintech Q2'26",
+    subtitle: 'Informe Afiches, segundo trimestre de 2026',
+    category: 'FINTECH',
+    period: 'Mayo 2026',
+    geography: 'Argentina',
+    sample: '650 casos',
+    fileUrl: '/docs/reporte-fintech-q2-2026-afiches.pdf',
+    cardColor: '#F97316',
+    accentColor: '#7C3AED',
+    stackColors: ['#7C3AED', '#DDD6FE'],
+    number: '02',
+    summary: 'Un relevamiento sobre billeteras virtuales, bancos, efectivo y nuevos habitos de pago en Argentina.',
+    highlights: ['Productos bancarios', 'Medios de pago', 'Entrevistas potenciadas por IA'],
+    dashboardReady: false,
+    teaserStats: [
+      { label: 'Casos', value: '650' },
+      { label: 'Uso billetera', value: '62%' },
+      { label: 'Debito', value: '78%' },
+    ],
+  },
+  {
+    id: 3,
+    slug: 'seguridad-comparada-2026',
+    title: 'Reporte de seguridad',
+    subtitle: 'Seguridad comparada: Argentina, Mexico, Honduras y Uruguay',
+    category: 'SEGURIDAD',
+    period: '2025-2026',
+    geography: '4 paises',
+    sample: '4 estudios nacionales',
+    fileUrl: '/docs/reporte-seguridad-afiches-2026.pdf',
+    cardColor: '#0369A1',
+    accentColor: '#BAE6FD',
+    stackColors: ['#22D46A', '#BAE6FD'],
+    number: '03',
+    summary: 'Una comparacion regional sobre percepcion de inseguridad, experiencia directa y conversacion publica.',
+    highlights: ['Comparacion regional', 'Percepcion y experiencia', 'Evolucion del contexto'],
+    dashboardReady: false,
+    teaserStats: [
+      { label: 'Paises', value: '4' },
+      { label: 'Estudios', value: '4' },
+      { label: 'Tema', value: 'Seguridad' },
+    ],
+  },
+  {
+    id: 4,
+    slug: 'crisis-venezuela-enero-2026',
+    title: 'Crisis en Venezuela',
+    subtitle: 'Percepciones regionales: Venezuela, Colombia, Brasil y Argentina',
+    category: 'INVESTIGACION',
+    period: 'Enero 2026',
+    geography: 'Venezuela, Colombia, Brasil y Argentina',
+    sample: 'Resumen regional',
+    fileUrl: '/docs/crisis-venezuela.pdf',
+    cardColor: '#7C3AED',
+    accentColor: '#F97316',
+    stackColors: ['#F97316', '#DDD6FE'],
+    number: '04',
+    summary: 'Una lectura regional sobre la crisis venezolana, percepcion del regimen y posicion frente a la intervencion externa.',
+    highlights: ['Percepcion del regimen', 'Apoyo a intervencion', 'Comparacion por pais'],
+    dashboardReady: false,
+    teaserStats: [
+      { label: 'Paises', value: '4' },
+      { label: 'Fecha', value: 'Ene 26' },
+      { label: 'Foco', value: 'Regional' },
+    ],
+  },
+];
+
+export function getReportBySlug(slug) {
+  return reports.find((report) => report.slug === slug);
+}
+
+export function getReportByFileName(fileName) {
+  return reports.find((report) => report.fileUrl.split('/').pop() === fileName);
+}
+
+export function getReportAccessPath(reportOrSlug) {
+  const slug = typeof reportOrSlug === 'string' ? reportOrSlug : reportOrSlug.slug;
+  return `/estudios/${slug}`;
+}

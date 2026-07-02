@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BrandDots from './BrandDots';
 import { useLang } from '../context/LanguageContext';
 
@@ -9,27 +10,46 @@ const LANGS = [
   { code: 'pt', flagSrc: 'https://flagcdn.com/24x18/br.png', label: 'PT' },
 ];
 
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
 export default function Header() {
   const { lang, setLang, t } = useLang();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [active, setActive] = useState('inicio');
   const [menuOpen, setMenuOpen] = useState(false);
+  const reportesLabel = { es: 'REPORTES', en: 'REPORTS', pt: 'RELATORIOS' }[lang] || 'REPORTES';
+  const clientesLabel = { es: 'CLIENTES', en: 'CLIENTS', pt: 'CLIENTES' }[lang] || 'CLIENTES';
 
   const navLinks = [
     { id: 'inicio',       label: t.nav.inicio },
-    { id: 'servicios',    label: t.nav.servicios },
+    { id: 'reportes',     label: reportesLabel },
     { id: 'encuestas-ia', label: t.nav.encuestasIa },
-    { id: 'portfolio',    label: t.nav.portfolio },
+    { id: 'clientes',     label: clientesLabel },
     { id: 'contacto',     label: t.nav.contacto },
   ];
 
+  const scrollToSection = (id) => {
+    const scroll = () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      window.setTimeout(scroll, 80);
+      return;
+    }
+
+    scroll();
+  };
+
   // Detecta qué sección está visible con IntersectionObserver
   useEffect(() => {
-    const ids = ['inicio', 'servicios', 'encuestas-ia', 'portfolio', 'contacto'];
+    if (location.pathname.startsWith('/reportes/')) {
+      setActive('reportes');
+      return undefined;
+    }
+
+    const ids = ['inicio', 'reportes', 'encuestas-ia', 'clientes', 'contacto'];
     const observers = ids.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -41,7 +61,7 @@ export default function Header() {
       return obs;
     });
     return () => observers.forEach(obs => obs?.disconnect());
-  }, []);
+  }, [location.pathname]);
 
   return (
     <header

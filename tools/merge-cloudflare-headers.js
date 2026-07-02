@@ -31,16 +31,23 @@ const distHeadersPath = path.join(rootDir, 'dist', '_headers');
 const publicHeadersPath = path.join(rootDir, 'public', '_headers');
 const distRedirectsPath = path.join(rootDir, 'dist', '_redirects');
 const publicRedirectsPath = path.join(rootDir, 'public', '_redirects');
+const distRoutesPath = path.join(rootDir, 'dist', '_routes.json');
+const publicRoutesPath = path.join(rootDir, 'public', '_routes.json');
 
 const publicHeaders = readIfExists(publicHeadersPath);
 const distHeaders = readIfExists(distHeadersPath);
 const publicRedirects = readIfExists(publicRedirectsPath);
+const publicRoutes = readIfExists(publicRoutesPath);
 
 if (!publicHeaders.trim() && !distHeaders.trim()) {
   // Still copy redirects if present.
   if (publicRedirects.trim()) {
     fs.mkdirSync(path.dirname(distRedirectsPath), { recursive: true });
     fs.writeFileSync(distRedirectsPath, normalize(publicRedirects) + '\n', 'utf8');
+  }
+  if (publicRoutes.trim()) {
+    fs.mkdirSync(path.dirname(distRoutesPath), { recursive: true });
+    fs.writeFileSync(distRoutesPath, normalize(publicRoutes) + '\n', 'utf8');
   }
   process.exit(0);
 }
@@ -54,4 +61,10 @@ fs.writeFileSync(distHeadersPath, merged, 'utf8');
 if (publicRedirects.trim()) {
   fs.mkdirSync(path.dirname(distRedirectsPath), { recursive: true });
   fs.writeFileSync(distRedirectsPath, normalize(publicRedirects) + '\n', 'utf8');
+}
+
+// Cloudflare Pages Functions: force protected routes through the Functions bundle.
+if (publicRoutes.trim()) {
+  fs.mkdirSync(path.dirname(distRoutesPath), { recursive: true });
+  fs.writeFileSync(distRoutesPath, normalize(publicRoutes) + '\n', 'utf8');
 }
