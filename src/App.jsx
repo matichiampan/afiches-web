@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Home from '@/pages/Home';
-import Services from '@/pages/Services';
 import OpenData from '@/pages/OpenData';
 import AIEncuestas from '@/pages/AIEncuestas';
 import Contact from '@/pages/Contact';
@@ -21,14 +20,11 @@ function LandingPage() {
       <section id="inicio">
         <Home />
       </section>
-      <section id="servicios">
-        <Services />
+      <section id="reportes">
+        <OpenData />
       </section>
       <section id="encuestas-ia">
         <AIEncuestas />
-      </section>
-      <section id="reportes">
-        <OpenData />
       </section>
       <section id="clientes">
         <Clients />
