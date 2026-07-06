@@ -21,8 +21,9 @@ export default function Header() {
 
   const navLinks = [
     { id: 'inicio',       label: t.nav.inicio },
-    { id: 'reportes',     label: reportesLabel },
+    { id: 'servicios',    label: t.nav.servicios },
     { id: 'encuestas-ia', label: t.nav.encuestasIa },
+    { id: 'reportes',     label: reportesLabel },
     { id: 'clientes',     label: clientesLabel },
     { id: 'contacto',     label: t.nav.contacto },
   ];
@@ -49,7 +50,7 @@ export default function Header() {
       return undefined;
     }
 
-    const ids = ['inicio', 'reportes', 'encuestas-ia', 'clientes', 'contacto'];
+    const ids = ['inicio', 'servicios', 'encuestas-ia', 'reportes', 'clientes', 'contacto'];
     const observers = ids.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
