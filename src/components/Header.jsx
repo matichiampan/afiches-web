@@ -72,12 +72,12 @@ export default function Header() {
       <div className="w-full px-6 py-3 flex items-center justify-between relative">
 
         {/* Left — nav links desktop */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden xl:flex items-center gap-3 2xl:gap-6">
           {navLinks.map(({ id, label }) => (
             <button
               key={id}
               onClick={() => scrollToSection(id)}
-              className="text-sm font-semibold tracking-widest transition-all duration-200 bg-transparent border-0 cursor-pointer"
+              className="text-xs 2xl:text-sm font-semibold tracking-widest whitespace-nowrap transition-all duration-200 bg-transparent border-0 cursor-pointer"
               style={active === id
                 ? { background: 'var(--lavender)', color: 'var(--bg)', padding: '4px 16px', borderRadius: 9999 }
                 : { color: 'var(--cream)', padding: '4px 0' }}
@@ -96,7 +96,7 @@ export default function Header() {
         </button>
 
         {/* Right — language switcher desktop */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             {LANGS.map(({ code, flagSrc, label }) => (
               <button
@@ -128,7 +128,7 @@ export default function Header() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden ml-auto bg-transparent border-0 cursor-pointer"
+          className="xl:hidden ml-auto bg-transparent border-0 cursor-pointer"
           style={{ color: 'var(--cream)' }}
           onClick={() => setMenuOpen(o => !o)}
         >
