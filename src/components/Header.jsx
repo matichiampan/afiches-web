@@ -28,19 +28,34 @@ export default function Header() {
     { id: 'contacto',     label: t.nav.contacto },
   ];
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id, delay = 0) => {
     const scroll = () => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (!el) return;
+
+      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+      const top = Math.max(0, window.scrollY + el.getBoundingClientRect().top - headerHeight);
+      window.scrollTo({ top, behavior: 'smooth' });
     };
 
     if (location.pathname !== '/') {
       navigate('/');
-      window.setTimeout(scroll, 80);
+      window.setTimeout(scroll, Math.max(delay, 80));
+      return;
+    }
+
+    if (delay) {
+      window.setTimeout(scroll, delay);
       return;
     }
 
     scroll();
+  };
+
+  const navigateFromMobileMenu = (id) => {
+    setMenuOpen(false);
+    // Espera a que termine el cierre del menú para calcular la posición final.
+    scrollToSection(id, 220);
   };
 
   // Detecta qué sección está visible con IntersectionObserver
@@ -158,7 +173,7 @@ export default function Header() {
               {navLinks.map(({ id, label }) => (
                 <button
                   key={id}
-                  onClick={() => { scrollToSection(id); setMenuOpen(false); }}
+                  onClick={() => navigateFromMobileMenu(id)}
                   className="text-left bg-transparent border-0 cursor-pointer"
                   style={active === id
                     ? { background: 'var(--lavender)', color: 'var(--bg)', padding: '4px 16px', borderRadius: 9999, fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em' }
