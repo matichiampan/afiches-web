@@ -164,11 +164,15 @@ function CarouselView({ viewLabel, downloadLabel, isMobile, onRequestAccess }) {
 
 function GridView({ viewLabel, downloadLabel, onRequestAccess }) {
   return (
-    <div style={{ padding: '48px 48px 64px' }}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="px-5 sm:px-8 lg:px-12 pt-12 pb-16">
+      <div
+        className="grid gap-5"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))' }}
+      >
         {reports.map((report, i) => (
           <motion.div
             key={report.slug}
+            className="min-w-0"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -198,9 +202,8 @@ export default function OpenData() {
       <SectionIntro number="03" title={t.sectionIntro.portfolio} accent="#22D46A" marqueeColor="#22D46A" />
 
       <div
+        className="grid grid-cols-1 xl:grid-cols-2"
         style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
           minHeight: isMobile ? 'unset' : 520,
           alignItems: 'center',
         }}
@@ -225,7 +228,7 @@ export default function OpenData() {
           </p>
         </motion.div>
 
-        <div style={{ borderLeft: isMobile ? 'none' : '1px solid rgba(240,235,225,0.07)' }}>
+        <div className="border-t border-[rgba(240,235,225,0.07)] xl:border-t-0 xl:border-l">
           {useGrid ? (
             <GridView
               viewLabel={t.portfolio.view}

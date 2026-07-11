@@ -82,15 +82,14 @@ export default function Clients() {
       borderTop: '1px solid rgba(240,235,225,0.07)',
       padding: 'clamp(32px, 6vw, 56px) clamp(16px, 6vw, 48px)',
     }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 1fr)',
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)_minmax(0,1fr)]" style={{
         gap: 16,
         alignItems: 'stretch',
       }}>
 
         {/* CLIENTES */}
-        <Card>
+        <div className="md:col-span-2 xl:col-span-1">
+          <Card>
           <p style={{
             fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.22em',
             color: 'rgba(240,235,225,0.45)', marginBottom: 12,
@@ -123,7 +122,8 @@ export default function Clients() {
               </div>
             ))}
           </div>
-        </Card>
+          </Card>
+        </div>
 
         {/* ALAS */}
         <Card>

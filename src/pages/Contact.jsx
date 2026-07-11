@@ -15,13 +15,12 @@ export default function Contact() {
       <SectionIntro number="04" title={t.sectionIntro.contacto} accent="#DDD6FE" marqueeColor="#7C3AED" />
 
       <motion.div
+        className="grid grid-cols-1 xl:grid-cols-2"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
           gap: isMobile ? 32 : 64,
           alignItems: 'center',
           padding: isMobile ? '40px 20px' : '64px 48px',

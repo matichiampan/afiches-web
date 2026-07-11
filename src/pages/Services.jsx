@@ -155,10 +155,10 @@ export default function Services() {
     <div style={{ background: 'var(--bg)' }}>
       <SectionIntro number="02" title={t.sectionIntro.servicios} accent="#F97316" />
 
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 3 }}>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-[3px]">
 
         {/* Izquierda â€” cards compactas */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-[3px]">
           {items.map((svc, i) => (
             <Cell key={i} svc={svc} index={i}
               meInteresa={t.services.meInteresa}

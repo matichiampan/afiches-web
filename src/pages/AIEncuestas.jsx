@@ -184,7 +184,7 @@ export default function AIEncuestas() {
       <div style={{ borderTop: '1px solid rgba(240,235,225,0.07)' }} />
 
       {/* ── 1. Hero + pasos — una sola franja ── */}
-      <div style={{ padding: P, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 32 : 56, alignItems: 'center' }}>
+      <div className="grid grid-cols-1 xl:grid-cols-2" style={{ padding: P, gap: isMobile ? 32 : 56, alignItems: 'center' }}>
 
         {/* Título */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
@@ -230,7 +230,7 @@ export default function AIEncuestas() {
 
       {/* ── 3. Cualitativo + Co-ocurrencias + Barras — todo en una grilla ── */}
       <div style={{ background: 'rgba(255,255,255,0.03)', padding: P }}>
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr', gap: isMobile ? 0 : 40, alignItems: 'start' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3" style={{ gap: isMobile ? 0 : 40, alignItems: 'start' }}>
 
           {/* Columna 1: cards cualitativas (apiladas) */}
           <div>
@@ -270,7 +270,7 @@ export default function AIEncuestas() {
 
           {/* Columna 2: grafo — oculta en mobile */}
           {!isMobile && (
-            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            <motion.div className="min-w-0" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
               <p style={{ color: '#22D46A', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 10 }}>
                 {t.ai.coocLabel}
@@ -288,7 +288,7 @@ export default function AIEncuestas() {
 
           {/* Columna 3: barras + stats — oculta en mobile */}
           {!isMobile && (
-            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            <motion.div className="min-w-0 md:col-span-2 xl:col-span-1" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }} transition={{ delay: 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
               <p style={{ color: '#F97316', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', marginBottom: 10 }}>
                 {t.ai.barsLabel}
