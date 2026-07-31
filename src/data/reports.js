@@ -1,5 +1,28 @@
 export const reports = [
   {
+    id: 5,
+    slug: 'opinion-publica-pba-julio-2026',
+    title: 'Opinión pública — Provincia de Buenos Aires',
+    subtitle: 'Informe Afiches, julio de 2026',
+    category: 'OPINION PUBLICA',
+    period: 'Julio 2026',
+    geography: 'Provincia de Buenos Aires',
+    sample: '600 casos',
+    fileUrl: '/docs/opinion-publica-pba-julio-2026.pdf',
+    cardColor: '#15803D',
+    accentColor: '#BAE6FD',
+    stackColors: ['#BAE6FD', '#DDD6FE'],
+    number: '05',
+    summary: 'Un estudio sobre clima social, economía, evaluación de gestión, imagen de dirigentes y escenario electoral en la Provincia de Buenos Aires.',
+    highlights: ['Muestra provincial', 'Clima social y economía', 'Escenario electoral'],
+    dashboardReady: false,
+    teaserStats: [
+      { label: 'Casos', value: '600' },
+      { label: 'Territorio', value: 'PBA' },
+      { label: 'Periodo', value: 'Jul 26' },
+    ],
+  },
+  {
     id: 1,
     slug: 'opinion-publica-argentina-junio-2026',
     title: 'Opinion publica Argentina',

@@ -1,5 +1,10 @@
 export const REPORTS = [
   {
+    slug: 'opinion-publica-pba-julio-2026',
+    title: 'Opinión pública — Provincia de Buenos Aires',
+    fileName: 'opinion-publica-pba-julio-2026.pdf',
+  },
+  {
     slug: 'opinion-publica-argentina-junio-2026',
     title: 'Opinion publica Argentina',
     fileName: 'opinion-publica-argentina-junio-2026.pdf',
