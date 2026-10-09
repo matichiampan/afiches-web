@@ -21,5 +21,5 @@ await fs.rm(path.join(dist, 'sitio'), { recursive: true, force: true });
 const DRAFT = /^(direccion-episto.*|borrador-clean.*|identidad-visual|visuales-prueba|recorrido-afiches-v\d+\w*-backup.*)\.(html|css|js)$/;
 for (const f of await fs.readdir(dist)) if (DRAFT.test(f)) await fs.rm(path.join(dist, f));
 
-await fs.writeFile(path.join(dist, '_redirects'), '/estudios/* /app.html 200\n/reportes/* /app.html 200\n');
+await fs.writeFile(path.join(dist, '_redirects'), '/estudios/* /app 200\n/reportes/* /app 200\n');
 console.log('Landing publicada en dist/ (/, /en/) · React en /estudios/* y /reportes/*');
