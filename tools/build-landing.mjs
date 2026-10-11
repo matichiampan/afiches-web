@@ -33,37 +33,37 @@ const META = {
 const STUDY = {
   'opinion-publica-pba-julio-2026': {
     es: ['Opinión pública', 'Opinión pública — Provincia de Buenos Aires', 'Julio 2026', '600 casos', 'Provincia de Buenos Aires', 'Un estudio sobre clima social, economía, evaluación de gestión, imagen de dirigentes y escenario electoral en la Provincia de Buenos Aires.'],
-    en: ['Public opinion', 'Public opinion — Buenos Aires Province', 'July 2026', '600 cases', 'Buenos Aires Province', 'A study of social climate, the economy, government approval, leaders’ image and the electoral landscape in Buenos Aires Province.'],
+    en: ['Public opinion', 'Public opinion — Buenos Aires Province', 'July 2026', '600 respondents', 'Buenos Aires Province', 'Public sentiment, the economy, government approval, perceptions of political leaders, and the electoral landscape in Buenos Aires Province.'],
   },
   'opinion-publica-argentina-junio-2026': {
-    es: ['Opinión pública', 'Opinión pública — Argentina', 'Junio 2026', '1.110 respuestas', 'Argentina', 'Un mapa de clima social, agenda pública y percepciones ciudadanas construido sobre una muestra nacional.'],
-    en: ['Public opinion', 'Public opinion — Argentina', 'June 2026', '1,110 responses', 'Argentina', 'A map of social climate, public agenda and citizen perceptions built on a national sample.'],
+    es: ['Opinión pública', 'Opinión pública — Argentina', 'Junio 2026', '1.110 casos', 'Argentina', 'Un mapa de clima social, agenda pública y percepciones ciudadanas construido sobre una muestra nacional.'],
+    en: ['Public opinion', 'Public opinion — Argentina', 'June 2026', '1,110 respondents', 'Argentina', 'A nationwide overview of public sentiment, key public concerns, and citizens’ perceptions.'],
   },
   'reporte-fintech-q2-2026': {
     es: ['Fintech', 'Reporte Fintech Q2’26', 'Mayo 2026', '650 casos', 'Argentina', 'Un relevamiento sobre billeteras virtuales, bancos, efectivo y nuevos hábitos de pago en Argentina.'],
-    en: ['Fintech', 'Fintech Report Q2’26', 'May 2026', '650 cases', 'Argentina', 'A survey on digital wallets, banks, cash and new payment habits in Argentina.'],
+    en: ['Fintech', 'Fintech Report Q2’26', 'May 2026', '650 respondents', 'Argentina', 'A survey on digital wallets, banks, cash and new payment habits in Argentina.'],
   },
   'seguridad-comparada-2026': {
     es: ['Seguridad', 'Reporte de seguridad', '2025-2026', '4 estudios nacionales', 'Argentina, México, Honduras y Uruguay', 'Una comparación regional sobre percepción de inseguridad, experiencia directa y conversación pública.'],
-    en: ['Security', 'Security report', '2025–2026', '4 national studies', 'Argentina, Mexico, Honduras and Uruguay', 'A regional comparison of perceived insecurity, direct experience and public conversation.'],
+    en: ['Security', 'Security report', '2025–2026', '4 national studies', 'Argentina, Mexico, Honduras and Uruguay', 'A regional comparison of perceptions of insecurity, personal experiences, and public discourse.'],
   },
   'crisis-venezuela-enero-2026': {
     es: ['Investigación', 'Crisis en Venezuela', 'Enero 2026', 'Resumen regional', 'Venezuela, Colombia, Brasil y Argentina', 'Una lectura regional sobre la crisis venezolana, la percepción del régimen y la posición frente a la intervención externa.'],
-    en: ['Research', 'Crisis in Venezuela', 'January 2026', 'Regional summary', 'Venezuela, Colombia, Brazil and Argentina', 'A regional reading of the Venezuelan crisis, perceptions of the regime and views on foreign intervention.'],
+    en: ['Research', 'Crisis in Venezuela', 'January 2026', 'Regional summary', 'Venezuela, Colombia, Brazil and Argentina', 'A regional analysis of the Venezuelan crisis, perceptions of the regime, and attitudes toward foreign intervention.'],
   },
 };
 const studies = reports.filter(r => STUDY[r.slug]).map(r => ({ slug: r.slug, t: STUDY[r.slug] }));
 
 const TEAM = [
-  { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads methodology at Afiches. Ex-Kantar. Background in Political Science (University of Buenos Aires).'] },
-  { name: 'Faustino Raggi', img: 'faustino-raggi', es: ['Cofundador · Comercial', 'Lidera el área comercial. Ex coordinador de Insights en Disney. Formación en Sociología (UBA).'], en: ['Co-founder · Sales', 'Leads sales. Former Insights Coordinator at Disney. Background in Sociology (University of Buenos Aires).'] },
+  { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads research methodology. Previously at Kantar. Studied political science at the University of Buenos Aires.'] },
+  { name: 'Faustino Raggi', img: 'faustino-raggi', es: ['Cofundador · Comercial', 'Lidera el área comercial. Ex coordinador de Insights en Disney. Formación en Sociología (UBA).'], en: ['Co-founder · Commercial', 'Leads commercial strategy. Former Consumer Insights Coordinator at Disney. Background in sociology from the University of Buenos Aires.'] },
   { name: 'Luciana Modica', img: 'luciana-modica', es: ['Responsable de Desarrollo de Negocios', 'Lidera el desarrollo de negocios y las alianzas. Columbia University (MPA 2027).'], en: ['Head of Business Development', 'Leads business development and partnerships. Columbia University (MPA 2027).'] },
   { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Regional Sales Lead', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Sales Lead', 'Supports clients across the region from the first brief to the final results.'] },
 ];
 
 const SERVICES = {
-  es: [['Encuestas online', 'Cuestionarios por internet, con resultados que representan a la población que te interesa.'], ['Encuestas presenciales', 'Relevamiento en territorio, con alcance en todo el país.'], ['Exit polls', 'Mediciones a la salida de votaciones, eventos o actos.'], ['Entrevistas cualitativas asistidas por IA', 'Entrevistas en profundidad a escala de encuesta: la IA repregunta según cada respuesta.'], ['Publicidad digital', 'Campañas segmentadas, con mensajes probados con datos.']],
-  en: [['Online surveys', 'Online questionnaires, with results that represent the population you care about.'], ['In-person surveys', 'Fieldwork on the ground, nationwide.'], ['Exit polls', 'Measurements as people leave polling stations, events or rallies.'], ['AI-assisted qualitative interviews', 'In-depth interviews at survey scale: the AI follows up on every answer.'], ['Digital advertising', 'Targeted campaigns, with messages tested on data.']],
+  es: [['Encuestas online', 'Cuestionarios por internet con preguntas cerradas, sin IA, para medir rápido y con muestras grandes.'], ['Encuestas con entrevistas IA', 'Encuestas con preguntas abiertas en las que la IA repregunta según cada respuesta: entrevistas en profundidad a escala cuantitativa.'], ['Encuestas presenciales', 'Encuestadores propios en la calle, en hogares o en puntos de interés.'], ['Exit polls', 'Encuestas a la salida de votaciones, eventos o actos, con resultados el mismo día.'], ['Mystery shopper', 'Evaluadores que visitan o contactan un negocio como clientes y registran la atención.'], ['Análisis de datos', 'Procesamiento y análisis de bases propias o de terceros, con codificación de abiertas con IA.'], ['Publicidad digital', 'Campañas segmentadas que usan lo que aprendemos en los estudios.']],
+  en: [['Online surveys', 'Online questionnaires with closed-ended questions, without AI, to measure quickly with large samples.'], ['Surveys with AI interviews', 'Surveys with open-ended questions where the AI follows up on each answer: the depth of qualitative research at the scale of a survey.'], ['In-person surveys', 'Our own interviewers on the street, in homes or at points of interest.'], ['Exit polls', 'Surveys as people leave polling stations, events or rallies, with same-day results.'], ['Mystery shopping', 'Evaluators who visit or contact a business as customers and record how they were served.'], ['Data analysis', 'Processing and analysis of your own or third-party data, with AI coding of open-ended responses.'], ['Digital advertising', 'Data-driven advertising campaigns tailored to reach the right audiences and maximize performance.']],
 };
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -92,11 +92,12 @@ function keepLang(html, lang) {
 }
 
 function faqs(html) {
-  return [...html.matchAll(/<details[^>]*><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map(m => ({ q: text(m[1]), a: text(m[2]) }));
+  html = html.slice(html.indexOf('<div class="faqs">'), html.indexOf('<div class="end-cta">'));
+  return [...html.matchAll(/<details(?: open)?><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map(m => ({ q: text(m[1]), a: text(m[2]) }));
 }
 
 function studyCards(lang) {
-  const btn = lang === 'es' ? 'Descargar estudio ↗' : 'Download study ↗';
+  const btn = lang === 'es' ? 'Acceder al informe ↗' : 'Access the report ↗';
   const sampleLabel = lang === 'es' ? 'Muestra' : 'Sample';
   return studies.map(({ slug, t }) => {
     const [cat, title, period, sample, geo, summary] = t[lang];
@@ -216,7 +217,8 @@ function llms() {
 
 ## Qué hace Afiches
 - Alcance de más de 30 millones de personas en Argentina a través de las principales plataformas digitales (Facebook, Instagram, WhatsApp).
-- Segmentación por edad, intereses y ubicación, hasta el código postal: puede investigar públicos de menos del 1% de la población.
+- Recluta con anuncios segmentados en Meta (Facebook, Instagram, WhatsApp) en cualquier país de América: por edad, nivel socioeconómico, intereses y ubicación, entre otros. Puede investigar públicos de menos del 1% de la población.
+- Suma encuestadores propios en campo cuando el estudio lo requiere.
 - Entrevistas cualitativas asistidas por IA: cada respuesta orienta la siguiente pregunta, combinando profundidad cualitativa con escala cuantitativa.
 - Resultados con porcentajes y cruces, temas detectados y frases textuales de los participantes.
 
@@ -226,7 +228,7 @@ ${SERVICES.es.map(([n, d]) => `- **${n}**: ${d}`).join('\n')}
 ## Estudios publicados
 ${s('es')}
 
-Los estudios se descargan en ${URLS.es}#estudios (requiere dejar un mail).
+Los informes se acceden en ${URLS.es}#estudios (requiere dejar un mail).
 
 ## Equipo
 ${TEAM.map(p => `- **${p.name}**, ${p.es[0]}. ${p.es[1]}`).join('\n')}
@@ -239,7 +241,7 @@ ${TEAM.map(p => `- **${p.name}**, ${p.es[0]}. ${p.es[1]}`).join('\n')}
 - X: ${SOCIAL[2]}
 
 ## English summary
-Afiches is a market research and public opinion firm based in Buenos Aires, Argentina. It runs qualitative and quantitative research powered by AI: it recruits participants through major digital platforms (reach of 30+ million people in Argentina, targeting down to the postal code), conducts AI-assisted qualitative interviews at survey scale, and delivers online and in-person surveys, exit polls and digital advertising.
+Afiches is a market research and public opinion firm based in Buenos Aires, Argentina. It runs qualitative and quantitative research powered by AI: it recruits participants through major digital platforms (500+ million social media users across the Americas, 30+ million in Argentina), conducts AI-assisted qualitative interviews at survey scale, and delivers online and in-person surveys, exit polls and digital advertising.
 
 ${s('en')}
 `;
