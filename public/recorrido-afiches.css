@@ -321,3 +321,13 @@ html{scroll-padding-top:125px}
 /* v21 · logo nuevo de Perfil (círculo con el pájaro + PERFIL) */
 .logo-row img[alt="Diario Perfil"]{opacity:1;height:30px;max-width:150px}
 @media(max-width:700px){.logo-row img[alt="Diario Perfil"]{max-width:70px;height:auto}}
+
+/* v22 · equipo: tres tarjetas principales + una compacta debajo */
+.person-sm{grid-column:1/-1;justify-self:center;width:min(100%,560px);display:flex;align-items:center;gap:20px;text-align:left;padding:18px 24px}
+.person-sm .avatar{width:72px;height:72px;margin:0;flex:none}
+.person-sm .avatar:before{inset:-5px}
+.person-sm .avatar:after{width:14px;height:14px;border-width:3px;right:0;bottom:2px}
+.person-sm h3{font-size:16px}
+.person-sm .bg{margin-top:4px}
+@media(max-width:850px){.team .person:nth-child(3):not(.person-sm){grid-column:1/-1;justify-self:center;width:min(100%,440px)}}
+@media(max-width:560px){.team .person:nth-child(3):not(.person-sm){width:100%}.person-sm{padding:16px 18px;gap:14px}.person-sm .avatar{width:60px;height:60px}}

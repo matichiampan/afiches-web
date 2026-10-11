@@ -57,7 +57,8 @@ const studies = reports.filter(r => STUDY[r.slug]).map(r => ({ slug: r.slug, t: 
 const TEAM = [
   { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads methodology at Afiches. Ex-Kantar. Background in Political Science (University of Buenos Aires).'] },
   { name: 'Faustino Raggi', img: 'faustino-raggi', es: ['Cofundador · Comercial', 'Lidera el área comercial. Ex coordinador de Insights en Disney. Formación en Sociología (UBA).'], en: ['Co-founder · Sales', 'Leads sales. Former Insights Coordinator at Disney. Background in Sociology (University of Buenos Aires).'] },
-  { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Responsable comercial · Regional Sales Lead', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Sales Lead', 'Supports clients across the region from the first brief to the final results.'] },
+  { name: 'Luciana Modica', img: 'luciana-modica', es: ['Responsable de Desarrollo de Negocios', 'Lidera el desarrollo de negocios y las alianzas. Columbia University (MPA 2027).'], en: ['Head of Business Development', 'Leads business development and partnerships. Columbia University (MPA 2027).'] },
+  { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Regional Sales Lead', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Sales Lead', 'Supports clients across the region from the first brief to the final results.'] },
 ];
 
 const SERVICES = {
