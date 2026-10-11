@@ -443,3 +443,24 @@ html{scroll-padding-top:125px}
 .mcard canvas{display:block;width:100%;height:auto;aspect-ratio:520/500}
 .orb{will-change:transform}
 .svc-stage.idle .svc-ball{animation-play-state:paused}
+
+
+/* v28 · contacto final, línea de servicios bajo la portada */
+.also-do{text-align:center;margin:26px auto 0;font-size:13px}
+.also-do a{color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--line);padding-bottom:2px;transition:color .2s}
+.also-do a:hover{color:var(--ink)}
+.contact-final{padding-top:30px}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,70px);align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(26px,4vw,52px);box-shadow:var(--deep,var(--shadow))}
+.cf-copy h2{font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.04em;font-weight:600;margin:0 0 14px}
+.cf-copy h2 span span,.cf-copy h2>span>span{color:var(--type-green,#22d46a)}
+.cf-copy p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 22px}
+.cf-links{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cf-links a{display:inline-flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500}
+.cf-links a:hover{color:var(--accent)}
+.cf-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--wash);color:var(--accent);font-size:12px;font-weight:700}
+.cf-form{display:flex;flex-direction:column}
+.cf-form input,.cf-form textarea{width:100%;box-sizing:border-box;margin-bottom:14px}
+.cf-form textarea{min-height:120px}
+.cf-form .pill-button{align-self:flex-start}
+@media(max-width:850px){.cf-grid{grid-template-columns:1fr}}
+.cf-copy h2 span span,.cf-copy h2>span{color:inherit}.cf-copy h2 br+span{color:var(--type-green,#22d46a)!important}

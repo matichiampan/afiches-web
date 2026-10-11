@@ -58,7 +58,7 @@ const TEAM = [
   { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads research methodology. Previously at Kantar. Studied political science at the University of Buenos Aires.'] },
   { name: 'Faustino Raggi', img: 'faustino-raggi', es: ['Cofundador · Comercial', 'Lidera el área comercial. Ex coordinador de Insights en Disney. Formación en Sociología (UBA).'], en: ['Co-founder · Commercial', 'Leads commercial strategy. Former Consumer Insights Coordinator at Disney. Background in sociology from the University of Buenos Aires.'] },
   { name: 'Luciana Modica', img: 'luciana-modica', es: ['Responsable de Desarrollo de Negocios', 'Lidera el desarrollo de negocios y las alianzas. Columbia University (MPA 2027).'], en: ['Head of Business Development', 'Leads business development and partnerships. Columbia University (MPA 2027).'] },
-  { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Regional Sales Lead', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Sales Lead', 'Supports clients across the region from the first brief to the final results.'] },
+  { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Ejecutiva de cuentas regional', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Account Executive', 'Supports clients across the region from the first brief to the final results.'] },
 ];
 
 const SERVICES = {
@@ -217,7 +217,7 @@ function llms() {
 
 ## Qué hace Afiches
 - Alcance de más de 30 millones de personas en Argentina a través de las principales plataformas digitales (Facebook, Instagram, WhatsApp).
-- Recluta con anuncios segmentados en Meta (Facebook, Instagram, WhatsApp) en cualquier país de América: por edad, nivel socioeconómico, intereses y ubicación, entre otros. Puede investigar públicos de menos del 1% de la población.
+- Recluta con anuncios segmentados en Meta (Facebook, Instagram, WhatsApp) en cualquier país de América: por edad, nivel socioeconómico, intereses y ubicación, entre otros. Puede investigar públicos de menos del 0,01% de la población.
 - Suma encuestadores propios en campo cuando el estudio lo requiere.
 - Entrevistas cualitativas asistidas por IA: cada respuesta orienta la siguiente pregunta, combinando profundidad cualitativa con escala cuantitativa.
 - Resultados con porcentajes y cruces, temas detectados y frases textuales de los participantes.
