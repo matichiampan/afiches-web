@@ -32,6 +32,7 @@ html=html.replace('AFICHES · RECORRIDO INTERACTIVO','AFICHES · COPIA PARA REVI
 html=html.replace('En este borrador el mail se guarda localmente. La descarga se habilita después de registrarlo.','Vista del formulario: en la web, cada estudio se descarga después de dejar el mail. Esta copia no registra datos ni descarga los PDFs.');
 html=html.replace('Tus respuestas se procesan con IA de OpenAI para generar la repregunta y el resultado. No incluyas datos confidenciales. En este borrador no se guardan en la base de estudios.','La entrevista con IA real está disponible en la versión conectada. Este archivo permite revisar su presentación, sin enviar respuestas ni datos.');
 html=html.replace('Afiches · Exploración visual local · Dirección 04','Afiches · Borrador visual · Copia para revisión');
+html=html.replace(/href="\/(servicios|informes)\//g,'href="https://afiches.net/$1/');
 if(/(?:src|href)="\/(?!\/)/.test(html))throw new Error('Quedaron recursos locales sin incluir');
 if(/\bfetch\(/.test(html))throw new Error('Quedaron solicitudes de red al servidor');
 if(/OPENAI_API_KEY|Bearer |127\.0\.0\.1|localhost/.test(html))throw new Error('Quedó una referencia de servidor local');

@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host :: --port 3000",
-    "build": "node tools/generate-llms.js || true && vite build && node tools/merge-cloudflare-headers.js && node tools/build-landing.mjs && node tools/publish-landing.mjs",
+    "build": "node tools/generate-llms.js || true && vite build && node tools/merge-cloudflare-headers.js && node tools/build-landing.mjs && node tools/build-pages.mjs && node tools/optimize-assets.mjs && node tools/publish-landing.mjs",
     "preview": "vite preview --host :: --port 3000",
     "build:landing": "node tools/build-landing.mjs"
   },

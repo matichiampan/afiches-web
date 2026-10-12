@@ -26,3 +26,4 @@ Thumbs.db
 
 # Generado en el build (tools/build-landing.mjs)
 public/sitio/
+public/sitio-borradores/

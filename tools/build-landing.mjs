@@ -5,6 +5,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reports } from '../src/data/reports.js';
+import { toEnglish } from './site-paths.mjs';
 
 const SITE = 'https://afiches.net';
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -63,7 +64,7 @@ const TEAM = [
 
 const SERVICES = {
   es: [['Encuestas online', 'Cuestionarios por internet con preguntas cerradas, sin IA, para medir rápido y con muestras grandes.'], ['Encuestas con entrevistas IA', 'Encuestas con preguntas abiertas en las que la IA repregunta según cada respuesta: entrevistas en profundidad a escala cuantitativa.'], ['Encuestas presenciales', 'Encuestadores propios en la calle, en hogares o en puntos de interés.'], ['Exit polls', 'Encuestas a la salida de votaciones, eventos o actos, con resultados el mismo día.'], ['Mystery shopper', 'Evaluadores que visitan o contactan un negocio como clientes y registran la atención.'], ['Análisis de datos', 'Procesamiento y análisis de bases propias o de terceros, con codificación de abiertas con IA.'], ['Publicidad digital', 'Campañas segmentadas que usan lo que aprendemos en los estudios.']],
-  en: [['Online surveys', 'Online questionnaires with closed-ended questions, without AI, to measure quickly with large samples.'], ['Surveys with AI interviews', 'Surveys with open-ended questions where the AI follows up on each answer: the depth of qualitative research at the scale of a survey.'], ['In-person surveys', 'Our own interviewers on the street, in homes or at points of interest.'], ['Exit polls', 'Surveys as people leave polling stations, events or rallies, with same-day results.'], ['Mystery shopping', 'Evaluators who visit or contact a business as customers and record how they were served.'], ['Data analysis', 'Processing and analysis of your own or third-party data, with AI coding of open-ended responses.'], ['Digital advertising', 'Data-driven advertising campaigns tailored to reach the right audiences and maximize performance.']],
+  en: [['Online surveys', 'Online questionnaires with closed-ended questions, without AI, to measure quickly with large samples.'], ['Surveys with AI interviews', 'Surveys with open-ended questions where the AI follows up on each answer: the depth of qualitative research at the scale of a survey.'], ['In-person surveys', 'Our own interviewers on the street, in homes or at points of interest.'], ['Exit polls', 'Surveys as people leave polling stations, events or rallies, with same-day results.'], ['Mystery shopping', 'Evaluators who visit or contact a business as customers and record how they were served.'], ['Data analysis', 'Processing and analysis of your own or third-party data, with AI coding of open-ended responses.'], ['Digital advertising', 'Social media ad campaigns that use what we learn in our studies.']],
 };
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -101,7 +102,7 @@ function studyCards(lang) {
   const sampleLabel = lang === 'es' ? 'Muestra' : 'Sample';
   return studies.map(({ slug, t }) => {
     const [cat, title, period, sample, geo, summary] = t[lang];
-    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><button type="button">${btn}</button></article>`;
+    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button><a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
   }).join('');
 }
 
@@ -162,7 +163,7 @@ function headTags(lang) {
     `<link rel="alternate" hreflang="en" href="${URLS.en}">`,
     `<link rel="alternate" hreflang="x-default" href="${URLS.es}">`,
     `<meta name="author" content="Afiches">`,
-    `<meta name="theme-color" content="#7c3aed">`,
+    `<meta name="theme-color" content="#f97316">`,
     `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`,
     `<meta property="og:type" content="website">`,
     `<meta property="og:site_name" content="Afiches">`,
@@ -199,6 +200,7 @@ function build(lang) {
   h = h.replace(/<p class="local-note">[\s\S]*?<\/p>/g, '');
   h = h.replace(/<div class="report-grid" id="report-grid">[\s\S]*?<\/div>/, `<div class="report-grid" id="report-grid">${studyCards(lang)}</div>`);
   if (lang === 'en') {
+    h = toEnglish(h);
     for (const [a, b] of Object.entries(ARIA_EN)) h = h.split(`aria-label="${a}"`).join(`aria-label="${b}"`).split(`alt="${a}"`).join(`alt="${b}"`);
     h = h.replace("theme.setAttribute('aria-label',dark?'Activar modo claro':'Activar modo oscuro');", "theme.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');");
   }
