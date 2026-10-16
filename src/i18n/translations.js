@@ -80,6 +80,7 @@ export const translations = {
     },
     clients: {
       clientsLabel: 'CONFIARON EN AFICHES',
+      institutionsLabel: 'INSTITUCIONES QUE ENSEÑAN CON AFICHES',
       mediaLabel: 'AFICHES EN LOS MEDIOS',
       studiesLabel: 'PAÍSES DONDE TRABAJAMOS',
       dragHint: 'Arrastrá el globo.',
@@ -170,6 +171,7 @@ export const translations = {
     },
     clients: {
       clientsLabel: 'THEY TRUSTED AFICHES',
+      institutionsLabel: 'INSTITUTIONS THAT TEACH WITH AFICHES',
       mediaLabel: 'AFICHES IN THE MEDIA',
       studiesLabel: 'COUNTRIES WE WORKED IN',
       dragHint: 'Drag the globe.',
@@ -257,6 +259,7 @@ export const translations = {
     },
     clients: {
       clientsLabel: 'CONFIARAM NA AFICHES',
+      institutionsLabel: 'INSTITUIÇÕES QUE ENSINAM COM AFICHES',
       mediaLabel: 'AFICHES NA MÍDIA',
       studiesLabel: 'PAÍSES ONDE TRABALHAMOS',
       dragHint: 'Arraste o globo.',

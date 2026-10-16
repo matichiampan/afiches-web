@@ -122,6 +122,14 @@ export default function Clients() {
               </div>
             ))}
           </div>
+
+          <p style={{
+            fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.22em',
+            color: 'rgba(240,235,225,0.45)', margin: '22px 0 12px', textAlign: 'center',
+          }}>
+            {t.clients.institutionsLabel}
+          </p>
+          <LogoCard src="/logos/uade.png" alt="UADE" delay={0.32} variant="wide" surface="light" />
           </Card>
         </div>
 
