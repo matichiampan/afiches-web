@@ -101,7 +101,7 @@ export async function onRequestPost({ request, env }) {
 
   const accessCookie = await createAccessCookie(report.slug, env);
   return json(
-    { fileUrl: getFileUrl(report) },
+    { fileUrl: getFileUrl(report), dashboardUrl: report.dashboardPath || null },
     {
       status: 200,
       headers: {

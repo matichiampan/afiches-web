@@ -108,7 +108,7 @@ function studyCards(lang) {
   const sampleLabel = lang === 'es' ? 'Muestra' : 'Sample';
   return studies.map(({ slug, t }) => {
     const [cat, title, period, sample, geo, summary] = t[lang];
-    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button>${dash[slug] ? `<a class="report-open" href="${dash[slug]}" target="_blank" rel="noopener">${lang === 'es' ? 'Ver el dashboard ↗' : 'Open the dashboard ↗'}</a>` : ''}<a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
+    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button>${dash[slug] ? `<a class="report-open" href="${dash[slug]}">${lang === 'es' ? 'Ver el dashboard ↗' : 'Open the dashboard ↗'}</a>` : ''}<a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
   }).join('');
 }
 

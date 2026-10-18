@@ -5,7 +5,7 @@ import {
 } from '../_shared/report-access.js';
 
 // Los dashboards de un estudio piden el mismo mail que su PDF. Sin la cookie de acceso
-// se redirige al formulario del estudio, que al guardar el mail vuelve al dashboard.
+// se redirige al cartel de mail de la home, que al guardar el mail abre el dashboard.
 // Lo que no es un dashboard registrado (por ejemplo /dashboards/vendor/*) pasa directo.
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -18,7 +18,7 @@ export async function onRequestGet(context) {
 
   const hasAccess = await hasReportAccess(request, report.slug, env);
   if (!hasAccess) {
-    return Response.redirect(new URL(`${getAccessUrl(report)}?ver=dashboard`, url).toString(), 302);
+    return Response.redirect(new URL(getAccessUrl(report, 'dashboard'), url).toString(), 302);
   }
 
   const response = await env.ASSETS.fetch(request);

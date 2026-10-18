@@ -55,8 +55,10 @@ export function getFileUrl(report) {
   return `/docs/${report.fileName}`;
 }
 
-export function getAccessUrl(report) {
-  return `/estudios/${report.slug}`;
+// Sin acceso se vuelve al cartel de mail de la home (el mismo de "Acceder al informe").
+// Con target 'dashboard', al dejar el mail se abre el dashboard en vez del PDF.
+export function getAccessUrl(report, target) {
+  return `/?estudio=${report.slug}${target === 'dashboard' ? '&ver=dashboard' : ''}#estudios`;
 }
 
 export function isValidEmail(email) {

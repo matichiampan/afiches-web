@@ -71,18 +71,19 @@
     $('#contact-status').textContent=t('Se abrió tu correo con el mensaje listo para enviar.','Your email app opened with the message ready to send.');
   });
 
-  let reports=[], selectedReport;
-  function openReport(report){selectedReport=report;$('#selected-report').textContent=report.title;$('#report-status').textContent='';$('#report-download').hidden=true;$('#report-form button').disabled=false;$('#report-dialog').showModal();}
+  let reports=[], selectedReport, selectedTarget;
+  // target 'dashboard': se llegó desde el dashboard sin mail; al guardarlo se abre el dashboard.
+  function openReport(report,target){selectedReport=report;selectedTarget=target;$('#selected-report').textContent=report.title;$('#report-status').textContent='';$('#report-download').hidden=true;$('#report-form button').disabled=false;$('#report-dialog').showModal();}
   $('.dialog-close').addEventListener('click',()=>$('#report-dialog').close());
   $('#report-form').addEventListener('submit',async event=>{
     event.preventDefault();const button=event.currentTarget.querySelector('button');button.disabled=true;$('#report-status').textContent=t('Registrando tu mail…','Saving your email…');
-    try{const result=await post('/api/request-report',{email:$('#report-email').value,slug:selectedReport.slug});const link=$('#report-download');link.href=result.fileUrl;link.hidden=false;$('#report-status').textContent=t('Listo. Ya podés abrir el informe.','Done. You can now open the report.');window.open(result.fileUrl,'_blank','noopener');}
+    try{const result=await post('/api/request-report',{email:$('#report-email').value,slug:selectedReport.slug});if(selectedTarget==='dashboard'&&result.dashboardUrl){$('#report-status').textContent=t('Listo. Abriendo el dashboard…','Done. Opening the dashboard…');location.href=result.dashboardUrl;return;}const link=$('#report-download');link.href=result.fileUrl;link.hidden=false;$('#report-status').textContent=t('Listo. Ya podés abrir el informe.','Done. You can now open the report.');window.open(result.fileUrl,'_blank','noopener');}
     catch(e){$('#report-status').textContent=e.message;}finally{button.disabled=false;}
   });
   fetch('/api/demo/status').then(async response=>{if(!response.ok)throw new Error('No pudimos conectar con la vista local.');return response.json();}).then(data=>{
     $('#demo-start').disabled=false;const startLabel=()=>{$('#demo-start').textContent=data.available?t('Empezar la entrevista ↗','Start the interview ↗'):t('Pedí una demo ↗','Request a demo ↗');};startLabel();document.addEventListener('langchange',startLabel);if(!data.available){demoOffline=true;}
     reports=data.reports;renderReports();document.addEventListener('langchange',renderReports);
-    const requested=new URLSearchParams(location.search).get('estudio');const report=reports.find(r=>r.slug===requested);if(report)openReport(report);
+    const params=new URLSearchParams(location.search);const report=reports.find(r=>r.slug===params.get('estudio'));if(report)openReport(report,params.get('ver'));
   }).catch(()=>{demoOffline=true;$('#demo-start').disabled=false;$('#demo-start').textContent=t('Pedí una demo ↗','Request a demo ↗');if(!$('#report-grid [data-slug]'))$('#report-grid').replaceChildren(node('p',t('No pudimos cargar los estudios. Probá recargar la página.','We couldn’t load the studies. Try reloading the page.')));});
   function renderReports(){const pre=[...$('#report-grid').querySelectorAll('[data-slug]')];if(pre.length){pre.forEach(card=>{const report=reports.find(r=>r.slug===card.dataset.slug);const b=card.querySelector('button');if(report&&b&&!b.dataset.bound){b.dataset.bound='1';b.addEventListener('click',()=>openReport({...report,title:card.querySelector('h3').textContent}));}});return;}$('#report-grid').replaceChildren();reports.forEach(report=>{const card=node('article',undefined,'report-card');const cover=document.createElement('img');cover.className='report-cover';cover.alt='';cover.loading='lazy';cover.src='/studies/'+report.slug+'.jpg';cover.addEventListener('error',()=>cover.remove());card.append(cover,node('small',report.category+' · '+report.period),node('h3',report.title),node('p',report.summary));const button=node('button',t('Acceder al informe ↗','Access the report ↗'));button.addEventListener('click',()=>openReport(report));card.append(button);$('#report-grid').append(card);});}
   document.querySelectorAll('#qpipe button[data-q]').forEach(b=>b.addEventListener('click',()=>{const open=b.getAttribute('aria-expanded')!=='true';
