@@ -4,7 +4,7 @@
 export const STUDY_PAGES = [
   {
     slug: 'encuesta-nacional-octubre-2026', date: '2026-10-18', services: ['online', 'ia'],
-    dashboard: '/dashboards/ballotages-2027-indecisos.html',
+    dashboard: '/dashboards/ballotages-2027-indecisos',
     es: {
       sample: 'Muestra nacional',
       title: 'Encuesta Nacional — Octubre 2026',

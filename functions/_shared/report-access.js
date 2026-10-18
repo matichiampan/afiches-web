@@ -3,6 +3,8 @@ export const REPORTS = [
     slug: 'encuesta-nacional-octubre-2026',
     title: 'Encuesta Nacional — Octubre 2026',
     fileName: 'encuesta-nacional-octubre-2026.pdf',
+    // El dashboard pide el mismo mail que el PDF (functions/dashboards).
+    dashboardPath: '/dashboards/ballotages-2027-indecisos',
   },
   {
     slug: 'opinion-publica-pba-julio-2026',
@@ -42,6 +44,11 @@ export function getReportBySlug(slug) {
 
 export function getReportByFileName(fileName) {
   return REPORTS.find((report) => report.fileName === fileName);
+}
+
+export function getReportByDashboardPath(pathname) {
+  const clean = pathname.replace(/\.html$/, '').replace(/\/$/, '');
+  return REPORTS.find((report) => report.dashboardPath === clean);
 }
 
 export function getFileUrl(report) {

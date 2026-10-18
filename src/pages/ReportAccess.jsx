@@ -47,6 +47,9 @@ export default function ReportAccess() {
   const { slug } = useParams();
   const isMobile = useIsMobile();
   const report = getReportBySlug(slug);
+  // ?ver=dashboard: se llegó desde el dashboard (o su link) y al guardar el mail se vuelve ahí.
+  const wantsDashboard = Boolean(report?.dashboardUrl) && new URLSearchParams(window.location.search).get('ver') === 'dashboard';
+  const target = wantsDashboard ? 'dashboard' : 'PDF';
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
@@ -59,14 +62,14 @@ export default function ReportAccess() {
 
     if (!report) return;
     if (!isValid) {
-      setError('Escribi un mail valido para acceder al PDF.');
+      setError(`Escribi un mail valido para acceder al ${target}.`);
       return;
     }
 
     setStatus('loading');
     try {
       const result = await requestAccess({ email: email.trim().toLowerCase(), report });
-      window.location.href = result.fileUrl || report.fileUrl;
+      window.location.href = wantsDashboard ? report.dashboardUrl : (result.fileUrl || report.fileUrl);
     } catch (err) {
       setStatus('idle');
       setError(err.message || 'No pudimos guardar el mail. Proba de nuevo.');
@@ -192,10 +195,12 @@ export default function ReportAccess() {
           >
             <Mail size={30} color={report.accentColor} />
             <h2 style={{ marginTop: 18, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', lineHeight: 1.05, fontWeight: 900 }}>
-              Dejanos tu mail para abrir el PDF.
+              Dejanos tu mail para abrir el {target}.
             </h2>
             <p style={{ marginTop: 14, color: 'rgba(240,235,225,0.62)', fontSize: '0.92rem', lineHeight: 1.65 }}>
-              Guardamos el contacto asociado al estudio y habilitamos la descarga.
+              {wantsDashboard
+                ? 'Guardamos el contacto asociado al estudio y habilitamos el dashboard y el informe.'
+                : 'Guardamos el contacto asociado al estudio y habilitamos la descarga.'}
             </p>
 
             <form onSubmit={onSubmit} style={{ marginTop: 24, display: 'grid', gap: 12 }}>
@@ -237,7 +242,7 @@ export default function ReportAccess() {
                   opacity: status === 'loading' ? 0.72 : 1,
                 }}
               >
-                <Download size={15} /> {status === 'loading' ? 'GUARDANDO...' : 'ABRIR PDF'}
+                <Download size={15} /> {status === 'loading' ? 'GUARDANDO...' : wantsDashboard ? 'ABRIR DASHBOARD' : 'ABRIR PDF'}
               </button>
               {error ? <p style={{ color: '#F97316', fontSize: '0.82rem', lineHeight: 1.45 }}>{error}</p> : null}
             </form>

@@ -9,7 +9,7 @@ export const reports = [
     geography: 'Argentina',
     sample: 'Muestra nacional',
     fileUrl: '/docs/encuesta-nacional-octubre-2026.pdf',
-    dashboardUrl: '/dashboards/ballotages-2027-indecisos.html',
+    dashboardUrl: '/dashboards/ballotages-2027-indecisos',
     cardColor: '#7C3AED',
     accentColor: '#F97316',
     stackColors: ['#F97316', '#DDD6FE'],
