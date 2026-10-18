@@ -37,6 +37,8 @@ async function saveLead({ request, env, email, report }) {
       body: JSON.stringify({
         email,
         slug: report.slug,
+        // el colector guarda el título que le mandamos si no conoce el estudio (estudios nuevos)
+        title: report.title,
         sourcePath,
         userAgent,
       }),
@@ -96,7 +98,8 @@ export async function onRequestPost({ request, env }) {
   try {
     await saveLead({ request, env, email, report });
   } catch {
-    return json({ error: 'No pudimos guardar el mail. Revisar la base report_leads.' }, { status: 502 });
+    // 503 y no 502: Cloudflare reemplaza los 502 por su página de error y el cartel no puede leer la respuesta.
+    return json({ error: 'No pudimos guardar tu mail. Probá de nuevo en unos minutos.' }, { status: 503 });
   }
 
   const accessCookie = await createAccessCookie(report.slug, env);

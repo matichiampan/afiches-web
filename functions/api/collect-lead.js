@@ -29,7 +29,11 @@ export async function onRequestPost({ request, env }) {
 
   const email = String(body.email || '').trim().toLowerCase();
   const slug = String(body.slug || '').trim();
-  const report = getReportBySlug(slug);
+  // Si el estudio es más nuevo que este despliegue, se usa el título que manda request-report:
+  // así sumar un estudio en la web no obliga a redeployar el colector.
+  const title = String(body.title || '').trim().slice(0, 200);
+  const known = getReportBySlug(slug);
+  const report = known || (/^[a-z0-9-]{3,120}$/.test(slug) && title ? { slug, title } : null);
 
   if (!report) return json({ error: 'Estudio no encontrado.' }, { status: 404 });
   if (!isValidEmail(email)) return json({ error: 'Escribi un mail valido.' }, { status: 400 });
