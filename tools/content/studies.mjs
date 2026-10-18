@@ -1,6 +1,6 @@
 // Resúmenes públicos de los estudios (/informes/<slug>/ y /en/reports/<slug>/).
 // Datos tomados de los PDF publicados en /docs. El informe completo sigue pidiendo el mail;
-// los estudios con `dashboard` suman un link directo al dashboard público en /dashboards.
+// los estudios con `dashboard` suman un link al dashboard en /dashboards (pide el mismo mail).
 export const STUDY_PAGES = [
   {
     slug: 'encuesta-nacional-octubre-2026', date: '2026-10-18', services: ['online', 'ia'],
@@ -22,6 +22,28 @@ export const STUDY_PAGES = [
       ficha: [['Universe', 'People aged 16+ in Argentina'], ['Fieldwork', 'October 10–15, 2026'], ['Methodology', 'Online survey with an open question analyzed with AI']],
       stats: [['52%', 'is what Cristina Fernández, Sergio Massa and Axel Kicillof get against Milei among those who choose a candidate; Milei, 48%.'], ['37%', 'are not polarized in at least one of the three runoffs against Peronism.'], ['31%', 'choose Milei in all three runoffs; 28% always choose the Peronist.'], ['34%', 'of non-polarized voters ask Milei for a different personal style; 22% raise economic concerns.']],
       body: ['Milei gets between 31% and 36% against any rival: what changes is the opponent. Against Peronism, between 26% and 28% choose neither, and the election hinges on how non-polarized voters split.', 'Non-polarized voters are younger and of lower socioeconomic level than the total. What they think Milei lacks falls into two blocks: his personal style —empathy, honesty, composure— and the economy —jobs, wages and making ends meet.'],
+    },
+  },
+  {
+    slug: 'informe-streaming-septiembre-2026', date: '2026-10-02', services: ['online', 'ia', 'cuali'],
+    dashboard: '/dashboards/streaming-septiembre-2026',
+    es: {
+      sample: 'Muestra nacional',
+      title: 'Informe sobre Streaming — Septiembre 2026',
+      description: 'Estudio nacional de Afiches sobre streaming: qué canales se recuerdan, cuánto se conoce a Olga, Luzu TV y Gelatina, qué se dice de cada uno y qué imagen tienen sus figuras. Informe y dashboard interactivo, septiembre 2026.',
+      lead: 'Encuesta nacional a personas de 16 años o más sobre el streaming en Argentina. Mide qué canales vienen a la mente de forma espontánea, el conocimiento de Olga, Luzu TV y Gelatina, qué se dice de cada canal en preguntas abiertas analizadas con IA y la imagen de Nico Occhiato, Migue Granados, Pedro Rosemblat y Tomás Rebord.',
+      ficha: [['Universo', 'Población de 16 años o más de Argentina'], ['Campo', '15 al 24 de septiembre de 2026'], ['Metodología', 'Encuesta online con preguntas abiertas analizadas con IA']],
+      stats: [['39%', 'menciona a Luzu TV de forma espontánea, el canal más recordado; Olga, 31%, y Gelatina, 11%.'], ['33%', 'no nombra ningún canal de streaming.'], ['66%', 'conoce Olga; Luzu TV llega al 57% y Gelatina al 37%.'], ['80%', 'conoce a Nico Occhiato y 78% a Migue Granados, ambos con saldo de imagen positivo.']],
+      body: ['Los canales se reconocen primero por una figura y después por su programación. Olga se asocia a Nati Jota, la Negra Vernaci y Migue Granados; Luzu TV, a Nico Occhiato y Nadie Dice Nada; Gelatina, a Pedro Rosemblat, sus entrevistas y sus jingles.', 'Gelatina es el único canal con una identidad política explícita: lo conocen siete de cada diez votantes de Massa y dos de cada diez de Milei y Bullrich. Rosemblat supera el 80% de imagen positiva entre votantes de Massa y cae al 11% entre los de Bullrich, mientras que Occhiato es la figura más transversal.'],
+    },
+    en: {
+      sample: 'National sample',
+      title: 'Streaming Report — September 2026',
+      description: 'Afiches national study on streaming: which channels come to mind, awareness of Olga, Luzu TV and Gelatina, what people say about each one and how their hosts are perceived. Report and interactive dashboard, September 2026.',
+      lead: 'National survey of people aged 16 and over on streaming in Argentina. It measures which channels come to mind unprompted, awareness of Olga, Luzu TV and Gelatina, what people say about each channel in open questions analyzed with AI, and the image of Nico Occhiato, Migue Granados, Pedro Rosemblat and Tomás Rebord.',
+      ficha: [['Universe', 'People aged 16+ in Argentina'], ['Fieldwork', 'September 15–24, 2026'], ['Methodology', 'Online survey with open questions analyzed with AI']],
+      stats: [['39%', 'mention Luzu TV unprompted, the most recalled channel; Olga 31% and Gelatina 11%.'], ['33%', 'cannot name any streaming channel.'], ['66%', 'know Olga; Luzu TV reaches 57% and Gelatina 37%.'], ['80%', 'know Nico Occhiato and 78% Migue Granados, both with a positive image balance.']],
+      body: ['Channels are recognized first by a host and then by their programming. Olga is associated with Nati Jota, la Negra Vernaci and Migue Granados; Luzu TV with Nico Occhiato and Nadie Dice Nada; Gelatina with Pedro Rosemblat, his interviews and his jingles.', 'Gelatina is the only channel with an explicit political identity: seven in ten Massa voters know it, against two in ten Milei and Bullrich voters. Rosemblat exceeds 80% positive image among Massa voters and falls to 11% among Bullrich voters, while Occhiato is the most cross-cutting host.'],
     },
   },
   {

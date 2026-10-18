@@ -32,6 +32,10 @@ const META = {
 
 // Estudios: textos corregidos (tildes) y traducidos
 const STUDY = {
+  'informe-streaming-septiembre-2026': {
+    es: ['Streaming', 'Informe sobre Streaming', 'Septiembre 2026', 'Nacional, 16 años y más', 'Argentina', 'Qué canales de streaming se conocen, qué se dice de Olga, Luzu TV y Gelatina, y qué imagen tienen sus figuras. Informe y dashboard interactivo.'],
+    en: ['Streaming', 'Streaming Report', 'September 2026', 'National, aged 16+', 'Argentina', 'Which streaming channels people know, what they say about Olga, Luzu TV and Gelatina, and how their hosts are perceived. Report and interactive dashboard.'],
+  },
   'encuesta-nacional-octubre-2026': {
     es: ['Opinión pública', 'Encuesta Nacional — Octubre 2026', 'Octubre 2026', 'Nacional, 16 años y más', 'Argentina', 'Milei frente a siete posibles rivales en un ballotage 2027, quiénes son los no polarizados y qué le piden. Informe y dashboard interactivo.'],
     en: ['Public opinion', 'National Survey — October 2026', 'October 2026', 'National, aged 16+', 'Argentina', 'Milei against seven possible rivals in a 2027 runoff, who the non-polarized voters are and what they ask of him. Report and interactive dashboard.'],

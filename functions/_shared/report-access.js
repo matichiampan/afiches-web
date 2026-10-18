@@ -7,6 +7,12 @@ export const REPORTS = [
     dashboardPath: '/dashboards/ballotages-2027-indecisos',
   },
   {
+    slug: 'informe-streaming-septiembre-2026',
+    title: 'Informe sobre Streaming — Septiembre 2026',
+    fileName: 'informe-streaming-septiembre-2026.pdf',
+    dashboardPath: '/dashboards/streaming-septiembre-2026',
+  },
+  {
     slug: 'opinion-publica-pba-julio-2026',
     title: 'Opinión pública — Provincia de Buenos Aires',
     fileName: 'opinion-publica-pba-julio-2026.pdf',
