@@ -1,6 +1,29 @@
 // Resúmenes públicos de los estudios (/informes/<slug>/ y /en/reports/<slug>/).
-// Datos tomados de los PDF publicados en /docs. El informe completo sigue pidiendo el mail.
+// Datos tomados de los PDF publicados en /docs. El informe completo sigue pidiendo el mail;
+// los estudios con `dashboard` suman un link directo al dashboard público en /dashboards.
 export const STUDY_PAGES = [
+  {
+    slug: 'encuesta-nacional-octubre-2026', date: '2026-10-18', services: ['online', 'ia'],
+    dashboard: '/dashboards/ballotages-2027-indecisos.html',
+    es: {
+      sample: 'Muestra nacional',
+      title: 'Encuesta Nacional — Octubre 2026',
+      description: 'Estudio nacional de Afiches sobre los ballotages 2027: Milei frente a siete posibles rivales, quiénes son los no polarizados y qué le piden. Informe y dashboard interactivo, octubre 2026.',
+      lead: 'Encuesta nacional a personas de 16 años o más sobre los escenarios de segunda vuelta de 2027. Mide a Javier Milei frente a siete posibles adversarios, segmenta el electorado frente al peronismo y profundiza en los no polarizados: quiénes son, cómo ven a Milei y qué creen que le falta.',
+      ficha: [['Universo', 'Población de 16 años o más de Argentina'], ['Campo', '10 al 15 de octubre de 2026'], ['Metodología', 'Encuesta online con pregunta abierta analizada con IA']],
+      stats: [['52%', 'obtienen Cristina Fernández, Sergio Massa y Axel Kicillof frente a Milei entre quienes eligen candidato; Milei, 48%.'], ['37%', 'no está polarizado en al menos uno de los tres duelos frente al peronismo.'], ['31%', 'elige a Milei en los tres duelos; el 28% elige siempre al peronista.'], ['34%', 'de los no polarizados le pide a Milei otra forma de ser; el 22% reclama por el bolsillo.']],
+      body: ['Milei obtiene entre 31% y 36% frente a cualquier rival: lo que cambia es el adversario. Frente al peronismo, entre 26% y 28% no elige a ninguno de los dos, y la elección se define en cómo se reparten los no polarizados.', 'Los no polarizados son más jóvenes y de menor nivel socioeconómico que el total. Lo que creen que le falta a Milei se ordena en dos bloques: su forma de ser —empatía, honestidad, equilibrio— y el bolsillo —trabajo, salarios y llegar a fin de mes—.'],
+    },
+    en: {
+      sample: 'National sample',
+      title: 'National Survey — October 2026',
+      description: 'Afiches national study on the 2027 runoffs: Milei against seven possible rivals, who the non-polarized voters are and what they ask for. Report and interactive dashboard, October 2026.',
+      lead: 'National survey of people aged 16 and over on the 2027 runoff scenarios. It measures Javier Milei against seven possible opponents, segments the electorate against Peronism and looks closely at non-polarized voters: who they are, how they see Milei and what they think he lacks.',
+      ficha: [['Universe', 'People aged 16+ in Argentina'], ['Fieldwork', 'October 10–15, 2026'], ['Methodology', 'Online survey with an open question analyzed with AI']],
+      stats: [['52%', 'is what Cristina Fernández, Sergio Massa and Axel Kicillof get against Milei among those who choose a candidate; Milei, 48%.'], ['37%', 'are not polarized in at least one of the three runoffs against Peronism.'], ['31%', 'choose Milei in all three runoffs; 28% always choose the Peronist.'], ['34%', 'of non-polarized voters ask Milei for a different personal style; 22% raise economic concerns.']],
+      body: ['Milei gets between 31% and 36% against any rival: what changes is the opponent. Against Peronism, between 26% and 28% choose neither, and the election hinges on how non-polarized voters split.', 'Non-polarized voters are younger and of lower socioeconomic level than the total. What they think Milei lacks falls into two blocks: his personal style —empathy, honesty, composure— and the economy —jobs, wages and making ends meet.'],
+    },
+  },
   {
     slug: 'opinion-publica-pba-julio-2026', date: '2026-07-04', services: ['online', 'ia'],
     es: {

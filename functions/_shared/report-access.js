@@ -1,5 +1,10 @@
 export const REPORTS = [
   {
+    slug: 'encuesta-nacional-octubre-2026',
+    title: 'Encuesta Nacional — Octubre 2026',
+    fileName: 'encuesta-nacional-octubre-2026.pdf',
+  },
+  {
     slug: 'opinion-publica-pba-julio-2026',
     title: 'Opinión pública — Provincia de Buenos Aires',
     fileName: 'opinion-publica-pba-julio-2026.pdf',

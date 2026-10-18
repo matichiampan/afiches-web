@@ -32,6 +32,10 @@ const META = {
 
 // Estudios: textos corregidos (tildes) y traducidos
 const STUDY = {
+  'encuesta-nacional-octubre-2026': {
+    es: ['Opinión pública', 'Encuesta Nacional — Octubre 2026', 'Octubre 2026', 'Nacional, 16 años y más', 'Argentina', 'Milei frente a siete posibles rivales en un ballotage 2027, quiénes son los no polarizados y qué le piden. Informe y dashboard interactivo.'],
+    en: ['Public opinion', 'National Survey — October 2026', 'October 2026', 'National, aged 16+', 'Argentina', 'Milei against seven possible rivals in a 2027 runoff, who the non-polarized voters are and what they ask of him. Report and interactive dashboard.'],
+  },
   'opinion-publica-pba-julio-2026': {
     es: ['Opinión pública', 'Opinión pública — Provincia de Buenos Aires', 'Julio 2026', '600 casos', 'Provincia de Buenos Aires', 'Un estudio sobre clima social, economía, evaluación de gestión, imagen de dirigentes y escenario electoral en la Provincia de Buenos Aires.'],
     en: ['Public opinion', 'Public opinion — Buenos Aires Province', 'July 2026', '600 respondents', 'Buenos Aires Province', 'Public sentiment, the economy, government approval, perceptions of political leaders, and the electoral landscape in Buenos Aires Province.'],
@@ -54,6 +58,8 @@ const STUDY = {
   },
 };
 const studies = reports.filter(r => STUDY[r.slug]).map(r => ({ slug: r.slug, t: STUDY[r.slug] }));
+// Estudios con dashboard público: la tarjeta suma un link directo al dashboard (el PDF sigue pidiendo el mail).
+const dash = Object.fromEntries(reports.filter(r => r.dashboardUrl).map(r => [r.slug, r.dashboardUrl]));
 
 const TEAM = [
   { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads research methodology. Previously at Kantar. Studied political science at the University of Buenos Aires.'] },
@@ -102,7 +108,7 @@ function studyCards(lang) {
   const sampleLabel = lang === 'es' ? 'Muestra' : 'Sample';
   return studies.map(({ slug, t }) => {
     const [cat, title, period, sample, geo, summary] = t[lang];
-    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button><a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
+    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button>${dash[slug] ? `<a class="report-open" href="${dash[slug]}" target="_blank" rel="noopener">${lang === 'es' ? 'Ver el dashboard ↗' : 'Open the dashboard ↗'}</a>` : ''}<a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
   }).join('');
 }
 
