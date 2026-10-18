@@ -1,2 +1,5 @@
-/estudios/* /app 200
-/reportes/* /app 200
+/estudios/:slug /?estudio=:slug 301
+/reportes/:slug /?estudio=:slug 301
+/estudios / 301
+/reportes / 301
+/app / 301
