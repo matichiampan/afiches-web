@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SERVICES } from './content/services.mjs';
 import { STUDY_PAGES } from './content/studies.mjs';
+import { listedReports } from '../src/data/reports.js';
 import { ARTICLES } from './content/articles.mjs';
 import { SITE, home, servicesIndex, reportsIndex, serviceUrl, reportUrl } from './site-paths.mjs';
 
@@ -14,6 +15,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pub = path.resolve(here, '../public');
 const out = path.join(pub, 'sitio');
 const draftsOut = path.join(pub, 'sitio-borradores');
+const listedSlugs = new Set(listedReports.map(r => r.slug));
+const listedStudies = STUDY_PAGES.filter(s => listedSlugs.has(s.slug));
+const cover = st => listedReports.find(r => r.slug === st.slug)?.coverUrl || `/studies/${st.slug}.jpg`;
 const TODAY = new Date().toISOString().slice(0, 10);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const L = (lang, es, en) => (lang === 'en' ? en : es);
@@ -90,7 +94,7 @@ const row = (label, inner, cls = '') => `<section class="pg-row ${cls}"><h2 clas
 const faqInner = faq => `<div class="faqs">${faq.map(([q, a], i) => `<details${i ? '' : ' open'}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
 const balls = (lang, keys) => `<div class="pg-balls">${keys.map(k => { const r = SERVICES.find(x => x.key === k); return `<a href="${serviceUrl(k, lang)}" style="--c:${r.color}"><span>${icon(k)}</span><b>${esc(r[lang].name)}</b></a>`; }).join('')}</div>`;
 const ending = (lang, line, subject, keys) => `<section class="pg-end"><p class="pg-end-line">${esc(line)}</p><div class="pg-end-actions"><a class="pill-button" href="${home(lang)}#contactanos">${L(lang, 'Pedir una propuesta', 'Request a proposal')} ↗</a><a class="pg-mail" href="mailto:info@afiches.net?subject=${encodeURIComponent(subject)}">info@afiches.net</a></div>${keys && keys.length ? `<p class="pg-end-sub">${L(lang, 'También te puede servir', 'You may also need')}</p>${balls(lang, keys)}` : ''}</section>`;
-const studyLink = (lang, st) => { const t = st[lang]; return `<a class="pg-study" href="${reportUrl(st.slug, lang)}"><img src="/studies/${st.slug}.jpg" alt="" loading="lazy" width="760" height="428"><span><small>${esc((t.sample || t.ficha[0][1]))}</small><b>${esc(t.title)}</b></span><i aria-hidden="true">→</i></a>`; };
+const studyLink = (lang, st) => { const t = st[lang]; return `<a class="pg-study" href="${reportUrl(st.slug, lang)}"><img src="${cover(st)}" alt="" loading="lazy" width="760" height="428"><span><small>${esc((t.sample || t.ficha[0][1]))}</small><b>${esc(t.title)}</b></span><i aria-hidden="true">→</i></a>`; };
 // grilla de 10×10 puntos para los datos en porcentaje (el mismo lenguaje que el mapa)
 const dots = n => { const p = Math.round(parseFloat(String(n).replace(',', '.'))); if (!/%/.test(n) || !(p >= 0 && p <= 100)) return `<span class="pg-dots pg-dots-big" aria-hidden="true"><i></i></span>`; return `<span class="pg-dots" aria-hidden="true">${Array.from({ length: 100 }, (_, i) => `<i${i < p ? ' class="on"' : ''}></i>`).join('')}</span>`; };
 const files = [];
@@ -131,23 +135,23 @@ for (const st of STUDY_PAGES) for (const lang of ['es', 'en']) {
   const t = st[lang], url = reportUrl(st.slug, lang), alt = reportUrl(st.slug, lang === 'es' ? 'en' : 'es');
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Informes', 'Reports'), reportsIndex(lang)], [t.title, url]];
   const access = `${home(lang)}?estudio=${st.slug}#estudios`;
-  const field = t.ficha.find(f => /Campo|Fieldwork/.test(f[0]))[1];
+  const field = t.ficha.find(f => /Campo|Fieldwork/.test(f[0]))?.[1];
   const body = `<article class="pg pg-report"><div class="wrap">${crumbs(lang, items)}
-<header class="pg-hero"><div class="pg-hero-text"><p class="pg-date">${esc(field)} · ${esc((t.sample || t.ficha[0][1]))}</p><h1>${esc(t.title)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${access}">${L(lang, 'Acceder al informe completo', 'Access the full report')} ↗</a>${st.dashboard ? `<a class="pg-mail" href="${st.dashboard}">${L(lang, 'Ver el dashboard', 'Open the dashboard')} ↗</a>` : ''}</div></div><a class="pg-cover" href="${access}" aria-label="${esc(L(lang, 'Abrir el informe ', 'Open the report ') + t.title)}"><img src="/studies/${st.slug}.jpg" alt="" width="760" height="428"></a></header>
+<header class="pg-hero"><div class="pg-hero-text"><p class="pg-date">${[field, t.sample || t.ficha[0][1]].filter(Boolean).map(esc).join(' · ')}</p><h1>${esc(t.title)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${access}">${L(lang, 'Acceder al informe completo', 'Access the full report')} ↗</a>${st.dashboard ? `<a class="pg-mail" href="${st.dashboard}">${L(lang, 'Ver el dashboard', 'Open the dashboard')} ↗</a>` : ''}</div></div><a class="pg-cover" href="${access}" aria-label="${esc(L(lang, 'Abrir el informe ', 'Open the report ') + t.title)}"><img src="${cover(st)}" alt="" width="760" height="428"></a></header>
 ${row(L(lang, 'Datos principales', 'Key findings'), `<div class="pg-stats">${t.stats.map(([n, d]) => `<div class="pg-stat">${dots(n)}<div><b>${esc(n)}</b><span>${esc(d)}</span></div></div>`).join('')}</div>`)}
 ${row(L(lang, 'Lectura', 'Reading'), t.body.map(p => `<p>${esc(p)}</p>`).join(''))}
 ${row(L(lang, 'Ficha técnica', 'Methodology'), `<dl class="pg-ficha">${t.ficha.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`)}
 ${ending(lang, L(lang, 'Podemos hacer un estudio así para tu marca, tu sector o tu territorio.', 'We can run a study like this for your brand, sector or territory.'), t.title, st.services)}</div></article>`;
-  const ld = [{ '@type': 'Report', '@id': SITE + url + '#report', name: t.title, headline: t.title, description: t.description, url: SITE + url, datePublished: st.date, inLanguage: lang, publisher: ORG, author: ORG, image: `${SITE}/studies/${st.slug}.jpg`, isAccessibleForFree: true }, crumbsLd(items)];
-  await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: t.title + ' | Afiches', description: t.description, body, ld, ogImage: `${SITE}/studies/${st.slug}.jpg`, current: 'estudios' }));
+  const ld = [{ '@type': 'Report', '@id': SITE + url + '#report', name: t.title, headline: t.title, description: t.description, url: SITE + url, ...(listedSlugs.has(st.slug) ? {} : { datePublished: st.date }), inLanguage: lang, publisher: ORG, author: ORG, image: `${SITE}${cover(st)}`, isAccessibleForFree: true }, crumbsLd(items)];
+  await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: t.title + ' | Afiches', description: t.description, body, ld, ogImage: `${SITE}${cover(st)}`, current: 'estudios' }));
 }
 for (const lang of ['es', 'en']) {
   const url = reportsIndex(lang), alt = reportsIndex(lang === 'es' ? 'en' : 'es');
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Informes', 'Reports'), url]];
   const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Informes', 'Reports')}</h1><p class="pg-lead">${L(lang, 'Estudios de opinión pública y de mercado realizados por Afiches en Argentina y América Latina. Cada resumen incluye los datos principales y la ficha técnica; el informe completo se accede dejando un mail.', 'Public opinion and market studies by Afiches in Argentina and Latin America. Each summary includes key findings and methodology; the full report is available by leaving your email.')}</p></div></header>
-<ol class="pg-reports">${STUDY_PAGES.map(st => { const t = st[lang]; return `<li><a href="${reportUrl(st.slug, lang)}"><img src="/studies/${st.slug}.jpg" alt="" loading="lazy" width="760" height="428"><span class="pg-rep-meta">${esc(t.ficha.find(f => /Campo|Fieldwork/.test(f[0]))[1])} · ${esc((t.sample || t.ficha[0][1]))}</span><b>${esc(t.title)}</b><span class="pg-rep-stat"><em>${esc(t.stats[0][0])}</em> ${esc(t.stats[0][1])}</span></a></li>`; }).join('')}</ol></div></article>`;
-  const ld = [{ '@type': 'CollectionPage', '@id': SITE + url, url: SITE + url, name: L(lang, 'Informes de Afiches', 'Afiches reports'), inLanguage: lang, about: ORG, hasPart: STUDY_PAGES.map(st => ({ '@id': SITE + reportUrl(st.slug, lang) + '#report' })) }, crumbsLd(items)];
-  await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: L(lang, 'Informes de opinión pública y mercado | Afiches', 'Public opinion and market research reports | Afiches'), description: L(lang, 'Informes de Afiches: opinión pública en la Provincia de Buenos Aires y en Argentina, fintech, seguridad comparada en cuatro países y crisis en Venezuela.', 'Afiches reports: public opinion in Buenos Aires Province and Argentina, fintech, comparative security in four countries and the Venezuelan crisis.'), body, ld, current: 'estudios' }));
+<ol class="pg-reports">${listedStudies.map(st => { const t = st[lang]; return `<li><a href="${reportUrl(st.slug, lang)}"><img src="${cover(st)}" alt="" loading="lazy" width="760" height="428"><span class="pg-rep-meta">${esc((t.sample || t.ficha[0][1]))}</span><b>${esc(t.title)}</b><span class="pg-rep-stat"><em>${esc(t.stats[0][0])}</em> ${esc(t.stats[0][1])}</span></a></li>`; }).join('')}</ol></div></article>`;
+  const ld = [{ '@type': 'CollectionPage', '@id': SITE + url, url: SITE + url, name: L(lang, 'Informes de Afiches', 'Afiches reports'), inLanguage: lang, about: ORG, hasPart: listedStudies.map(st => ({ '@id': SITE + reportUrl(st.slug, lang) + '#report' })) }, crumbsLd(items)];
+  await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: L(lang, 'Informes de opinión pública y mercado | Afiches', 'Public opinion and market research reports | Afiches'), description: L(lang, 'Informes de Afiches sobre streaming, fintech y seguridad comparada en cuatro países.', 'Afiches reports on streaming, fintech and comparative security in four countries.'), body, ld, current: 'estudios' }));
 }
 
 // ---------- artículos en borrador (fuera del sitio publicado) ----------
@@ -164,7 +168,7 @@ for (const a of ARTICLES) {
 await write('recursos/index.html', page({ lang: 'es', url: '/recursos/', alt: '/en/', title: 'Recursos (borradores) | Afiches', description: 'Borradores de artículos', robots: 'noindex,nofollow', banner: '<div class="draft-banner">BORRADORES · no publicados</div>', body: `<article class="pg"><div class="wrap"><header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>Recursos</h1><p class="pg-lead">Borradores para revisar.</p></div></header><ol class="pg-list">${ARTICLES.map(a => `<li><a href="/borradores/recursos/${a.slug}/" style="--c:#ddd6fe"><span class="pg-list-dot">${icon(a.services[0])}</span><b>${esc(a.title)}</b><span class="pg-list-txt">${esc(a.description)}</span><i aria-hidden="true">→</i></a></li>`).join('')}</ol></div></article>` }), draftsOut);
 
 // ---------- sitemap y llms.txt ----------
-const pairs = [['/', '/en/'], [servicesIndex('es'), servicesIndex('en')], ...SERVICES.map(s => [serviceUrl(s.key, 'es'), serviceUrl(s.key, 'en')]), [reportsIndex('es'), reportsIndex('en')], ...STUDY_PAGES.map(s => [reportUrl(s.slug, 'es'), reportUrl(s.slug, 'en')])];
+const pairs = [['/', '/en/'], [servicesIndex('es'), servicesIndex('en')], ...SERVICES.map(s => [serviceUrl(s.key, 'es'), serviceUrl(s.key, 'en')]), [reportsIndex('es'), reportsIndex('en')], ...listedStudies.map(s => [reportUrl(s.slug, 'es'), reportUrl(s.slug, 'en')])];
 const sm = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${pairs.flatMap(([es, en]) => [es, en].map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><xhtml:link rel="alternate" hreflang="es" href="${SITE}${es}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${en}"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${es}"/></url>`)).join('\n')}
@@ -173,6 +177,6 @@ ${pairs.flatMap(([es, en]) => [es, en].map(u => `  <url><loc>${SITE}${u}</loc><l
 await fs.writeFile(path.join(out, 'sitemap.xml'), sm);
 let llms = await fs.readFile(path.join(out, 'llms.txt'), 'utf8');
 llms = llms.replace(/\n## Páginas[\s\S]*?(?=\n## Contacto)/, '');
-llms = llms.replace('\n## Contacto', `\n## Páginas\n### Servicios\n${SERVICES.map(s => `- [${s.es.name}](${SITE}${serviceUrl(s.key, 'es')}): ${s.es.description}`).join('\n')}\n\n### Informes\n${STUDY_PAGES.map(s => `- [${s.es.title}](${SITE}${reportUrl(s.slug, 'es')}): ${s.es.stats.map(([n, d]) => n + ' ' + d).slice(0, 2).join(' ')}`).join('\n')}\n\n## Contacto`);
+llms = llms.replace('\n## Contacto', `\n## Páginas\n### Servicios\n${SERVICES.map(s => `- [${s.es.name}](${SITE}${serviceUrl(s.key, 'es')}): ${s.es.description}`).join('\n')}\n\n### Informes\n${listedStudies.map(s => `- [${s.es.title}](${SITE}${reportUrl(s.slug, 'es')}): ${s.es.stats.map(([n, d]) => n + ' ' + d).slice(0, 2).join(' ')}`).join('\n')}\n\n## Contacto`);
 await fs.writeFile(path.join(out, 'llms.txt'), llms);
 console.log(`Páginas: ${files.length} en public/sitio · borradores: ${ARTICLES.length} en public/sitio-borradores · sitemap con ${pairs.length * 2} URLs`);

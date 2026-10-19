@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="428" viewBox="0 0 760 428" role="img" aria-labelledby="title">
+  <title id="title">Reporte Fintech: cómo usan el dinero los argentinos</title>
+  <rect width="760" height="428" rx="20" fill="#f0ebe1"/>
+  <rect width="760" height="150" rx="20" fill="#152023"/><path d="M0 125h760v25H0z" fill="#152023"/>
+  <g font-family="Arial, sans-serif"><text x="36" y="47" fill="#22d46a" font-size="14" font-weight="700" letter-spacing="3">AFICHES · FINTECH</text>
+  <text x="36" y="95" fill="#f0ebe1" font-size="36" font-weight="700">¿Cómo usan el dinero</text><text x="36" y="133" fill="#f0ebe1" font-size="36" font-weight="700">los argentinos?</text>
+  <text x="36" y="194" fill="#152023" font-size="18" font-weight="700">Medio de pago principal</text>
+  <g font-size="17" fill="#152023"><text x="36" y="241">Billetera virtual</text><text x="36" y="292">Efectivo</text><text x="36" y="343">Banco</text></g>
+  <rect x="195" y="218" width="410" height="31" rx="8" fill="#7c3aed"/><rect x="195" y="269" width="146" height="31" rx="8" fill="#f97316"/><rect x="195" y="320" width="106" height="31" rx="8" fill="#22d46a"/>
+  <g font-size="22" font-weight="700" fill="#152023"><text x="620" y="242">62%</text><text x="357" y="293">22%</text><text x="317" y="344">16%</text></g>
+  <text x="36" y="397" fill="#455352" font-size="15">Billeteras virtuales, bancos y hábitos de pago · Argentina</text></g>
+</svg>

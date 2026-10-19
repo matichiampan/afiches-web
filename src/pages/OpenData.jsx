@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import SectionIntro from '../components/SectionIntro';
 import ReportAccessModal from '../components/ReportAccessModal';
-import { reports } from '../data/reports';
+import { listedReports as reports } from '../data/reports';
 import { useLang } from '../context/LanguageContext';
 import { useIsMobile } from '../hooks/useIsMobile';
 

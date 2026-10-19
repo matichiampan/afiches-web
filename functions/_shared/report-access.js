@@ -8,7 +8,7 @@ export const REPORTS = [
   },
   {
     slug: 'informe-streaming-septiembre-2026',
-    title: 'Informe sobre Streaming — Septiembre 2026',
+    title: 'Informe sobre Streaming',
     fileName: 'informe-streaming-septiembre-2026.pdf',
     dashboardPath: '/dashboards/streaming-septiembre-2026',
   },
@@ -24,7 +24,7 @@ export const REPORTS = [
   },
   {
     slug: 'reporte-fintech-q2-2026',
-    title: "Reporte Fintech Q2'26",
+    title: 'Reporte Fintech',
     fileName: 'reporte-fintech-q2-2026-afiches.pdf',
   },
   {

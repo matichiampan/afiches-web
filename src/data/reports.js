@@ -26,10 +26,10 @@ export const reports = [
   {
     id: 7,
     slug: 'informe-streaming-septiembre-2026',
-    title: 'Informe sobre Streaming — Septiembre 2026',
-    subtitle: 'Informe Afiches, septiembre de 2026',
+    title: 'Informe sobre Streaming',
+    subtitle: 'Olga, Luzu TV y Gelatina',
+    listed: true,
     category: 'STREAMING',
-    period: 'Septiembre 2026',
     geography: 'Argentina',
     sample: 'Muestra nacional',
     fileUrl: '/docs/informe-streaming-septiembre-2026.pdf',
@@ -44,7 +44,6 @@ export const reports = [
     teaserStats: [
       { label: 'Menciona Luzu', value: '39%' },
       { label: 'Pais', value: 'AR' },
-      { label: 'Periodo', value: 'Sep 26' },
     ],
   },
   {
@@ -96,10 +95,11 @@ export const reports = [
   {
     id: 2,
     slug: 'reporte-fintech-q2-2026',
-    title: "Reporte Fintech Q2'26",
-    subtitle: 'Informe Afiches, segundo trimestre de 2026',
+    title: 'Reporte Fintech',
+    subtitle: 'Billeteras virtuales, bancos y hábitos de pago',
+    listed: true,
+    coverUrl: '/studies/fintech.svg',
     category: 'FINTECH',
-    period: 'Mayo 2026',
     geography: 'Argentina',
     sample: '650 casos',
     fileUrl: '/docs/reporte-fintech-q2-2026-afiches.pdf',
@@ -120,9 +120,10 @@ export const reports = [
     id: 3,
     slug: 'seguridad-comparada-2026',
     title: 'Reporte de seguridad',
+    listed: true,
+    coverUrl: '/studies/seguridad.svg',
     subtitle: 'Seguridad comparada: Argentina, Mexico, Honduras y Uruguay',
     category: 'SEGURIDAD',
-    period: '2025-2026',
     geography: '4 paises',
     sample: '4 estudios nacionales',
     fileUrl: '/docs/reporte-seguridad-afiches-2026.pdf',
@@ -163,6 +164,9 @@ export const reports = [
     ],
   },
 ];
+
+// El catálogo completo conserva los accesos directos a informes y dashboards.
+export const listedReports = reports.filter((report) => report.listed);
 
 export function getReportBySlug(slug) {
   return reports.find((report) => report.slug === slug);

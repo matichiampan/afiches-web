@@ -4,7 +4,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { reports } from '../src/data/reports.js';
+import { reports, listedReports } from '../src/data/reports.js';
 import { toEnglish } from './site-paths.mjs';
 
 const SITE = 'https://afiches.net';
@@ -49,8 +49,8 @@ const STUDY = {
     en: ['Public opinion', 'Public opinion — Argentina', 'June 2026', '1,110 respondents', 'Argentina', 'A nationwide overview of public sentiment, key public concerns, and citizens’ perceptions.'],
   },
   'reporte-fintech-q2-2026': {
-    es: ['Fintech', 'Reporte Fintech Q2’26', 'Mayo 2026', '650 casos', 'Argentina', 'Un relevamiento sobre billeteras virtuales, bancos, efectivo y nuevos hábitos de pago en Argentina.'],
-    en: ['Fintech', 'Fintech Report Q2’26', 'May 2026', '650 respondents', 'Argentina', 'A survey on digital wallets, banks, cash and new payment habits in Argentina.'],
+    es: ['Fintech', 'Reporte Fintech', 'Mayo 2026', '650 casos', 'Argentina', 'Un relevamiento sobre billeteras virtuales, bancos, efectivo y nuevos hábitos de pago en Argentina.'],
+    en: ['Fintech', 'Fintech Report', 'May 2026', '650 respondents', 'Argentina', 'A survey on digital wallets, banks, cash and new payment habits in Argentina.'],
   },
   'seguridad-comparada-2026': {
     es: ['Seguridad', 'Reporte de seguridad', '2025-2026', '4 estudios nacionales', 'Argentina, México, Honduras y Uruguay', 'Una comparación regional sobre percepción de inseguridad, experiencia directa y conversación pública.'],
@@ -61,7 +61,7 @@ const STUDY = {
     en: ['Research', 'Crisis in Venezuela', 'January 2026', 'Regional summary', 'Venezuela, Colombia, Brazil and Argentina', 'A regional analysis of the Venezuelan crisis, perceptions of the regime, and attitudes toward foreign intervention.'],
   },
 };
-const studies = reports.filter(r => STUDY[r.slug]).map(r => ({ slug: r.slug, t: STUDY[r.slug] }));
+const studies = listedReports.filter(r => STUDY[r.slug]).map(r => ({ slug: r.slug, cover: r.coverUrl || `/studies/${r.slug}.jpg`, t: STUDY[r.slug] }));
 // Estudios con dashboard público: la tarjeta suma un link directo al dashboard (el PDF sigue pidiendo el mail).
 const dash = Object.fromEntries(reports.filter(r => r.dashboardUrl).map(r => [r.slug, r.dashboardUrl]));
 
@@ -110,9 +110,9 @@ function faqs(html) {
 function studyCards(lang) {
   const btn = lang === 'es' ? 'Acceder al informe ↗' : 'Access the report ↗';
   const sampleLabel = lang === 'es' ? 'Muestra' : 'Sample';
-  return studies.map(({ slug, t }) => {
+  return studies.map(({ slug, cover, t }) => {
     const [cat, title, period, sample, geo, summary] = t[lang];
-    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="/studies/${slug}.jpg" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)} · ${esc(period)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button>${dash[slug] ? `<a class="report-open" href="${dash[slug]}">${lang === 'es' ? 'Ver el dashboard ↗' : 'Open the dashboard ↗'}</a>` : ''}<a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
+    return `<article class="report-card" data-slug="${slug}"><img class="report-cover" src="${cover}" alt="${esc((lang === 'es' ? 'Portada del estudio ' : 'Cover of the study ') + title)}" loading="lazy" width="900" height="507"><small>${esc(cat)}</small><h3>${esc(title)}</h3><p class="report-meta">${sampleLabel}: ${esc(sample)} · ${esc(geo)}</p><p>${esc(summary)}</p><div class="report-actions"><button type="button">${btn}</button>${dash[slug] ? `<a class="report-open" href="${dash[slug]}">${lang === 'es' ? 'Ver el dashboard ↗' : 'Open the dashboard ↗'}</a>` : ''}<a class="report-more" href="/informes/${slug}/">${lang === 'es' ? 'Ver datos principales' : 'See key findings'} →</a></div></article>`;
   }).join('');
 }
 
@@ -157,7 +157,7 @@ function jsonLd(lang, faqList) {
         '@type': 'ItemList', '@id': `${url}#estudios`, name: lang === 'es' ? 'Estudios de Afiches' : 'Afiches studies',
         itemListElement: studies.map(({ slug, t }, i) => {
           const [cat, title, period, sample, geo, summary] = t[lang];
-          return { '@type': 'ListItem', position: i + 1, item: { '@type': 'Report', name: title, description: `${summary} ${lang === 'es' ? 'Muestra' : 'Sample'}: ${sample}. ${period}.`, about: cat, spatialCoverage: geo, inLanguage: 'es', publisher: { '@id': org }, url: `${url}#estudios` } };
+          return { '@type': 'ListItem', position: i + 1, item: { '@type': 'Report', name: title, description: `${summary} ${lang === 'es' ? 'Muestra' : 'Sample'}: ${sample}.`, about: cat, spatialCoverage: geo, inLanguage: 'es', publisher: { '@id': org }, url: `${url}#estudios` } };
         }),
       },
     ],
@@ -222,7 +222,7 @@ function build(lang) {
 }
 
 function llms() {
-  const s = (lang) => studies.map(({ t }) => { const [cat, title, period, sample, geo, summary] = t[lang]; return `- **${title}** (${period}; ${sample}; ${geo}): ${summary}`; }).join('\n');
+  const s = (lang) => studies.map(({ t }) => { const [cat, title, period, sample, geo, summary] = t[lang]; return `- **${title}** (${sample}; ${geo}): ${summary}`; }).join('\n');
   return `# Afiches
 
 > Consultora de investigación de mercado y opinión pública con base en Buenos Aires, Argentina. Hace investigación cualitativa y cuantitativa potenciada por inteligencia artificial: recluta participantes en las principales plataformas digitales, realiza entrevistas cualitativas asistidas por IA a escala de encuesta y analiza los resultados.

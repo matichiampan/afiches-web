@@ -150,7 +150,7 @@ export default function ReportAccess() {
 
               <div style={{ marginTop: isMobile ? 58 : 100, maxWidth: 700 }}>
                 <p style={{ fontSize: '0.72rem', fontWeight: 900, letterSpacing: '0.18em', opacity: 0.72, marginBottom: 12 }}>
-                  {report.category} / {report.period}
+                  {[report.category, report.period].filter(Boolean).join(' / ')}
                 </p>
                 <h1 style={{ fontSize: 'clamp(2.35rem, 6vw, 6rem)', lineHeight: 0.94, fontWeight: 900, letterSpacing: '-0.05em' }}>
                   {report.title}
