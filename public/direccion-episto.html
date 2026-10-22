@@ -213,10 +213,10 @@
    {th:['Precio y promociones','Price and promotions'],c:'#f97316',a1:['Compro donde hay promo, ya no soy fiel a ninguna marca.','I shop wherever there’s a deal; I’m not loyal to any brand anymore.'],ai:['¿Qué promo te hace cambiar de lugar?','What kind of deal makes you switch stores?'],a2:['Si no hay 2x1, espero a la semana siguiente.','If there’s no 2-for-1, I wait until next week.']},
    {th:['Atención y tiempos','Service and waiting times'],c:'#22d46a',a1:['Siempre hay una sola caja abierta.','There’s always just one checkout open.'],ai:['¿Qué hacés cuando la fila es larga?','What do you do when the line is long?'],a2:['Me voy a otro lado, no tengo tiempo.','I go somewhere else; I don’t have time.']},
    {th:['Envíos y app','Delivery and app'],c:'#0ea5e9',a1:['La app es fácil, compro desde el colectivo.','The app is easy; I shop from the bus.'],ai:['¿Qué te haría comprar más seguido por la app?','What would make you order through the app more often?'],a2:['Que el pedido llegue cuando dicen.','That orders arrive when they say they will.']}];
-  const counts=T.map(()=>0),chips=T.map(t=>{const c=document.createElement('span');c.className='cq-chip';c.style.setProperty('--c',t.c);c.innerHTML='<i></i><span></span><b>0</b>';chipsBox.append(c);return c;});
-  const paintChips=()=>chips.forEach((c,i)=>{c.children[1].textContent=tr(T[i].th[0],T[i].th[1]);c.children[2].textContent=counts[i];});paintChips();
+  const counts=T.map(()=>0),chips=T.map(t=>{const c=document.createElement('span');c.className='cq-chip';c.innerHTML='<span></span> <b>0</b>';chipsBox.append(c);return c;});
+  const paintChips=()=>chips.forEach((c,i)=>{c.children[0].textContent=tr(T[i].th[0],T[i].th[1]);c.children[1].textContent=counts[i];});paintChips();
   const wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
-  let running=false,round=0,id=1240;
+  let running=false,looping=false,round=0,id=1240;
   const el=(cls,html)=>{const e=document.createElement('div');e.className=cls;if(html!=null)e.innerHTML=html;return e;};
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   async function thread(slot,k,delay){
@@ -229,7 +229,7 @@
    const ty=el('cq-typing','<i></i><i></i><i></i>');th.append(ty);requestAnimationFrame(()=>ty.classList.add('in'));await wait(1100);ty.remove();
    await add('ai','<b>'+tr('Repregunta IA','AI follow-up')+'</b>'+esc(tr(t.ai[0],t.ai[1])),1000);
    await add('a',esc(tr(t.a2[0],t.a2[1])),800);
-   const tag=el('cq-tag','<i></i>'+esc(tr(t.th[0],t.th[1])));tag.style.setProperty('--c',t.c);th.append(tag);requestAnimationFrame(()=>requestAnimationFrame(()=>tag.classList.add('in')));
+   const tag=el('cq-tag',esc(tr(t.th[0],t.th[1])));tag.style.setProperty('--c',t.c);th.append(tag);requestAnimationFrame(()=>requestAnimationFrame(()=>tag.classList.add('in')));
    await wait(450);
    const from=tag.getBoundingClientRect(),to=chips[k].getBoundingClientRect();
    if(!reduce&&from.width){const f=document.createElement('span');f.className='cq-fly';f.style.background=t.c;f.style.left=(from.left+10)+'px';f.style.top=(from.top+from.height/2-4)+'px';document.body.append(f);
@@ -238,6 +238,7 @@
    return th;
   }
   async function loop(){
+   if(looping)return;looping=true;
    while(running){
     const slots=[...Array(3)].map(()=>el('cq-thread'));box.replaceChildren(...slots);
     const order=[0,1,2].map(i=>(i+round)%3);round++;
@@ -245,8 +246,10 @@
     await wait(2600);if(reduce){running=false;break;}
     ths.forEach(t=>t.classList.add('fade'));await wait(650);
    }
+   looping=false;
   }
-  new IntersectionObserver(([e])=>{if(e.isIntersecting&&!running){running=true;loop();}else if(!e.isIntersecting)running=false;},{threshold:.35}).observe(stage);
+  // una sola animación a la vez: si vuelve a verse mientras termina la ronda anterior, sigue esa
+  new IntersectionObserver(([e])=>{running=e.isIntersecting;if(running)loop();},{threshold:.35}).observe(stage);
   document.addEventListener('langchange',paintChips);
  })();
 

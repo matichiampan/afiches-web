@@ -827,3 +827,15 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 .mq-set>.mq-label:first-child{margin-left:0}
 @media(max-width:700px){.mq-sec{padding:22px 0 28px}.mq-set{gap:30px;padding-right:30px;zoom:.78}.mq-track{animation-duration:55s}}
 @media(prefers-reduced-motion:reduce){.mq{-webkit-mask-image:none;mask-image:none}.mq-track{animation:none;width:auto;justify-content:center}.mq-set{flex-wrap:wrap;justify-content:center;row-gap:18px;padding:0 20px}.mq-set[aria-hidden]{display:none}}
+
+/* Entrevistas en paralelo: encabezado chico y temas como texto simple (sin pastillas ni puntos) */
+.cq-thread>.header{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:500;color:var(--muted);margin-bottom:2px}
+.cq-thread>.header i{width:6px;height:6px;border-radius:50%;background:var(--green);animation:cq-live 1.6s ease-in-out infinite}
+.cq-tag{margin-top:auto;padding:6px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none;font-size:10.5px;font-weight:600;color:var(--ink);align-self:stretch}
+.cq-chips{gap:4px 18px}
+.cq-chip{padding:0;border:0;border-radius:0;background:none;font-size:12px;font-weight:600}
+.cq-chip b{margin-left:4px}
+.cq-chip.pop{animation:cq-pop2 .6s ease-out}
+@keyframes cq-pop2{40%{color:var(--accent)}}
+.cq-themes small{letter-spacing:normal;text-transform:none;font-size:12px;font-weight:400}
+@media(prefers-reduced-motion:reduce){.cq-thread>.header i{animation:none}}
