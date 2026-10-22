@@ -68,8 +68,8 @@ const dash = Object.fromEntries(reports.filter(r => r.dashboardUrl).map(r => [r.
 const TEAM = [
   { name: 'Matías Chiampan', img: 'matias-chiampan', es: ['Cofundador · Metodología', 'Lidera la metodología de Afiches. Ex Kantar. Formación en Ciencia Política (UBA).'], en: ['Co-founder · Methodology', 'Leads research methodology. Previously at Kantar. Studied political science at the University of Buenos Aires.'] },
   { name: 'Faustino Raggi', img: 'faustino-raggi', es: ['Cofundador · Comercial', 'Lidera el área comercial. Ex coordinador de Insights en Disney. Formación en Sociología (UBA).'], en: ['Co-founder · Commercial', 'Leads commercial strategy. Former Consumer Insights Coordinator at Disney. Background in sociology from the University of Buenos Aires.'] },
-  { name: 'Luciana Modica', img: 'luciana-modica', es: ['Responsable de Desarrollo de Negocios', 'Lidera el desarrollo de negocios y las alianzas. Columbia University (MPA 2027).'], en: ['Head of Business Development', 'Leads business development and partnerships. Columbia University (MPA 2027).'] },
-  { name: 'Yanny Rodriguez', img: 'yanny-rodriguez', es: ['Ejecutiva de cuentas regional', 'Acompaña a los clientes de la región desde el primer brief hasta la entrega de resultados.'], en: ['Regional Account Executive', 'Supports clients across the region from the first brief to the final results.'] },
+  { name: 'Luciana Modica', img: 'luciana-modica', es: ['Cofundadora · EE.UU.', 'Lidera el desarrollo de negocios en EE.UU. Fundadora de LIAP. MPA, Columbia University (2027).'], en: ['Co-founder · United States', 'Leads business development in the U.S. Founder of LIAP. MPA, Columbia University (2027).'] },
+  { name: 'Yanny Rodríguez', img: 'yanny-rodriguez', es: ['Responsable Comercial · Regional', 'Lidera el desarrollo comercial regional. Ex Legislatura de la Ciudad de Buenos Aires. Background en Ciencia Política (UBA).'], en: ['Commercial Lead · Regional', 'Leads regional business development. Previously at the Buenos Aires City Legislature. Background in political science (University of Buenos Aires).'] },
 ];
 
 const SERVICES = {
@@ -103,6 +103,7 @@ function keepLang(html, lang) {
 }
 
 function faqs(html) {
+  if (!html.includes('<div class="faqs">')) return [];
   html = html.slice(html.indexOf('<div class="faqs">'), html.indexOf('<div class="end-cta">'));
   return [...html.matchAll(/<details(?: open)?><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map(m => ({ q: text(m[1]), a: text(m[2]) }));
 }
@@ -131,7 +132,7 @@ function jsonLd(lang, faqList) {
         description: META[lang].description,
         address: { '@type': 'PostalAddress', addressLocality: 'Buenos Aires', addressCountry: 'AR' },
         areaServed: [{ '@type': 'Country', name: 'Argentina' }, { '@type': 'Place', name: lang === 'es' ? 'América Latina' : 'Latin America' }],
-        founder: people.slice(0, 2).map(p => ({ '@id': p['@id'] })),
+        founder: people.slice(0, 3).map(p => ({ '@id': p['@id'] })),
         employee: people.map(p => ({ '@id': p['@id'] })),
         sameAs: SOCIAL,
         knowsAbout: lang === 'es'
@@ -149,10 +150,11 @@ function jsonLd(lang, faqList) {
         primaryImageOfPage: { '@type': 'ImageObject', url: META[lang].ogImage },
       },
       ...people,
-      {
+      // las preguntas frecuentes viven en su propia página (build-pages.mjs)
+      ...(faqList.length ? [{
         '@type': 'FAQPage', '@id': `${url}#faq`, inLanguage: lang,
         mainEntity: faqList.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-      },
+      }] : []),
       {
         '@type': 'ItemList', '@id': `${url}#estudios`, name: lang === 'es' ? 'Estudios de Afiches' : 'Afiches studies',
         itemListElement: studies.map(({ slug, t }, i) => {
@@ -192,7 +194,7 @@ function headTags(lang) {
 const ARIA_EN = {
   'Navegación principal': 'Main navigation', 'Cambiar idioma': 'Change language', 'Activar modo oscuro': 'Switch to dark mode', 'Cerrar': 'Close',
   'Cerrar acceso al estudio': 'Close study access', 'Reproducir video': 'Play video', 'Accesos a Afiches': 'Afiches shortcuts', 'Accesos a informes': 'Report shortcuts',
-  'Seleccioná un tema para explorar sus coocurrencias': 'Select a topic to explore how it connects', 'Video original del entrevistador de Afiches': 'Afiches AI interviewer video', 'Suscribirme': 'Subscribe',
+  'Seleccioná un tema para explorar sus coocurrencias': 'Select a topic to explore how it connects', 'Video original del entrevistador de Afiches': 'Afiches AI interviewer video', 'Suscribirme': 'Subscribe', 'Clientes, instituciones y medios': 'Clients, institutions and media',
 };
 
 function build(lang) {

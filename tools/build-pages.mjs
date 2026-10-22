@@ -9,7 +9,8 @@ import { SERVICES } from './content/services.mjs';
 import { STUDY_PAGES } from './content/studies.mjs';
 import { listedReports } from '../src/data/reports.js';
 import { ARTICLES } from './content/articles.mjs';
-import { SITE, home, servicesIndex, reportsIndex, serviceUrl, reportUrl } from './site-paths.mjs';
+import { SITE, home, servicesIndex, reportsIndex, serviceUrl, reportUrl, faqUrl, toEnglish } from './site-paths.mjs';
+import { FAQ } from './content/faq.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const pub = path.resolve(here, '../public');
@@ -154,6 +155,19 @@ for (const lang of ['es', 'en']) {
   await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: L(lang, 'Informes de opinión pública y mercado | Afiches', 'Public opinion and market research reports | Afiches'), description: L(lang, 'Informes de Afiches sobre streaming, fintech y seguridad comparada en cuatro países.', 'Afiches reports on streaming, fintech and comparative security in four countries.'), body, ld, current: 'estudios' }));
 }
 
+// ---------- preguntas frecuentes (antes estaban en la home) ----------
+const plain = s => String(s).replace(/<[^>]+>/g, '').replace(/s+/g, ' ').trim();
+for (const lang of ['es', 'en']) {
+  const url = faqUrl(lang), alt = faqUrl(lang === 'es' ? 'en' : 'es');
+  const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Preguntas frecuentes', 'FAQ'), url]];
+  const qa = FAQ.map(f => f[lang]).map(([q, a]) => [q, lang === 'en' ? toEnglish(a) : a]);
+  const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Preguntas frecuentes', 'Frequently asked questions')}</h1></div></header>
+<div class="faqs pg-faq">${qa.map(([q, a], i) => `<details${i ? '' : ' open'}><summary>${esc(q)}</summary><p>${a}</p></details>`).join('')}</div>
+${ending(lang, L(lang, '¿Tenés otra pregunta? Escribinos.', 'Have another question? Write to us.'), L(lang, 'Consulta', 'Inquiry'))}</div></article>`;
+  const ld = [{ '@type': 'FAQPage', '@id': SITE + url + '#faq', url: SITE + url, inLanguage: lang, mainEntity: qa.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: plain(a) } })) }, crumbsLd(items)];
+  await write(url.slice(1) + 'index.html', page({ lang, url, alt, title: L(lang, 'Preguntas frecuentes | Afiches', 'Frequently asked questions | Afiches'), description: L(lang, 'Cómo reclutamos, qué hace la IA, qué entregamos, plazos, costos y confidencialidad en los estudios de Afiches.', 'How we recruit, what the AI does, deliverables, timelines, costs and confidentiality in Afiches studies.'), body, ld }));
+}
+
 // ---------- artículos en borrador (fuera del sitio publicado) ----------
 await fs.rm(draftsOut, { recursive: true, force: true });
 for (const a of ARTICLES) {
@@ -168,7 +182,7 @@ for (const a of ARTICLES) {
 await write('recursos/index.html', page({ lang: 'es', url: '/recursos/', alt: '/en/', title: 'Recursos (borradores) | Afiches', description: 'Borradores de artículos', robots: 'noindex,nofollow', banner: '<div class="draft-banner">BORRADORES · no publicados</div>', body: `<article class="pg"><div class="wrap"><header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>Recursos</h1><p class="pg-lead">Borradores para revisar.</p></div></header><ol class="pg-list">${ARTICLES.map(a => `<li><a href="/borradores/recursos/${a.slug}/" style="--c:#ddd6fe"><span class="pg-list-dot">${icon(a.services[0])}</span><b>${esc(a.title)}</b><span class="pg-list-txt">${esc(a.description)}</span><i aria-hidden="true">→</i></a></li>`).join('')}</ol></div></article>` }), draftsOut);
 
 // ---------- sitemap y llms.txt ----------
-const pairs = [['/', '/en/'], [servicesIndex('es'), servicesIndex('en')], ...SERVICES.map(s => [serviceUrl(s.key, 'es'), serviceUrl(s.key, 'en')]), [reportsIndex('es'), reportsIndex('en')], ...listedStudies.map(s => [reportUrl(s.slug, 'es'), reportUrl(s.slug, 'en')])];
+const pairs = [['/', '/en/'], [servicesIndex('es'), servicesIndex('en')], ...SERVICES.map(s => [serviceUrl(s.key, 'es'), serviceUrl(s.key, 'en')]), [reportsIndex('es'), reportsIndex('en')], [faqUrl('es'), faqUrl('en')], ...listedStudies.map(s => [reportUrl(s.slug, 'es'), reportUrl(s.slug, 'en')])];
 const sm = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${pairs.flatMap(([es, en]) => [es, en].map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><xhtml:link rel="alternate" hreflang="es" href="${SITE}${es}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${en}"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${es}"/></url>`)).join('\n')}
