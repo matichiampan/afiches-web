@@ -212,6 +212,7 @@ function build(lang) {
   h = h.replace(/<p class="local-note">[\s\S]*?<\/p>/g, '');
   h = h.replace(/<div class="report-grid" id="report-grid">[\s\S]*?<\/div>/, `<div class="report-grid" id="report-grid">${studyCards(lang)}</div>`);
   if (lang === 'en') {
+    h = h.replace('src="/videos/afiches-ia.mp4"', 'src="/videos/afiches-ia-en.mp4"');
     h = toEnglish(h);
     for (const [a, b] of Object.entries(ARIA_EN)) h = h.split(`aria-label="${a}"`).join(`aria-label="${b}"`).split(`alt="${a}"`).join(`alt="${b}"`);
     h = h.replace("theme.setAttribute('aria-label',dark?'Activar modo claro':'Activar modo oscuro');", "theme.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');");
