@@ -8,10 +8,10 @@
     if(!res.ok){const error=new Error(result.error||'No pudimos completar la solicitud.');error.status=res.status;throw error;}return result;
   }
   const rail=node('nav',undefined,'journey');rail.setAttribute('aria-label','Seguí explorando Afiches');
-  const destinations=[['inicio', ['Inicio', 'Home'], '#ddd6fe', 'M5 12 12 5l7 7M8 10v9h8v-9'], ['redes', ['Alcance', 'Reach'], '#f97316', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9'], ['servicios', ['Servicios', 'Services'], '#22d46a', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'], ['demo', ['AI', 'AI'], '#22d46a', 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6'], ['resultados', ['Resultados', 'Results'], '#bae6fd', 'M6 18V9m6 9V5m6 13v-6'], ['estudios', ['Estudios', 'Studies'], '#ddd6fe', 'M7 4h7l4 4v12H7V4m7 0v5h4'], ['equipo', ['Equipo', 'Team'], '#f97316', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8'], ['contactanos', ['Contacto', 'Contact'], '#bae6fd', 'M4 6h16v12H4zM4 7l8 6 8-6']];
+  const destinations=[['inicio', ['Inicio', 'Home'], '#ddd6fe', 'M5 12 12 5l7 7M8 10v9h8v-9'], ['redes', ['Alcance', 'Reach'], '#f97316', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9'], ['servicios', ['Servicios', 'Services'], '#22d46a', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'], ['resultados', ['Resultados', 'Results'], '#bae6fd', 'M6 18V9m6 9V5m6 13v-6'], ['estudios', ['Estudios', 'Studies'], '#ddd6fe', 'M7 4h7l4 4v12H7V4m7 0v5h4'], ['equipo', ['Equipo', 'Team'], '#f97316', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8'], ['contactanos', ['Contacto', 'Contact'], '#bae6fd', 'M4 6h16v12H4zM4 7l8 6 8-6']];
   destinations.forEach(([id,label,color,path])=>{const a=node('a');a.href='#'+id;a.style.setProperty('--dot',color);a.setAttribute('aria-label',label[0]);a.innerHTML='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="'+path+'"/></svg><span><span class="es">'+label[0]+'</span><span class="en">'+label[1]+'</span></span>';rail.append(a);});rail.classList.add('top');(document.querySelector('.site-header')||document.body).append(rail);
   let frame=false;
-  function markSection(){frame=false;let current='inicio';for(const [id] of destinations.slice(1)){const el=$('#'+id);if(el&&el.offsetParent!==null&&el.getBoundingClientRect().top<innerHeight*.4)current=id;}const more=$('.svc-more-title'),est=$('#estudios');if(more&&est&&more.getBoundingClientRect().top<innerHeight*.4&&est.getBoundingClientRect().top>=innerHeight*.4)current='servicios';rail.querySelectorAll('a').forEach(a=>{if(a.hash==='#'+current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
+  function markSection(){frame=false;let current='inicio';for(const [id] of destinations.slice(1)){const el=$('#'+id);if(el&&el.offsetParent!==null&&el.getBoundingClientRect().top<innerHeight*.4)current=id;}rail.querySelectorAll('a').forEach(a=>{if(a.hash==='#'+current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
   addEventListener('scroll',()=>{if(!frame){frame=true;requestAnimationFrame(markSection);}}, {passive:true});markSection();
   document.querySelectorAll('.orb.decorative').forEach(orb=>orb.addEventListener('pointerdown',()=>{orb.classList.remove('nudge');void orb.offsetWidth;orb.classList.add('nudge');}));
   const dots=($('.demo-steps')||{children:[]}).children;
@@ -92,31 +92,25 @@
         location.href=href;});}
     });return;}$('#report-grid').replaceChildren();reports.filter(report=>['informe-streaming-septiembre-2026','reporte-fintech-q2-2026','seguridad-comparada-2026'].includes(report.slug)).forEach(report=>{const card=node('article',undefined,'report-card');const cover=document.createElement('img');cover.className='report-cover';cover.alt='';cover.loading='lazy';cover.src=report.slug==='reporte-fintech-q2-2026'?'/studies/fintech.svg':report.slug==='seguridad-comparada-2026'?'/studies/seguridad.svg':'/studies/'+report.slug+'.jpg';cover.addEventListener('error',()=>cover.remove());card.append(cover,node('small',report.category||report.title),node('h3',report.title),node('p',report.summary));const button=node('button',t('Acceder al informe ↗','Access the report ↗'));button.addEventListener('click',()=>openReport(report));card.append(button);$('#report-grid').append(card);});}
   // (los pasos de la muestra validada se manejan en la landing)
-  // Servicio principal (Encuestas online con IA): abierto por defecto, se puede plegar
-  const mainHead=$('.svc-main-head'),mainBody=$('#svc-ia-body');
-  if(mainHead&&mainBody){
-    const setMain=open=>{mainHead.setAttribute('aria-expanded',String(open));mainBody.hidden=!open;mainHead.closest('.svc-main').classList.toggle('closed',!open);};
-    mainHead.addEventListener('click',()=>setMain(mainHead.getAttribute('aria-expanded')!=='true'));
-    const inside=['demo','calidad','resultados','cualitativas'];
-    const reveal=()=>{const id=location.hash.slice(1);if(inside.includes(id)&&mainBody.hidden){setMain(true);requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());}};
-    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&inside.includes(a.hash.slice(1))&&mainBody.hidden)setMain(true);});
-    addEventListener('hashchange',reveal);reveal();
-  }
-  // Servicios: la bolita elegida viaja al panel y se expande
+  // Servicios: la bolita elegida viaja al panel y se expande.
+  // La primera ("Encuestas online con IA") arranca abierta y muestra debajo su detalle (entrevistas, demo y resultados).
   const stage=$('#svc-stage');
   if(stage){
     const balls=[...stage.querySelectorAll('.svc-ball')],panes=[...stage.querySelectorAll('.svc-pane')],bloom=stage.querySelector('.svc-bloom');
     const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const panel=stage.querySelector('.svc-panel'),colOf=n=>balls[n].style.getPropertyValue('--c');
-    let current=-1,busy=false;
+    const panel=stage.querySelector('.svc-panel'),colOf=n=>balls[n].style.getPropertyValue('--c'),detail=$('#svc-detail');
+    let current=balls.findIndex(b=>b.getAttribute('aria-selected')==='true'),busy=false;
+    const syncDetail=()=>{if(detail)detail.hidden=current!==0;};
+    if(current>=0){const col=colOf(current);panel.style.background=col;bloom.style.background=col;}
+    syncDetail();
     const swap=n=>{panes.forEach((p,i)=>{p.hidden=i!==n;p.classList.toggle('enter',i===n);});};
-    const close=()=>{balls.forEach(b=>b.setAttribute('aria-selected','false'));current=-1;panel.classList.remove('open');panel.hidden=true;panes.forEach(p=>p.hidden=true);};
+    const close=()=>{balls.forEach(b=>b.setAttribute('aria-selected','false'));current=-1;syncDetail();panel.classList.remove('open');panel.hidden=true;panes.forEach(p=>p.hidden=true);};
     const show=(n,fly)=>{
       if(busy)return;if(n===current){close();return;}
-      if(current<0){balls.forEach((b,i)=>{b.setAttribute('aria-selected',String(i===n));});current=n;const col=colOf(n);panel.hidden=false;panel.style.background=col;bloom.style.background=col;swap(n);panel.classList.remove('open');void panel.offsetWidth;panel.classList.add('open');return;}
+      if(current<0){balls.forEach((b,i)=>{b.setAttribute('aria-selected',String(i===n));});current=n;syncDetail();const col=colOf(n);panel.hidden=false;panel.style.background=col;bloom.style.background=col;swap(n);panel.classList.remove('open');void panel.offsetWidth;panel.classList.add('open');return;}
       const ball=balls[n],col=colOf(n),prev=colOf(current);
       balls.forEach((b,i)=>{b.setAttribute('aria-selected',String(i===n));});
-      current=n;
+      current=n;syncDetail();
       if(still||!fly){panel.style.background=col;bloom.style.background=col;swap(n);return;}
       busy=true;
       const target=panes.find(p=>!p.hidden).querySelector('.svc-big'),tr=target.getBoundingClientRect(),pr=panel.getBoundingClientRect();
@@ -135,5 +129,24 @@
       b.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'||e.key==='ArrowDown'?1:e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:0;if(!d)return;e.preventDefault();const i=balls.indexOf(document.activeElement),n=((i<0?0:i)+d+balls.length)%balls.length;balls.forEach((b,k)=>b.tabIndex=k===n?0:-1);balls[n].focus();});});
     balls.forEach((b,i)=>b.tabIndex=i?-1:0);
     new IntersectionObserver(([e])=>stage.classList.toggle('idle',!e.isIntersecting)).observe(stage);
+    // Links a #demo, #calidad, #resultados o #cualitativas: si la primera bolita estaba cerrada o había otra elegida, se abre antes de llegar
+    const inside=['demo','calidad','resultados','cualitativas'];
+    const reveal=()=>{const id=location.hash.slice(1);if(inside.includes(id)&&current!==0){show(0,false);requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());}};
+    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&inside.includes(a.hash.slice(1))&&current!==0)show(0,false);},true);
+    addEventListener('hashchange',reveal);reveal();
+  }
+  // Cinta de logos: una línea por grupo. Cada una repite sus logos hasta cubrir el ancho de la pantalla y corre a velocidad constante.
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const tracks=[...document.querySelectorAll('.mq-row .mq-track')];
+    const fill=()=>tracks.forEach(track=>{
+      const sets=track.querySelectorAll('.mq-set');if(sets.length<2)return;
+      const [a,b]=sets,view=track.parentElement.getBoundingClientRect().width,w=()=>a.getBoundingClientRect().width;
+      if(!view||!w())return;
+      if(!track._base)track._base=[...a.children];
+      for(let guard=0;w()<view&&guard<12;guard++)[a,b].forEach(set=>track._base.forEach(node=>{const c=node.cloneNode(true);c.setAttribute('aria-hidden','true');(c.tagName==='A'?[c]:[...c.querySelectorAll('a')]).forEach(l=>l.tabIndex=-1);set.append(c);}));
+      track.style.animationDuration=Math.max(18,w()/32)+'s';
+    });
+    const go=()=>{fill();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fill,200);});};
+    if(document.readyState==='complete')go();else addEventListener('load',go);
   }
 })();

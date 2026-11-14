@@ -839,3 +839,33 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 @keyframes cq-pop2{40%{color:var(--accent)}}
 .cq-themes small{letter-spacing:normal;text-transform:none;font-size:12px;font-weight:400}
 @media(prefers-reduced-motion:reduce){.cq-thread>.header i{animation:none}}
+
+/* ===== Comentarios de noviembre: logos por línea, servicios con bolitas, informes y equipo ===== */
+/* Logos: una cinta por grupo, con su título arriba */
+.mq-sec{padding:30px 0 38px}
+.mq-row+.mq-row{margin-top:26px}
+.mq-sec .mq-title{margin:0 0 14px;font-size:12px;line-height:1.4;color:var(--muted);text-align:center}
+.mq-sec .mq-title :is(.es,.en){color:inherit}
+@media(max-width:700px){.mq-sec{padding:22px 0 30px}.mq-row+.mq-row{margin-top:18px}.mq-sec .mq-title{font-size:11px;margin-bottom:10px}}
+
+/* Servicios: las bolitas son el menú; la primera arranca abierta y muestra su detalle debajo */
+.svc-detail{margin-top:52px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg,var(--wash) 0,var(--bg) 360px);box-shadow:var(--shadow);padding:34px 44px 40px}
+.svc-detail[hidden]{display:none}
+@media(max-width:700px){.svc-detail{margin-top:34px;border-radius:24px;padding:22px 16px 26px}}
+/* Datos validados dentro de Resultados */
+.blk-res>.blk-calidad{margin-top:48px}
+
+/* Informes: las tarjetas no quedan pegadas al borde de abajo */
+.report-card .report-actions{margin-bottom:28px}
+#estudios .sec-more{margin-top:38px}
+
+/* Equipo: descripción corrida, más aireada */
+.team .person .bg{font-size:12.5px;line-height:1.65;margin-top:12px;max-width:34ch}
+.team .person .li-link{margin-top:auto}
+.team .person .bg{margin-bottom:18px}
+/* Panel de servicios: las negritas se leen también en modo oscuro (el fondo del panel siempre es claro) */
+.svc-pane .svc-desc strong{color:#14161c}
+/* Panel de servicios en celular: la primera bolita tiene más texto y necesita un poco más de alto */
+@media(max-width:560px){.svc-panel{height:470px}}
+@media(max-width:400px){.svc-panel{height:490px}}
+@media(max-width:350px){.svc-panel{height:545px}}
