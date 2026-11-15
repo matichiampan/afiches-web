@@ -871,8 +871,8 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 @media(max-width:350px){.svc-panel{height:570px}}
 
 /* ===== Segunda tanda de comentarios: UADE fijo, logos nuevos y más globitos de servicios ===== */
-.mq-fixed{display:flex;justify-content:center;padding:6px 0}
-.mq-fixed .mq-set{padding-right:0}
+/* Fila con un solo logo (UADE): gira como las otras, con más aire entre repeticiones */
+.mq-solo .mq-set{gap:120px;padding-right:120px}
 .mq-set img[alt="Cachafaz"]{height:50.2px}
 .mq-set img[alt="FUCA"]{height:30px}
 .mq-set img[alt="Creative Group"]{height:26.5px}
