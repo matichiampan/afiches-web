@@ -48,6 +48,7 @@ npm run build:landing
 Genera `public/sitio/`:
 
 - `index.html` (español, `/`) y `en/index.html` (inglés, `/en/`): cada uno con un solo idioma, title, description, canonical, hreflang, Open Graph/Twitter, JSON-LD (Organization, WebSite, WebPage, Person, FAQPage, ItemList de estudios) y los estudios escritos en el HTML.
+- Idioma automático: cada página tiene su versión en español y en inglés, cada una en su dirección. Un script en el `<head>` (`tools/lang-redirect.mjs`) lleva a la persona a la versión que corresponde: primero la que eligió con el botón ES/EN (se guarda en el navegador), y si no eligió, el idioma principal del navegador (español → español; cualquier otro idioma → inglés). Los buscadores no se redirigen. `hreflang="x-default"` apunta al inglés.
 - `robots.txt`, `sitemap.xml`, `llms.txt` y las imágenes para compartir `og-afiches-es.png` / `og-afiches-en.png` (se generan desde `tools/og-image.html`).
 
 Vista local: http://127.0.0.1:3001/sitio/ y http://127.0.0.1:3001/sitio/en/

@@ -11,6 +11,7 @@ import { listedReports } from '../src/data/reports.js';
 import { ARTICLES } from './content/articles.mjs';
 import { SITE, home, servicesIndex, reportsIndex, serviceUrl, reportUrl, faqUrl, toEnglish } from './site-paths.mjs';
 import { FAQ } from './content/faq.mjs';
+import { langScript } from './lang-redirect.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const pub = path.resolve(here, '../public');
@@ -68,13 +69,13 @@ function page({ lang, url, alt, title, description, body, ld = [], robots = 'ind
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${SITE}${url}">
-${robots.startsWith('index') ? `<link rel="alternate" hreflang="${lang}" href="${SITE}${url}"><link rel="alternate" hreflang="${other}" href="${SITE}${alt}"><link rel="alternate" hreflang="x-default" href="${SITE}${lang === 'es' ? url : alt}">` : ''}
+${robots.startsWith('index') ? `<link rel="alternate" hreflang="${lang}" href="${SITE}${url}"><link rel="alternate" hreflang="${other}" href="${SITE}${alt}"><link rel="alternate" hreflang="x-default" href="${SITE}${lang === 'es' ? alt : url}">` : ''}
 <meta name="theme-color" content="#f97316"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Afiches"><meta property="og:url" content="${SITE}${url}">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:image" content="${og}">
 <meta property="og:locale" content="${lang === 'es' ? 'es_AR' : 'en_US'}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@AfichesAC">
 ${s.themeInit}
-${s.fonts}
+${robots.startsWith('index') ? langScript(lang, alt) + '\n' : ''}${s.fonts}
 ${s.style}<link rel="stylesheet" href="/recorrido-afiches.css"><link rel="stylesheet" href="/paginas.css">
 ${ld.length ? `<script type="application/ld+json">${JSON.stringify(graph).replace(/</g, '\\u003c')}</script>` : ''}
 </head><body class="subpage">
@@ -185,7 +186,7 @@ await write('recursos/index.html', page({ lang: 'es', url: '/recursos/', alt: '/
 const pairs = [['/', '/en/'], [servicesIndex('es'), servicesIndex('en')], ...SERVICES.map(s => [serviceUrl(s.key, 'es'), serviceUrl(s.key, 'en')]), [reportsIndex('es'), reportsIndex('en')], [faqUrl('es'), faqUrl('en')], ...listedStudies.map(s => [reportUrl(s.slug, 'es'), reportUrl(s.slug, 'en')])];
 const sm = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${pairs.flatMap(([es, en]) => [es, en].map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><xhtml:link rel="alternate" hreflang="es" href="${SITE}${es}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${en}"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${es}"/></url>`)).join('\n')}
+${pairs.flatMap(([es, en]) => [es, en].map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><xhtml:link rel="alternate" hreflang="es" href="${SITE}${es}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${en}"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${en}"/></url>`)).join('\n')}
 </urlset>
 `;
 await fs.writeFile(path.join(out, 'sitemap.xml'), sm);

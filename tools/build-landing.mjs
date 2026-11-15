@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reports, listedReports } from '../src/data/reports.js';
 import { toEnglish } from './site-paths.mjs';
+import { langScript } from './lang-redirect.mjs';
 
 const SITE = 'https://afiches.net';
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -173,7 +174,7 @@ function headTags(lang) {
     `<link rel="canonical" href="${url}">`,
     `<link rel="alternate" hreflang="es" href="${URLS.es}">`,
     `<link rel="alternate" hreflang="en" href="${URLS.en}">`,
-    `<link rel="alternate" hreflang="x-default" href="${URLS.es}">`,
+    `<link rel="alternate" hreflang="x-default" href="${URLS.en}">`,
     `<meta name="author" content="Afiches">`,
     `<meta name="theme-color" content="#f97316">`,
     `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`,
@@ -203,8 +204,8 @@ function build(lang) {
   h = h.replace(/<html lang="es"/, `<html lang="${lang}"`);
   h = h.replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="index,follow,max-image-preview:large">');
   h = h.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(META[lang].title)}</title>\n${headTags(lang)}`);
-  // idioma fijo por URL: sin detección automática ni cambio en la misma página
-  h = h.replace(/<script>\(\(\)=>\{let l;try\{l=localStorage\.getItem\("afiches-lang"\)\}[\s\S]*?<\/script>/, '<script>window.t=(es,en)=>document.documentElement.lang==="en"?en:es;</script>');
+  // cada idioma vive en su URL; el idioma del navegador (o la elección del botón ES/EN) decide a cuál ir (ver lang-redirect.mjs)
+  h = h.replace(/<script>\(\(\)=>\{let l;try\{l=localStorage\.getItem\("afiches-lang"\)\}[\s\S]*?<\/script>/, () => '<script>window.t=(es,en)=>document.documentElement.lang==="en"?en:es;</script>\n' + langScript(lang, lang === 'es' ? '/en/' : '/'));
   h = h.replace(/ const langBtn=document\.querySelector\('\.lang-toggle'\);[\s\S]*?\r?\n applyLang\(\);\r?\n/, '\n');
   h = h.replace(/<button class="lang-toggle" type="button" aria-label="Cambiar idioma">([\s\S]*?)<\/button>/,
     `<a class="lang-toggle" href="${lang === 'es' ? 'en/' : '../'}" hreflang="${other}" lang="${other}" aria-label="${other === 'en' ? 'English version' : 'Versión en español'}">$1</a>`);
@@ -278,7 +279,7 @@ ${['es', 'en'].map(l => `  <url>
     <lastmod>${TODAY}</lastmod>
     <xhtml:link rel="alternate" hreflang="es" href="${URLS.es}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${URLS.en}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${URLS.es}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${URLS.en}"/>
   </url>`).join('\n')}
 </urlset>
 `;
