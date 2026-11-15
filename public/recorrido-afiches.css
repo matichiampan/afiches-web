@@ -866,9 +866,9 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 /* Panel de servicios: las negritas se leen también en modo oscuro (el fondo del panel siempre es claro) */
 .svc-pane .svc-desc strong{color:#14161c}
 /* Panel de servicios en celular: la primera bolita tiene más texto y necesita un poco más de alto */
-@media(max-width:560px){.svc-panel{height:470px}}
-@media(max-width:400px){.svc-panel{height:490px}}
-@media(max-width:350px){.svc-panel{height:545px}}
+@media(max-width:560px){.svc-panel{height:490px}}
+@media(max-width:400px){.svc-panel{height:520px}}
+@media(max-width:350px){.svc-panel{height:570px}}
 
 /* ===== Segunda tanda de comentarios: UADE fijo, logos nuevos y más globitos de servicios ===== */
 .mq-fixed{display:flex;justify-content:center;padding:6px 0}
@@ -878,3 +878,7 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 /* Servicios: ocho globitos caben en una fila; el primer bloque de cada detalle no lleva línea arriba */
 .svc-balls{max-width:1080px}
 .svc-detail>.svc-block:first-of-type{border-top:0;padding-top:8px}
+
+/* La demo arranca plegada: el bloque que le sigue pasa a ser el primero visible */
+.blk-demo[hidden]{display:none}
+.blk-demo[hidden]+.svc-block{border-top:0;padding-top:8px}

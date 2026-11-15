@@ -134,8 +134,9 @@
     // Links a #demo, #cualitativas, #resultados o #calidad: abren la bolita que tiene ese contenido (la demo está en la 0 y en la 1)
     const owner={demo:[0,1],cualitativas:[1],resultados:[0],calidad:[0]};
     const need=id=>{const ok=owner[id];return ok&&!ok.includes(current)?ok[0]:-1;};
-    const reveal=()=>{const id=location.hash.slice(1),n=need(id);if(n>=0){show(n,false);requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());}};
-    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const n=need(a.hash.slice(1));if(n>=0)show(n,false);},true);
+    // La demo arranca plegada (no se ve en la home): se abre con "Probar la demo" o con cualquier link a #demo.
+    const reveal=()=>{const id=location.hash.slice(1),n=need(id),folded=id==='demo'&&demo&&demo.hidden;if(folded)demo.hidden=false;if(n>=0)show(n,false);if(n>=0||folded)requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());};
+    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.hash.slice(1);if(id==='demo'&&demo)demo.hidden=false;const n=need(id);if(n>=0)show(n,false);},true);
     addEventListener('hashchange',reveal);reveal();
   }
   // Cinta de logos: una línea por grupo. Cada una repite sus logos hasta cubrir el ancho de la pantalla y corre a velocidad constante.
