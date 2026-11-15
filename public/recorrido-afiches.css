@@ -812,16 +812,16 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 .mq-set img{display:block;width:auto;flex:none;filter:grayscale(1);mix-blend-mode:multiply;opacity:.62;transition:opacity .3s}
 .mq-set img:hover{opacity:1}
 [data-theme="dark"] .mq-set img{filter:grayscale(1) brightness(0) invert(1);mix-blend-mode:normal;opacity:.55}
-.mq-set img[alt="Asociación Conciencia"]{height:21px}
-.mq-set img[alt="DEF"]{height:28px}
-.mq-set img[alt="Orja"]{height:29px}
-.mq-set img[alt="Eventys"]{height:32px}
-.mq-set img[alt="UADE"]{height:29px}
-.mq-set img[alt="La Política Online"]{height:22px}
-.mq-set img[alt="Diario Perfil"]{height:22px}
-.mq-set img[alt="Infobae"]{height:30px}
-.mq-set img[alt="La Nación"]{height:22px}
-.mq-set img[alt="Revista Noticias"]{height:25px}
+.mq-set img[alt="Asociación Conciencia"]{height:26.5px}
+.mq-set img[alt="DEF"]{height:30px}
+.mq-set img[alt="Orja"]{height:45.3px}
+.mq-set img[alt="Eventys"]{height:46.5px}
+.mq-set img[alt="UADE"]{height:36.3px}
+.mq-set img[alt="La Política Online"]{height:27.3px}
+.mq-set img[alt="Diario Perfil"]{height:25px}
+.mq-set img[alt="Infobae"]{height:28.3px}
+.mq-set img[alt="La Nación"]{height:22.5px}
+.mq-set img[alt="Revista Noticias"]{height:28px}
 .mq-label{flex:none;margin-left:34px;font-size:12px;font-weight:400;color:var(--muted);white-space:nowrap}
 .mq-label :is(.es,.en){color:inherit}
 .mq-set>.mq-label:first-child{margin-left:0}
@@ -873,9 +873,9 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 /* ===== Segunda tanda de comentarios: UADE fijo, logos nuevos y más globitos de servicios ===== */
 .mq-fixed{display:flex;justify-content:center;padding:6px 0}
 .mq-fixed .mq-set{padding-right:0}
-.mq-set img[alt="Cachafaz"]{height:54px}
-.mq-set img[alt="FUCA"]{height:38px}
-.mq-set img[alt="Creative Group"]{height:27px}
+.mq-set img[alt="Cachafaz"]{height:50.2px}
+.mq-set img[alt="FUCA"]{height:30px}
+.mq-set img[alt="Creative Group"]{height:26.5px}
 /* Servicios: ocho globitos caben en una fila; el primer bloque de cada detalle no lleva línea arriba */
 .svc-balls{max-width:1080px}
 .svc-detail>.svc-block:first-of-type{border-top:0;padding-top:8px}
