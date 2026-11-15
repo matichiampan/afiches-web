@@ -98,9 +98,11 @@
   if(stage){
     const balls=[...stage.querySelectorAll('.svc-ball')],panes=[...stage.querySelectorAll('.svc-pane')],bloom=stage.querySelector('.svc-bloom');
     const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const panel=stage.querySelector('.svc-panel'),colOf=n=>balls[n].style.getPropertyValue('--c'),detail=$('#svc-detail');
+    const panel=stage.querySelector('.svc-panel'),colOf=n=>balls[n].style.getPropertyValue('--c'),details=[...document.querySelectorAll('.svc-detail')],demo=$('#demo');
     let current=balls.findIndex(b=>b.getAttribute('aria-selected')==='true'),busy=false;
-    const syncDetail=()=>{if(detail)detail.hidden=current!==0;};
+    // Cada bolita con detalle (0 = encuestas online con IA, 1 = entrevistas en profundidad) muestra el suyo debajo.
+    // La demo está en las dos: se muda al detalle que esté abierto.
+    const syncDetail=()=>{details.forEach(d=>{d.hidden=Number(d.dataset.for)!==current;});const slot=document.querySelector('.svc-detail:not([hidden]) .demo-slot');if(demo&&slot&&slot.nextElementSibling!==demo)slot.after(demo);};
     if(current>=0){const col=colOf(current);panel.style.background=col;bloom.style.background=col;}
     syncDetail();
     const swap=n=>{panes.forEach((p,i)=>{p.hidden=i!==n;p.classList.toggle('enter',i===n);});};
@@ -129,10 +131,11 @@
       b.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'||e.key==='ArrowDown'?1:e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:0;if(!d)return;e.preventDefault();const i=balls.indexOf(document.activeElement),n=((i<0?0:i)+d+balls.length)%balls.length;balls.forEach((b,k)=>b.tabIndex=k===n?0:-1);balls[n].focus();});});
     balls.forEach((b,i)=>b.tabIndex=i?-1:0);
     new IntersectionObserver(([e])=>stage.classList.toggle('idle',!e.isIntersecting)).observe(stage);
-    // Links a #demo, #calidad, #resultados o #cualitativas: si la primera bolita estaba cerrada o había otra elegida, se abre antes de llegar
-    const inside=['demo','calidad','resultados','cualitativas'];
-    const reveal=()=>{const id=location.hash.slice(1);if(inside.includes(id)&&current!==0){show(0,false);requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());}};
-    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&inside.includes(a.hash.slice(1))&&current!==0)show(0,false);},true);
+    // Links a #demo, #cualitativas, #resultados o #calidad: abren la bolita que tiene ese contenido (la demo está en la 0 y en la 1)
+    const owner={demo:[0,1],cualitativas:[1],resultados:[0],calidad:[0]};
+    const need=id=>{const ok=owner[id];return ok&&!ok.includes(current)?ok[0]:-1;};
+    const reveal=()=>{const id=location.hash.slice(1),n=need(id);if(n>=0){show(n,false);requestAnimationFrame(()=>document.getElementById(id).scrollIntoView());}};
+    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const n=need(a.hash.slice(1));if(n>=0)show(n,false);},true);
     addEventListener('hashchange',reveal);reveal();
   }
   // Cinta de logos: una línea por grupo. Cada una repite sus logos hasta cubrir el ancho de la pantalla y corre a velocidad constante.

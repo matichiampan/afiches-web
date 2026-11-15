@@ -869,3 +869,12 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 @media(max-width:560px){.svc-panel{height:470px}}
 @media(max-width:400px){.svc-panel{height:490px}}
 @media(max-width:350px){.svc-panel{height:545px}}
+
+/* ===== Segunda tanda de comentarios: UADE fijo, logos nuevos y más globitos de servicios ===== */
+.mq-fixed{display:flex;justify-content:center;padding:6px 0}
+.mq-fixed .mq-set{padding-right:0}
+.mq-set img[alt="Cachafaz"]{height:54px}
+.mq-set img[alt="FUCA"]{height:38px}
+/* Servicios: ocho globitos caben en una fila; el primer bloque de cada detalle no lleva línea arriba */
+.svc-balls{max-width:1080px}
+.svc-detail>.svc-block:first-of-type{border-top:0;padding-top:8px}
