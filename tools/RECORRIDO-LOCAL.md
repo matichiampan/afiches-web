@@ -47,9 +47,10 @@ npm run build:landing
 
 Genera `public/sitio/`:
 
-- `index.html` (español, `/`) y `en/index.html` (inglés, `/en/`): cada uno con un solo idioma, title, description, canonical, hreflang, Open Graph/Twitter, JSON-LD (Organization, WebSite, WebPage, Person, FAQPage, ItemList de estudios) y los estudios escritos en el HTML.
-- Idioma automático: cada página tiene su versión en español y en inglés, cada una en su dirección. Un script en el `<head>` (`tools/lang-redirect.mjs`) lleva a la persona a la versión que corresponde: primero la que eligió con el botón ES/EN (se guarda en el navegador), y si no eligió, el idioma principal del navegador (español → español; cualquier otro idioma → inglés). Los buscadores no se redirigen. `hreflang="x-default"` apunta al inglés.
-- `robots.txt`, `sitemap.xml`, `llms.txt` y las imágenes para compartir `og-afiches-es.png` / `og-afiches-en.png` (se generan desde `tools/og-image.html`).
+- `index.html` (español, `/`), `en/index.html` (inglés, `/en/`) y `pt/index.html` (portugués, `/pt/`): cada uno con un solo idioma, title, description, canonical, hreflang, Open Graph/Twitter, JSON-LD (Organization, WebSite, WebPage, Person, FAQPage, ItemList de estudios) y los estudios escritos en el HTML.
+- Idiomas: español (`/`), inglés (`/en/`) y portugués de Brasil (`/pt/`). Cada página tiene su versión en los tres, cada una en su dirección. Un script en el `<head>` (`tools/lang-redirect.mjs`) lleva a la persona a la versión que corresponde: primero la que eligió con el selector ES / EN / PT del encabezado (se guarda en el navegador), y si no eligió, el idioma principal del navegador (español → español; portugués → portugués; cualquier otro idioma → inglés). Los buscadores no se redirigen. `hreflang="x-default"` apunta al inglés.
+- Dónde viven los textos en portugués: en la plantilla `public/direccion-episto.html` cada texto lleva `<span class="es">`, `<span class="en">` y `<span class="pt">`; los scripts usan `t('es','en','pt')`; servicios, informes y preguntas frecuentes tienen un bloque `pt` en `tools/content/`; los textos de interfaz de las páginas internas están en `tools/content/ui-pt.mjs` (clave = texto en español; el build avisa si falta alguno). El video del entrevistador de IA solo existe en español e inglés: el portugués usa el de inglés.
+- `robots.txt`, `sitemap.xml`, `llms.txt` y las imágenes para compartir `og-afiches-es.png` / `og-afiches-en.png` / `og-afiches-pt.png` (se generan desde `tools/og-image.html?lang=es|en|pt`).
 
 Vista local: http://127.0.0.1:3001/sitio/ y http://127.0.0.1:3001/sitio/en/
 

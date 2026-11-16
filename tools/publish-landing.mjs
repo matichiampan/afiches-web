@@ -31,4 +31,4 @@ await fs.writeFile(path.join(dist, '_redirects'), [
   '/reportes / 301',
   '/app / 301',
 ].join('\n') + '\n');
-console.log('Landing publicada en dist/ (/, /en/) · /estudios/* y /reportes/* redirigen al cartel de mail de la home');
+console.log('Landing publicada en dist/ (/, /en/, /pt/) · /estudios/* y /reportes/* redirigen al cartel de mail de la home');

@@ -1,16 +1,28 @@
-// Rutas públicas del sitio en cada idioma. La plantilla usa las rutas en español;
-// build-landing.mjs las traduce para /en/ con toEnglish().
+// Rutas públicas del sitio en cada idioma (es, en, pt). La plantilla usa las rutas en español;
+// build-landing.mjs las traduce para /en/ y /pt/ con toLang().
 import { SERVICES } from './content/services.mjs';
+import { LANGS } from './lang-redirect.mjs';
 
+export { LANGS };
 export const SITE = 'https://afiches.net';
-export const home = lang => (lang === 'en' ? '/en/' : '/');
-export const servicesIndex = lang => (lang === 'en' ? '/en/services/' : '/servicios/');
-export const reportsIndex = lang => (lang === 'en' ? '/en/reports/' : '/informes/');
+const ROOT = { es: '/', en: '/en/', pt: '/pt/' };
+const SECTION = {
+  es: { services: 'servicios/', reports: 'informes/', faq: 'preguntas-frecuentes/' },
+  en: { services: 'services/', reports: 'reports/', faq: 'faq/' },
+  pt: { services: 'servicos/', reports: 'relatorios/', faq: 'perguntas-frequentes/' },
+};
+export const home = lang => ROOT[lang];
+export const servicesIndex = lang => ROOT[lang] + SECTION[lang].services;
+export const reportsIndex = lang => ROOT[lang] + SECTION[lang].reports;
 export const serviceUrl = (key, lang) => { const s = SERVICES.find(x => x.key === key); return servicesIndex(lang) + s[lang].slug + '/'; };
-export const faqUrl = lang => (lang === 'en' ? '/en/faq/' : '/preguntas-frecuentes/');
+export const faqUrl = lang => ROOT[lang] + SECTION[lang].faq;
 export const reportUrl = (slug, lang) => reportsIndex(lang) + slug + '/';
+// la misma página en cada idioma: { es, en, pt }
+export const urlsOf = fn => Object.fromEntries(LANGS.map(l => [l, fn(l)]));
 
-export function toEnglish(html) {
-  for (const s of SERVICES) html = html.split(`href="/servicios/${s.es.slug}/"`).join(`href="/en/services/${s.en.slug}/"`);
-  return html.split('href="/servicios/"').join('href="/en/services/"').split('href="/preguntas-frecuentes/"').join('href="/en/faq/"').replace(/href="\/informes\/([a-z0-9-]*\/?)"/g, 'href="/en/reports/$1"');
+export function toLang(html, lang) {
+  if (lang === 'es') return html;
+  for (const s of SERVICES) html = html.split(`href="/servicios/${s.es.slug}/"`).join(`href="${servicesIndex(lang)}${s[lang].slug}/"`);
+  return html.split('href="/servicios/"').join(`href="${servicesIndex(lang)}"`).split('href="/preguntas-frecuentes/"').join(`href="${faqUrl(lang)}"`).replace(/href="\/informes\/([a-z0-9-]*\/?)"/g, (_, rest) => `href="${reportsIndex(lang)}${rest}"`);
 }
+export const toEnglish = html => toLang(html, 'en');
