@@ -3,7 +3,7 @@
 // los estudios con `dashboard` suman un link al dashboard en /dashboards (pide el mismo mail).
 export const STUDY_PAGES = [
   {
-    slug: 'encuesta-nacional-octubre-2026', date: '2026-10-18', services: ['online', 'ia'],
+    slug: 'encuesta-nacional-octubre-2026', date: '2026-10-18', services: ['ia', 'cuali', 'analisis'],
     dashboard: '/dashboards/ballotages-2027-indecisos',
     es: {
       sample: 'Muestra nacional',
@@ -32,9 +32,18 @@ export const STUDY_PAGES = [
       stats: [['52%', 'obtêm Cristina Fernández, Sergio Massa e Axel Kicillof contra Milei entre quem escolhe candidato; Milei, 48%.'], ['37%', 'não está polarizado em pelo menos um dos três duelos contra o peronismo.'], ['31%', 'escolhe Milei nos três duelos; 28% escolhem sempre o peronista.'], ['34%', 'dos não polarizados pede a Milei outro jeito de ser; 22% reclamam do bolso.']],
       body: ['Milei obtém entre 31% e 36% contra qualquer rival: o que muda é o adversário. Diante do peronismo, entre 26% e 28% não escolhem nenhum dos dois, e a eleição se define em como os não polarizados se dividem.', 'Os não polarizados são mais jovens e de nível socioeconômico mais baixo que o total. O que acham que falta a Milei se organiza em dois blocos: seu jeito de ser —empatia, honestidade, equilíbrio— e o bolso —trabalho, salários e fechar o mês—.'],
     },
+    fr: {
+      sample: 'Échantillon national',
+      title: 'Enquête nationale — octobre 2026',
+      description: 'Étude nationale d\'Afiches sur les seconds tours de 2027 : Milei face à sept rivaux, qui sont les électeurs non polarisés et ce qu\'ils demandent. Rapport et tableau de bord interactif, octobre 2026.',
+      lead: 'Enquête nationale auprès de personnes de 16 ans et plus sur les scénarios de second tour de 2027. Elle mesure Javier Milei face à sept adversaires possibles, segmente l\'électorat face au péronisme et approfondit le cas des électeurs non polarisés : qui ils sont, comment ils voient Milei et ce qu\'ils pensent qu\'il lui manque.',
+      ficha: [['Univers', 'Population de 16 ans et plus d\'Argentine'], ['Terrain', '10 au 15 octobre 2026'], ['Méthodologie', 'Enquête en ligne avec question ouverte analysée par intelligence artificielle (IA)']],
+      stats: [['52 %', 'pour Cristina Fernández, Sergio Massa et Axel Kicillof face à Milei, parmi ceux qui choisissent un candidat ; Milei, 48 %.'], ['37 %', 'des électeurs sont non polarisés dans au moins un des trois duels face au péronisme.'], ['31 %', 'choisissent Milei dans les trois duels ; 28 % choisissent toujours le péroniste.'], ['34 %', 'des électeurs non polarisés demandent à Milei une autre façon d\'être ; 22 % l\'interpellent sur le pouvoir d\'achat.']],
+      body: ['Milei obtient entre 31 % et 36 % face à n\'importe quel rival : ce qui change, c\'est l\'adversaire. Face au péronisme, entre 26 % et 28 % ne choisissent aucun des deux, et l\'élection se joue sur la façon dont se répartissent les électeurs non polarisés.', 'Les électeurs non polarisés sont plus jeunes et d\'un niveau socioéconomique plus bas que l\'ensemble. Ce qu\'ils pensent qu\'il manque à Milei se répartit en deux blocs : sa façon d\'être (empathie, honnêteté, équilibre) et le pouvoir d\'achat (emploi, salaires et joindre les deux bouts).'],
+    },
   },
   {
-    slug: 'informe-streaming-septiembre-2026', date: '2026-10-02', services: ['online', 'ia', 'cuali'],
+    slug: 'informe-streaming-septiembre-2026', date: '2026-10-02', services: ['ia', 'cuali', 'analisis'],
     dashboard: '/dashboards/streaming-septiembre-2026',
     es: {
       sample: 'Muestra nacional',
@@ -63,9 +72,18 @@ export const STUDY_PAGES = [
       stats: [['39%', 'menciona Luzu TV de forma espontânea, o canal mais lembrado; Olga, 31%, e Gelatina, 11%.'], ['33%', 'não cita nenhum canal de streaming.'], ['66%', 'conhece Olga; Luzu TV chega a 57% e Gelatina a 37%.'], ['80%', 'conhece Nico Occhiato e 78%, Migue Granados, ambos com saldo de imagem positivo.']],
       body: ['Os canais são reconhecidos primeiro por uma figura e depois pela programação. Olga se associa a Nati Jota, la Negra Vernaci e Migue Granados; Luzu TV, a Nico Occhiato e Nadie Dice Nada; Gelatina, a Pedro Rosemblat, suas entrevistas e seus jingles.', 'Gelatina é o único canal com uma identidade política explícita: sete em cada dez eleitores de Massa o conhecem, e dois em cada dez de Milei e Bullrich. Rosemblat supera 80% de imagem positiva entre eleitores de Massa e cai para 11% entre os de Bullrich, enquanto Occhiato é a figura mais transversal.'],
     },
+    fr: {
+      sample: 'Échantillon national',
+      title: 'Rapport sur le streaming',
+      description: 'Étude nationale d\'Afiches sur le streaming : chaînes qui viennent à l\'esprit, notoriété d\'Olga, Luzu TV et Gelatina, ce qu\'on dit de chacune et image de leurs personnalités. Rapport et tableau de bord interactif.',
+      lead: 'Enquête nationale auprès de personnes de 16 ans et plus sur le streaming en Argentine. Elle mesure quelles chaînes viennent spontanément à l\'esprit, la notoriété d\'Olga, Luzu TV et Gelatina, ce qui se dit de chaque chaîne dans des questions ouvertes analysées par intelligence artificielle (IA) et l\'image de Nico Occhiato, Migue Granados, Pedro Rosemblat et Tomás Rebord.',
+      ficha: [['Univers', 'Population de 16 ans et plus d\'Argentine'], ['Méthodologie', 'Enquête en ligne avec questions ouvertes analysées par IA']],
+      stats: [['39 %', 'citent Luzu TV spontanément, la chaîne la plus mémorisée ; Olga, 31 %, et Gelatina, 11 %.'], ['33 %', 'ne citent aucune chaîne de streaming.'], ['66 %', 'connaissent Olga ; Luzu TV atteint 57 % et Gelatina 37 %.'], ['80 %', 'connaissent Nico Occhiato et 78 %, Migue Granados, tous deux avec un solde d\'image positif.']],
+      body: ['Les chaînes se reconnaissent d\'abord par une personnalité, puis par leur programmation. Olga est associée à Nati Jota, la Negra Vernaci et Migue Granados ; Luzu TV, à Nico Occhiato et Nadie Dice Nada ; Gelatina, à Pedro Rosemblat, ses interviews et ses jingles.', 'Gelatina est la seule chaîne à l\'identité politique explicite : sept électeurs de Massa sur dix la connaissent, contre deux sur dix chez les électeurs de Milei et de Bullrich. Rosemblat dépasse 80 % d\'image positive chez les électeurs de Massa et tombe à 11 % chez ceux de Bullrich, tandis qu\'Occhiato est la personnalité la plus transversale.'],
+    },
   },
   {
-    slug: 'opinion-publica-pba-julio-2026', date: '2026-07-04', services: ['online', 'ia'],
+    slug: 'opinion-publica-pba-julio-2026', date: '2026-07-04', services: ['ia', 'cuali', 'analisis'],
     es: {
       sample: '600 casos',
       title: 'Opinión pública en la Provincia de Buenos Aires — Julio 2026',
@@ -93,9 +111,18 @@ export const STUDY_PAGES = [
       stats: [['52%', 'declara que sua situação econômica piorou no último ano.'], ['37%', 'dos domicílios sofreu algum episódio de insegurança nos últimos 12 meses; na Grande Buenos Aires, 41%.'], ['48%', 'avalia positivamente a gestão de seu prefeito; a provincial chega a 43% e a nacional a 36%.'], ['40%', 'não se identifica com nenhum espaço político.']],
       body: ['A insegurança aparece como uma experiência cotidiana: mais de um terço dos domicílios da província foi vítima de algum episódio no último ano, e quem passou por isso se sente 33 pontos menos seguro no bairro do que quem não passou. Roubos e assaltos concentram a principal preocupação.', 'O estudo incluiu entrevistas guiadas por IA com duas reperguntas sobre a experiência concreta de insegurança, que permitem reconstruir como os entrevistados a vivem na Grande Buenos Aires e no interior da província.'],
     },
+    fr: {
+      sample: '600 répondants',
+      title: 'Opinion publique dans la province de Buenos Aires — juillet 2026',
+      description: 'Étude d\'Afiches dans la province de Buenos Aires : économie personnelle, insécurité, évaluation de la gestion, image des dirigeants et intentions de vote. 600 répondants, juillet 2026.',
+      lead: 'Enquête auprès de personnes de 16 ans et plus qui vivent et votent dans la province de Buenos Aires. Elle aborde le climat économique, l\'expérience de l\'insécurité, l\'évaluation des gouvernements municipal, provincial et national, l\'image des dirigeants et le scénario électoral.',
+      ficha: [['Échantillon', '600 répondants'], ['Univers', 'Personnes de 16 ans et plus qui vivent et votent dans la province de Buenos Aires'], ['Terrain', '1er au 4 juillet 2026'], ['Méthodologie', 'Enquête en ligne avec module d\'entretiens guidés par intelligence artificielle (IA) ; résultats pondérés']],
+      stats: [['52 %', 'déclarent que leur situation économique s\'est dégradée au cours de la dernière année.'], ['37 %', 'des ménages ont subi un acte de délinquance au cours des 12 derniers mois ; dans le Grand Buenos Aires, 41 %.'], ['48 %', 'évaluent positivement la gestion de leur maire ; la gestion provinciale atteint 43 % et la nationale 36 %.'], ['40 %', 'ne s\'identifient à aucune formation politique.']],
+      body: ['L\'insécurité apparaît comme une expérience quotidienne : plus d\'un tiers des ménages de la province a été victime d\'un acte de délinquance au cours de l\'année écoulée, et ceux qui l\'ont subi se sentent 33 points moins en sécurité dans leur quartier que ceux qui n\'en ont pas été victimes. Les vols et les agressions concentrent la principale préoccupation.', 'L\'étude comprenait des entretiens guidés par IA avec deux relances sur l\'expérience concrète de l\'insécurité, qui permettent de reconstituer comment la vivent les répondants dans le Grand Buenos Aires et dans l\'intérieur de la province.'],
+    },
   },
   {
-    slug: 'opinion-publica-argentina-junio-2026', date: '2026-06-30', services: ['online', 'ia'],
+    slug: 'opinion-publica-argentina-junio-2026', date: '2026-06-30', services: ['ia', 'cuali', 'analisis'],
     es: {
       sample: '1.110 casos',
       title: '¿Qué piensan los argentinos? Estudio nacional — Junio 2026',
@@ -123,9 +150,18 @@ export const STUDY_PAGES = [
       stats: [['88%', 'considera prioritário combater a violência contra as mulheres; 69%, muito prioritário.'], ['37%', 'se considera feminista (muito ou um pouco).'], ['74%', 'se informa pelas redes sociais; 58%, pela televisão.'], ['34%', 'lê La Nación, o portal mais mencionado, seguido por Infobae (32%) e Clarín (31%).']],
       body: ['O feminismo segue sendo uma identidade minoritária, mas combater a violência contra as mulheres aparece como uma prioridade quase unânime e transversal aos eleitorados. Diante do feminicídio, predomina um olhar punitivo: 76% escolhem a prisão perpétua sem possibilidade de reinserção.', 'No ecossistema de mídia, as redes sociais são a porta de entrada mais difundida, enquanto a televisão ganha peso entre os mais velhos. As perguntas abertas analisadas com IA mostram que cada portal constrói confiança por motivos distintos: profundidade, alcance ou coerência editorial.'],
     },
+    fr: {
+      sample: '1 110 répondants',
+      title: 'Que pensent les Argentins ? Étude nationale — juin 2026',
+      description: 'Étude nationale d\'Afiches : féminisme et violences faites aux femmes, écosystème médiatique, sites les plus lus et confiance dans l\'information. 1 110 répondants, juin 2026.',
+      lead: 'Enquête nationale sur deux axes : les attitudes face au féminisme et aux violences faites aux femmes, et l\'écosystème médiatique, avec un accent sur les canaux par lesquels la population s\'informe et la confiance accordée aux principaux sites d\'information.',
+      ficha: [['Échantillon', '1 110 répondants'], ['Univers', 'Population de 16 ans et plus d\'Argentine'], ['Terrain', 'Juin 2026'], ['Méthodologie', 'Enquête en ligne avec questions ouvertes analysées par intelligence artificielle (IA) ; résultats pondérés']],
+      stats: [['88 %', 'jugent prioritaire de combattre les violences faites aux femmes ; 69 %, très prioritaire.'], ['37 %', 'se considèrent féministes (très ou un peu).'], ['74 %', 's\'informent par les réseaux sociaux ; 58 %, par la télévision.'], ['34 %', 'lisent La Nación, le site d\'information le plus cité, suivi d\'Infobae (32 %) et de Clarín (31 %).']],
+      body: ['Le féminisme reste une identité minoritaire, mais combattre les violences faites aux femmes apparaît comme une priorité quasi unanime et transversale aux électorats. Face au féminicide, un regard punitif domine : 76 % choisissent la prison à perpétuité sans possibilité de réinsertion.', 'Dans l\'écosystème médiatique, les réseaux sociaux sont la porte d\'entrée la plus répandue, tandis que la télévision pèse davantage chez les plus âgés. Les questions ouvertes analysées par IA montrent que chaque site construit la confiance pour des raisons différentes : profondeur, portée ou cohérence éditoriale.'],
+    },
   },
   {
-    slug: 'reporte-fintech-q2-2026', date: '2026-05-31', services: ['online', 'ia'],
+    slug: 'reporte-fintech-q2-2026', date: '2026-05-31', services: ['ia', 'cuali', 'analisis'],
     es: {
       sample: '650 casos',
       title: 'Reporte Fintech Argentina: cómo usan el dinero los argentinos',
@@ -153,9 +189,18 @@ export const STUDY_PAGES = [
       stats: [['62%', 'usa a carteira digital como principal meio de pagamento; dinheiro vivo, 22%, e banco, 16%.'], ['80%', 'dos usuários de fintechs usa duas ou mais carteiras digitais ao mesmo tempo.'], ['78%', 'usa cartão de débito; 73%, transferências, e 58%, pagamentos por QR.'], ['15%', 'já operou com criptomoedas alguma vez.']],
       body: ['A carteira digital se consolidou como o centro da operação cotidiana, enquanto o banco e o dinheiro vivo cumprem funções complementares. Nas entrevistas, a praticidade aparece como o principal critério para escolher um meio de pagamento, associada ao digital e à segurança.', 'O uso de carteiras digitais é maior entre os jovens e cresce com o nível socioeconômico; o uso bancário, ao contrário, se concentra nos maiores de 60 anos. As criptomoedas seguem sendo um fenômeno restrito, em que pesa mais a desconfiança do que o entusiasmo.'],
     },
+    fr: {
+      sample: '650 répondants',
+      title: 'Rapport Fintech Argentine : comment les Argentins utilisent l\'argent',
+      description: 'Étude d\'Afiches sur les portefeuilles électroniques, banques, espèces et cryptomonnaies en Argentine. Indicateurs quantitatifs et entretiens avec IA. 650 répondants.',
+      lead: 'Étude sur l\'écosystème des paiements et des services financiers en Argentine. Elle combine des indicateurs quantitatifs et des entretiens enrichis par l\'intelligence artificielle (IA) pour comprendre comment les personnes gèrent, déplacent et perçoivent leur argent.',
+      ficha: [['Échantillon', '650 répondants'], ['Portée', 'Nationale'], ['Méthodologie', 'Enquête en ligne avec entretiens enrichis par l\'IA']],
+      stats: [['62 %', 'utilisent le portefeuille électronique comme principal moyen de paiement ; les espèces, 22 %, et la banque, 16 %.'], ['80 %', 'des utilisateurs de fintech utilisent deux portefeuilles électroniques ou plus en même temps.'], ['78 %', 'utilisent la carte de débit ; 73 %, les virements, et 58 %, les paiements par code QR.'], ['15 %', 'ont déjà réalisé des opérations avec des cryptomonnaies.']],
+      body: ['Le portefeuille électronique s\'est imposé comme le centre des opérations quotidiennes, tandis que la banque et les espèces jouent des rôles complémentaires. Dans les entretiens, la praticité apparaît comme le principal critère pour choisir un moyen de paiement, associée au numérique et à la sécurité.', 'L\'usage des portefeuilles électroniques est plus élevé chez les jeunes et augmente avec le niveau socioéconomique ; l\'usage bancaire, en revanche, se concentre chez les plus de 60 ans. Les cryptomonnaies restent un phénomène limité, où la méfiance pèse plus que l\'enthousiasme.'],
+    },
   },
   {
-    slug: 'seguridad-comparada-2026', date: '2026-02-28', services: ['online', 'ia', 'cuali'],
+    slug: 'seguridad-comparada-2026', date: '2026-02-28', services: ['ia', 'cuali', 'analisis'],
     es: {
       sample: '3.500 casos en 4 países',
       title: 'Seguridad comparada: Argentina, México, Honduras y Uruguay',
@@ -183,9 +228,18 @@ export const STUDY_PAGES = [
       stats: [['52%', 'dos uruguaios acredita que a segurança piorou no último ano; na Argentina, 39%.'], ['1,9 / 5', 'é a avaliação da segurança do país no Uruguai, a mais baixa dos quatro; a Argentina registra 2,46.'], ['3,36 vs. 2,77', 'é o medo de sofrer um crime na Argentina entre vítimas diretas e não expostos (escala de 1 a 5).'], ['4', 'narrativas distintas sobre a origem da insegurança, uma por país.']],
       body: ['Nos quatro países o medo aumenta entre quem foi vítima e também entre quem tem experiências próximas por meio de familiares ou amigos, e a confiança na polícia cai entre quem passou por situações de insegurança.', 'O módulo qualitativo permitiu observar como se conectam as causas mencionadas. Na Argentina e no Uruguai predominam narrativas de deterioração social e perda de controle; no México e em Honduras, tramas mais densas que vinculam corrupção, crime organizado e falhas do Estado.'],
     },
+    fr: {
+      sample: '3 500 répondants dans 4 pays',
+      title: 'Sécurité comparée : Argentine, Mexique, Honduras et Uruguay',
+      description: 'Étude régionale d\'Afiches sur la perception de l\'insécurité, la peur du crime, la confiance dans la police et les récits sur l\'origine de l\'insécurité. 3 500 répondants dans 4 pays.',
+      lead: 'Quatre études nationales réalisées avec une même plateforme et une conception commune qui combine mesure quantitative et module d\'approfondissement qualitatif assisté par intelligence artificielle (IA), pour comparer comment l\'insécurité est vécue et expliquée dans chaque pays.',
+      ficha: [['Échantillon', '3 500 répondants dans 4 pays'], ['Pays', 'Argentine, Mexique, Honduras et Uruguay'], ['Méthodologie', 'Enquête en ligne avec module qualitatif assisté par IA']],
+      stats: [['52 %', 'des Uruguayens pensent que la sécurité s\'est dégradée au cours de la dernière année ; en Argentine, 39 %.'], ['1,9 / 5', 'est la note de la sécurité du pays en Uruguay, la plus basse des quatre ; l\'Argentine obtient 2,46.'], ['3,36 vs. 2,77', 'est la peur d\'être victime d\'un crime en Argentine, entre victimes directes et personnes non exposées (échelle de 1 à 5).'], ['4', 'récits distincts sur l\'origine de l\'insécurité, un par pays.']],
+      body: ['Dans les quatre pays, la peur augmente chez ceux qui ont été victimes et aussi chez ceux qui ont vécu des expériences proches par le biais de leur famille ou de leurs amis, et la confiance dans la police diminue chez ceux qui ont connu des situations d\'insécurité.', 'Le module qualitatif a permis d\'observer comment les causes mentionnées s\'articulent. En Argentine et en Uruguay prédominent des récits de détérioration sociale et de perte de contrôle ; au Mexique et au Honduras, des récits plus denses qui relient corruption, crime organisé et défaillances de l\'État.'],
+    },
   },
   {
-    slug: 'crisis-venezuela-enero-2026', date: '2026-01-31', services: ['online', 'ia'],
+    slug: 'crisis-venezuela-enero-2026', date: '2026-01-31', services: ['online', 'ia', 'analisis'],
     es: {
       sample: '2.160 casos en 4 países',
       title: 'Crisis en Venezuela: percepciones en Venezuela, Colombia, Brasil y Argentina',
@@ -212,6 +266,15 @@ export const STUDY_PAGES = [
       ficha: [['Amostras', 'Venezuela 820 respondentes (±3,4%), Colômbia 500 (±4,3%), Argentina 420 (±4,7%), Brasil 420 (±4,7%)'], ['Campo', 'Janeiro de 2026'], ['Metodologia', 'Pesquisa online probabilística, estratificada por sexo, idade, nível educacional e voto anterior'], ['Nota', 'Na Venezuela, o contexto não garante plenamente a livre expressão de opiniões']],
       stats: [['77%', 'dos colombianos considera que a Venezuela é uma ditadura; na Argentina, 67%, e no Brasil, 64%.'], ['70%', 'dos venezuelanos concorda com uma mudança de governo.'], ['66%', 'dos venezuelanos acredita que o país estará melhor em um ano.'], ['78%', 'dos colombianos informados apoia a intervenção dos Estados Unidos; na Venezuela, 43%.']],
       body: ['A caracterização do regime como ditadura é majoritária nos quatro países, embora na Venezuela quase três em cada dez não se posicionem. O apoio à intervenção dos EUA é mais alto na Colômbia, no Brasil e na Argentina do que dentro da Venezuela.', 'O estudo incluiu a codificação de respostas espontâneas sobre como os venezuelanos se sentem em relação ao futuro do país, onde convivem a esperança e a incerteza.'],
+    },
+    fr: {
+      sample: '2 160 répondants dans 4 pays',
+      title: 'Crise au Venezuela : perceptions au Venezuela, en Colombie, au Brésil et en Argentine',
+      description: 'Étude régionale d\'Afiches sur la crise vénézuélienne : perception du régime, soutien à l\'intervention des États-Unis et attentes. Janvier 2026.',
+      lead: 'Enquêtes en ligne dans quatre pays pour comparer la façon dont la crise vénézuélienne est perçue : le type de régime, le soutien à un changement de gouvernement, l\'intervention des États-Unis et les attentes quant à l\'avenir du pays.',
+      ficha: [['Échantillons', 'Venezuela 820 répondants (±3,4 %), Colombie 500 (±4,3 %), Argentine 420 (±4,7 %), Brésil 420 (±4,7 %)'], ['Terrain', 'Janvier 2026'], ['Méthodologie', 'Enquête en ligne probabiliste, stratifiée par sexe, âge, niveau d\'éducation et vote précédent'], ['Note', 'Au Venezuela, le contexte ne garantit pas pleinement la liberté d\'expression des opinions']],
+      stats: [['77 %', 'des Colombiens considèrent que le Venezuela est une dictature ; en Argentine, 67 %, et au Brésil, 64 %.'], ['70 %', 'des Vénézuéliens sont favorables à un changement de gouvernement.'], ['66 %', 'des Vénézuéliens pensent que le pays ira mieux dans un an.'], ['78 %', 'des Colombiens informés soutiennent l\'intervention des États-Unis ; au Venezuela, 43 %.']],
+      body: ['La caractérisation du régime comme dictature est majoritaire dans les quatre pays, bien qu\'au Venezuela près de trois personnes sur dix ne se prononcent pas. Le soutien à l\'intervention américaine est plus élevé en Colombie, au Brésil et en Argentine qu\'au Venezuela même.', 'L\'étude a inclus le codage de réponses spontanées sur ce que ressentent les Vénézuéliens quant à l\'avenir du pays, où coexistent espoir et incertitude.'],
     },
   },
 ];

@@ -12,6 +12,7 @@ import { ARTICLES } from './content/articles.mjs';
 import { SITE, LANGS, home, servicesIndex, reportsIndex, serviceUrl, reportUrl, faqUrl, urlsOf, toLang } from './site-paths.mjs';
 import { FAQ } from './content/faq.mjs';
 import { UI_PT } from './content/ui-pt.mjs';
+import { UI_FR } from './content/ui-fr.mjs';
 import { langScript, langSwitch } from './lang-redirect.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -25,8 +26,9 @@ const TODAY = new Date().toISOString().slice(0, 10);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // textos de interfaz: es y en van en la llamada; el portugués sale de tools/content/ui-pt.mjs (clave = texto en español)
 const missingPt = new Set();
-const L = (lang, es, en) => (lang === 'en' ? en : lang === 'pt' ? (UI_PT[es] ?? (missingPt.add(es), es)) : es);
-const IDX = { es: 0, en: 1, pt: 2 };
+const UI = { pt: UI_PT, fr: UI_FR };
+const L = (lang, es, en) => (lang === 'en' ? en : lang === 'es' ? es : (UI[lang][es] ?? (missingPt.add(`${lang}: ${es}`), es)));
+const IDX = { es: 0, en: 1, pt: 2, fr: 3 };
 
 // ---------- piezas de la landing ----------
 const shell = {};
@@ -65,7 +67,7 @@ const ORG = { '@id': `${SITE}/#org` };
 // alts: la dirección de esta misma página en cada idioma { es, en, pt } (selector de idioma, hreflang y redirección automática)
 function page({ lang, url, alts = { es: '/', en: '/en/', pt: '/pt/' }, title, description, body, ld = [], robots = 'index,follow,max-image-preview:large', ogImage, banner = '', current = '' }) {
   const s = shell[lang];
-  const header = s.header.replace(/<div class="lang-toggle"[\s\S]*?<\/div>/, () => langSwitch(lang, alts)).replace('</header>', rail(lang, current) + '</header>');
+  const header = s.header.replace(/<!--lang-->[\s\S]*?<!--\/lang-->/, () => langSwitch(lang, alts)).replace('</header>', rail(lang, current) + '</header>');
   const og = ogImage || `${SITE}/og-afiches-${lang}.png`;
   const graph = { '@context': 'https://schema.org', '@graph': ld };
   return `<!doctype html>
@@ -78,7 +80,7 @@ ${robots.startsWith('index') ? LANGS.map(l => `<link rel="alternate" hreflang="$
 <meta name="theme-color" content="#f97316"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Afiches"><meta property="og:url" content="${SITE}${url}">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:image" content="${og}">
-<meta property="og:locale" content="${({ es: 'es_AR', en: 'en_US', pt: 'pt_BR' })[lang]}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@AfichesAC">
+<meta property="og:locale" content="${({ es: 'es_AR', en: 'en_US', pt: 'pt_BR', fr: 'fr_FR' })[lang]}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@AfichesAC">
 ${s.themeInit}
 ${robots.startsWith('index') ? langScript(lang, alts) + '\n' : ''}${s.fonts}
 ${s.style}<link rel="stylesheet" href="/recorrido-afiches.css"><link rel="stylesheet" href="/paginas.css">
@@ -114,11 +116,11 @@ for (const sv of SERVICES) for (const lang of LANGS) {
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Servicios', 'Services'), servicesIndex(lang)], [t.name, url]];
   const studies = sv.studies.map(s => STUDY_PAGES.find(x => x.slug === s)).filter(Boolean);
   const body = `<article class="pg" style="--c:${sv.color}"><div class="wrap">${crumbs(lang, items)}
-<header class="pg-hero"><div class="pg-hero-text"><h1>${esc(t.h1)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${home(lang)}#contactanos">${L(lang, 'Pedir una propuesta', 'Request a proposal')} ↗</a>${sv.key === 'ia' ? `<a class="pg-mail" href="${home(lang)}#demo">${L(lang, 'Probar la demo', 'Try the demo')} →</a>` : ''}</div></div><div class="pg-orb" aria-hidden="true"><span class="pg-orb-main">${icon(sv.key)}</span><span class="pg-o o1"></span><span class="pg-o o2"></span><span class="pg-o o3"></span></div></header>
+<header class="pg-hero"><div class="pg-hero-text"><h1>${esc(t.h1)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${home(lang)}#contactanos">${L(lang, 'Pedir una propuesta', 'Request a proposal')} ↗</a>${sv.key === 'ia' || sv.key === 'cuali' ? `<a class="pg-mail" href="${home(lang)}#demo">${L(lang, 'Probar la demo', 'Try the demo')} →</a>` : ''}</div></div><div class="pg-orb" aria-hidden="true"><span class="pg-orb-main">${icon(sv.key)}</span><span class="pg-o o1"></span><span class="pg-o o2"></span><span class="pg-o o3"></span></div></header>
 ${row(L(lang, 'Qué es', 'What it is'), t.what.map(p => `<p>${esc(p)}</p>`).join(''))}
 ${row(L(lang, 'Cuándo conviene', 'When to use it'), `<ul class="pg-uses">${t.when.map(w => `<li>${esc(w)}</li>`).join('')}</ul>`)}
 ${row(L(lang, 'Cómo trabajamos', 'How we work'), `<ol class="pg-flow">${t.how.map(([h, p]) => `<li><b>${esc(h)}</b><span>${esc(p)}</span></li>`).join('')}</ol>`)}
-${row(L(lang, 'Qué entregamos', 'What we deliver'), `<ul class="pg-deliver">${t.deliver.map(d => `<li>${esc(d)}</li>`).join('')}</ul>`)}
+${row(L(lang, 'Qué entregamos', 'What we deliver'), `<ul class="pg-deliver">${t.deliver.map(d => `<li>${esc(d.replace(/\.$/, ''))}</li>`).join('')}</ul>`)}
 ${row(L(lang, 'Preguntas', 'Questions'), faqInner(t.faq))}
 ${ending(lang, L(lang, `Contanos qué querés medir y armamos la propuesta.`, `Tell us what you want to measure and we’ll put together a proposal.`), t.name, sv.related)}</div></article>`;
   const ld = [{ '@type': 'Service', '@id': SITE + url + '#service', name: t.name, serviceType: t.name, description: t.description, url: SITE + url, provider: ORG, areaServed: [{ '@type': 'Place', name: L(lang, 'América', 'Americas') }], inLanguage: lang }, crumbsLd(items), faqLd(url, t.faq)];
@@ -133,7 +135,7 @@ for (const lang of LANGS) {
 <ol class="pg-list">${SERVICES.map(sv => `<li><a href="${serviceUrl(sv.key, lang)}" style="--c:${sv.color}"><span class="pg-list-dot">${icon(sv.key)}</span><b>${esc(sv[lang].name)}</b><span class="pg-list-txt">${esc(sv[lang].lead.split('. ')[0])}.</span><i aria-hidden="true">→</i></a></li>`).join('')}</ol>
 ${ending(lang, L(lang, '¿No sabés cuál te sirve? Contanos qué necesitás averiguar.', 'Not sure which one fits? Tell us what you need to find out.'), L(lang, 'Consulta', 'Inquiry'))}</div></article>`;
   const ld = [{ '@type': 'CollectionPage', '@id': SITE + url, url: SITE + url, name: L(lang, 'Servicios de Afiches', 'Afiches services'), inLanguage: lang, about: ORG, hasPart: SERVICES.map(sv => ({ '@id': SITE + serviceUrl(sv.key, lang) + '#service' })) }, crumbsLd(items)];
-  await write(url.slice(1) + 'index.html', page({ lang, url, alts,title: L(lang, 'Servicios de investigación de mercado y opinión pública | Afiches', 'Market research and public opinion services | Afiches'), description: L(lang, 'Encuestas online, encuestas con entrevistas IA, investigación cualitativa, encuestas presenciales, exit polls, mystery shopper, análisis de datos y publicidad digital.', 'Online surveys, surveys with AI interviews, qualitative research, in-person surveys, exit polls, mystery shopping, data analysis and digital advertising.'), body, ld, current: 'servicios' }));
+  await write(url.slice(1) + 'index.html', page({ lang, url, alts,title: L(lang, 'Servicios de investigación de mercado y opinión pública | Afiches', 'Market research and public opinion services | Afiches'), description: L(lang, 'Encuestas online con IA, entrevistas en profundidad, encuestas online tradicionales, encuestas presenciales, exit polls, mystery shopper, análisis de datos y publicidad digital.', 'Online surveys with AI, in-depth interviews, traditional online surveys, in-person surveys, exit polls, mystery shopping, data analysis and digital advertising.'), body, ld, current: 'servicios' }));
 }
 
 // ---------- informes ----------
@@ -142,9 +144,9 @@ for (const st of STUDY_PAGES) for (const lang of LANGS) {
   const t = st[lang], url = reportUrl(st.slug, lang), alts = urlsOf(l => reportUrl(st.slug, l));
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Informes', 'Reports'), reportsIndex(lang)], [t.title, url]];
   const access = `${home(lang)}?estudio=${st.slug}#estudios`;
-  const field = t.ficha.find(f => /Campo|Fieldwork/.test(f[0]))?.[1];
+  const field = t.ficha.find(f => /Campo|Fieldwork|Terrain/.test(f[0]))?.[1];
   const body = `<article class="pg pg-report"><div class="wrap">${crumbs(lang, items)}
-<header class="pg-hero"><div class="pg-hero-text"><p class="pg-date">${[field, t.sample || t.ficha[0][1]].filter(Boolean).map(esc).join(' · ')}</p><h1>${esc(t.title)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${access}">${L(lang, 'Acceder al informe completo', 'Access the full report')} ↗</a>${st.dashboard ? `<a class="pg-mail" href="${st.dashboard}">${L(lang, 'Ver el dashboard', 'Open the dashboard')} ↗</a>` : ''}</div></div><a class="pg-cover" href="${access}" aria-label="${esc(L(lang, 'Abrir el informe ', 'Open the report ') + t.title)}"><img src="${cover(st)}" alt="" width="760" height="428"></a></header>
+<header class="pg-hero"><div class="pg-hero-text"><p class="pg-date">${[field, t.sample || t.ficha[0][1]].filter(Boolean).map(esc).join(', ')}</p><h1>${esc(t.title)}</h1><p class="pg-lead">${esc(t.lead)}</p><div class="pg-actions"><a class="pill-button" href="${access}">${L(lang, 'Acceder al informe completo', 'Access the full report')} ↗</a>${st.dashboard ? `<a class="pg-mail" href="${st.dashboard}">${L(lang, 'Ver el dashboard', 'Open the dashboard')} ↗</a>` : ''}</div></div><a class="pg-cover" href="${access}" aria-label="${esc(L(lang, 'Abrir el informe ', 'Open the report ') + t.title)}"><img src="${cover(st)}" alt="" width="760" height="428"></a></header>
 ${row(L(lang, 'Datos principales', 'Key findings'), `<div class="pg-stats">${t.stats.map(([n, d]) => `<div class="pg-stat">${dots(n)}<div><b>${esc(n)}</b><span>${esc(d)}</span></div></div>`).join('')}</div>`)}
 ${row(L(lang, 'Lectura', 'Reading'), t.body.map(p => `<p>${esc(p)}</p>`).join(''))}
 ${row(L(lang, 'Ficha técnica', 'Methodology'), `<dl class="pg-ficha">${t.ficha.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`)}
@@ -188,7 +190,7 @@ for (const a of ARTICLES) {
 await write('recursos/index.html', page({ lang: 'es', url: '/recursos/', title: 'Recursos (borradores) | Afiches', description: 'Borradores de artículos', robots: 'noindex,nofollow', banner: '<div class="draft-banner">BORRADORES · no publicados</div>', body: `<article class="pg"><div class="wrap"><header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>Recursos</h1><p class="pg-lead">Borradores para revisar.</p></div></header><ol class="pg-list">${ARTICLES.map(a => `<li><a href="/borradores/recursos/${a.slug}/" style="--c:#ddd6fe"><span class="pg-list-dot">${icon(a.services[0])}</span><b>${esc(a.title)}</b><span class="pg-list-txt">${esc(a.description)}</span><i aria-hidden="true">→</i></a></li>`).join('')}</ol></div></article>` }), draftsOut);
 
 // ---------- sitemap y llms.txt ----------
-if (missingPt.size) throw new Error('Faltan traducciones al portugués en tools/content/ui-pt.mjs (clave = texto en español):\n' + [...missingPt].map(s => ' - ' + s).join('\n'));
+if (missingPt.size) throw new Error('Faltan traducciones en tools/content/ui-pt.mjs y ui-fr.mjs (clave = texto en español):\n' + [...missingPt].map(s => ' - ' + s).join('\n'));
 // cada página con su dirección en los tres idiomas { es, en, pt }
 const pairs = [urlsOf(home), urlsOf(servicesIndex), ...SERVICES.map(s => urlsOf(l => serviceUrl(s.key, l))), urlsOf(reportsIndex), urlsOf(faqUrl), ...listedStudies.map(s => urlsOf(l => reportUrl(s.slug, l)))];
 const sm = `<?xml version="1.0" encoding="UTF-8"?>

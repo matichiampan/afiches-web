@@ -22,7 +22,7 @@ export const UI_PT = {
   'Servicios de Afiches': 'Serviços da Afiches',
   'Servicios de investigación de mercado y opinión pública | Afiches': 'Serviços de pesquisa de mercado e opinião pública | Afiches',
   'Investigación cualitativa y cuantitativa potenciada por IA, con reclutamiento en redes sociales y trabajo de campo propio, en cualquier país de América.': 'Pesquisa qualitativa e quantitativa potencializada por IA, com recrutamento em redes sociais e trabalho de campo próprio, em qualquer país das Américas.',
-  'Encuestas online, encuestas con entrevistas IA, investigación cualitativa, encuestas presenciales, exit polls, mystery shopper, análisis de datos y publicidad digital.': 'Pesquisas online, pesquisas com entrevistas por IA, pesquisa qualitativa, pesquisas presenciais, pesquisas de boca de urna, cliente oculto, análise de dados e publicidade digital.',
+  'Encuestas online con IA, entrevistas en profundidad, encuestas online tradicionales, encuestas presenciales, exit polls, mystery shopper, análisis de datos y publicidad digital.': 'Pesquisas online com IA, entrevistas em profundidade, pesquisas online tradicionais, pesquisas presenciais, pesquisas de boca de urna, cliente oculto, análise de dados e publicidade digital.',
   '¿No sabés cuál te sirve? Contanos qué necesitás averiguar.': 'Não sabe qual serve para você? Conte pra gente o que precisa descobrir.',
   'Abrir el informe ': 'Abrir o relatório ',
   'Acceder al informe completo': 'Acessar o relatório completo',

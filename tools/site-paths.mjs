@@ -1,15 +1,16 @@
-// Rutas públicas del sitio en cada idioma (es, en, pt). La plantilla usa las rutas en español;
-// build-landing.mjs las traduce para /en/ y /pt/ con toLang().
+// Rutas públicas del sitio en cada idioma (es, en, pt, fr). La plantilla usa las rutas en español;
+// build-landing.mjs las traduce para /en/, /pt/ y /fr/ con toLang().
 import { SERVICES } from './content/services.mjs';
 import { LANGS } from './lang-redirect.mjs';
 
 export { LANGS };
 export const SITE = 'https://afiches.net';
-const ROOT = { es: '/', en: '/en/', pt: '/pt/' };
+const ROOT = { es: '/', en: '/en/', pt: '/pt/', fr: '/fr/' };
 const SECTION = {
   es: { services: 'servicios/', reports: 'informes/', faq: 'preguntas-frecuentes/' },
   en: { services: 'services/', reports: 'reports/', faq: 'faq/' },
   pt: { services: 'servicos/', reports: 'relatorios/', faq: 'perguntas-frequentes/' },
+  fr: { services: 'services/', reports: 'rapports/', faq: 'questions-frequentes/' },
 };
 export const home = lang => ROOT[lang];
 export const servicesIndex = lang => ROOT[lang] + SECTION[lang].services;

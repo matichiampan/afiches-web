@@ -12,6 +12,10 @@ export const FAQ = [
   "pt": [
    "Como vocês encontram as pessoas que respondem?",
    "Com anúncios em redes sociais direcionados ao público de cada estudo: por idade, nível socioeconômico, interesses ou região, entre outros. Quando necessário, incluímos entrevistadores em campo."
+  ],
+  "fr": [
+   "Comment trouvez-vous les personnes qui répondent ?",
+   "Avec des annonces sur les réseaux sociaux ciblant le public de chaque étude : par âge, niveau socioéconomique, centres d'intérêt ou zone, entre autres. Quand c'est nécessaire, nous ajoutons des enquêteurs sur le terrain."
   ]
  },
  {
@@ -26,6 +30,10 @@ export const FAQ = [
   "pt": [
    "Para que serve a inteligência artificial?",
    "Lê cada resposta aberta e faz uma repergunta para entender melhor (<a href=\"/servicios/entrevistas-ia/\">como funciona</a>). Assim você tem a profundidade de uma entrevista com a escala de uma pesquisa."
+  ],
+  "fr": [
+   "À quoi sert l'intelligence artificielle (IA) ?",
+   "Elle lit chaque réponse ouverte et pose une relance pour mieux comprendre (<a href=\"/servicios/entrevistas-ia/\">comment elle fonctionne</a>). Vous obtenez ainsi la profondeur d'un entretien à l'échelle d'une enquête."
   ]
  },
  {
@@ -40,6 +48,10 @@ export const FAQ = [
   "pt": [
    "O que eu recebo ao terminar?",
    "O relatório com os achados, a base de dados, o painel interativo e as citações textuais das pessoas. Definimos isso com você no início."
+  ],
+  "fr": [
+   "Que vais-je recevoir à la fin ?",
+   "Le rapport avec les résultats clés, la base de données, le tableau de bord interactif et les verbatims des répondants. Nous le définissons avec vous au départ."
   ]
  },
  {
@@ -54,6 +66,10 @@ export const FAQ = [
   "pt": [
    "Quanto tempo leva um estudo?",
    "Depende do público e do tamanho do estudo. Combinamos isso no início."
+  ],
+  "fr": [
+   "Combien de temps dure une étude ?",
+   "Cela dépend du public et de la taille de l'étude. Nous le fixons au départ."
   ]
  },
  {
@@ -68,6 +84,10 @@ export const FAQ = [
   "pt": [
    "Vocês fazem trabalho de campo?",
    "Sim. Temos entrevistadores próprios para <a href=\"/servicios/encuestas-presenciales/\">pesquisas presenciais</a>, <a href=\"/servicios/exit-polls/\">pesquisas de boca de urna (exit polls)</a> e <a href=\"/servicios/mystery-shopper/\">cliente oculto (mystery shopping)</a>, e podemos combinar campo com recrutamento online em um mesmo estudo."
+  ],
+  "fr": [
+   "Faites-vous du travail de terrain ?",
+   "Oui. Nous avons nos propres enquêteurs pour les <a href=\"/servicios/encuestas-presenciales/\">enquêtes en face à face</a>, les <a href=\"/servicios/exit-polls/\">sondages à la sortie des urnes</a> et le <a href=\"/servicios/mystery-shopper/\">client mystère</a>, et nous pouvons combiner terrain et recrutement en ligne dans une même étude."
   ]
  },
  {
@@ -82,6 +102,10 @@ export const FAQ = [
   "pt": [
    "Em quais países vocês atuam?",
    "Em qualquer país das Américas. Os estudos online podem ser feitos em toda a região; o campo presencial nós coordenamos conforme o país."
+  ],
+  "fr": [
+   "Dans quels pays travaillez-vous ?",
+   "Dans n'importe quel pays des Amériques. Les études en ligne peuvent être menées dans toute la région ; le terrain en face à face, nous le coordonnons selon le pays."
   ]
  },
  {
@@ -96,6 +120,10 @@ export const FAQ = [
   "pt": [
    "Vocês podem analisar dados que já temos?",
    "Sim. <a href=\"/servicios/analisis-de-datos/\">Processamos bases próprias ou de terceiros</a>: limpamos, ponderamos, codificamos as respostas abertas com IA e entregamos um relatório com painel interativo."
+  ],
+  "fr": [
+   "Pouvez-vous analyser des données que nous avons déjà ?",
+   "Oui. <a href=\"/servicios/analisis-de-datos/\">Nous traitons vos propres bases ou celles de tiers</a> : nous les nettoyons, les pondérons, codons les réponses ouvertes avec l'IA et livrons un rapport avec tableau de bord interactif."
   ]
  },
  {
@@ -110,6 +138,10 @@ export const FAQ = [
   "pt": [
    "Quanto custa um estudo?",
    "Depende do público, do tamanho da amostra e do tipo de estudo. Antes de começar, enviamos uma proposta com o custo fechado."
+  ],
+  "fr": [
+   "Combien coûte une étude ?",
+   "Cela dépend du public, de la taille de l'échantillon et du type d'étude. Avant de commencer, nous vous envoyons une proposition à prix fixe."
   ]
  },
  {
@@ -124,6 +156,10 @@ export const FAQ = [
   "pt": [
    "Como começamos?",
    "Conte pra gente o que você quer descobrir. Em uma reunião rápida definimos o público, a amostra e os prazos, e enviamos a proposta."
+  ],
+  "fr": [
+   "Comment démarrons-nous ?",
+   "Dites-nous ce que vous voulez savoir. Lors d'une courte réunion, nous définissons le public, l'échantillon et les délais, puis nous vous envoyons la proposition."
   ]
  },
  {
@@ -138,6 +174,10 @@ export const FAQ = [
   "pt": [
    "Como fica a confidencialidade dos dados?",
    "Os resultados de cada estudo pertencem ao cliente e não os publicamos sem autorização. As respostas são analisadas de forma anônima."
+  ],
+  "fr": [
+   "Qu'en est-il de la confidentialité des données ?",
+   "Les résultats de chaque étude appartiennent au client et nous ne les publions pas sans autorisation. Les réponses sont analysées de manière anonyme."
   ]
  }
 ];
