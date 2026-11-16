@@ -40,4 +40,12 @@ export const UI_FR = {
   'Preguntas frecuentes | Afiches': 'Questions fréquentes | Afiches',
   'Cómo reclutamos, qué hace la IA, qué entregamos, plazos, costos y confidencialidad en los estudios de Afiches.': "Comment nous recrutons, ce que fait l'IA, ce que nous livrons, délais, coûts et confidentialité dans les études d'Afiches.",
   'Suscripción a los estudios de Afiches': "Abonnement aux études d'Afiches",
+  'En qué consiste': 'En quoi cela consiste',
+  'Solicitar una demo': 'Demander une démo',
+  'Ver servicio': 'Voir le service',
+  'Consultar por un estudio': 'Se renseigner sur une étude',
+  'Contanos qué necesitás conocer. Te ayudamos a definir el estudio adecuado.': "Dites-nous ce que vous devez savoir. Nous vous aidons à définir l'étude adaptée.",
+  'Investigamos opiniones, hábitos y experiencias para ayudarte a tomar decisiones con información. Diseñamos cada proyecto según tus objetivos y combinamos encuestas, entrevistas, trabajo de campo y análisis de datos.': 'Nous étudions opinions, habitudes et expériences pour vous aider à décider en connaissance de cause. Nous concevons chaque projet selon vos objectifs et combinons enquêtes, entretiens, terrain et analyse de données.',
+  'Para elegir entre las opciones online': 'Pour choisir parmi les options en ligne',
+  'Encuestas online con IA, entrevistas en profundidad con IA, encuestas online tradicionales, encuestas presenciales, exit polls, mystery shopper, análisis de datos y publicidad digital.': 'Enquêtes en ligne avec IA, entretiens approfondis avec IA, enquêtes en ligne classiques, enquêtes en face à face, sondages à la sortie des urnes, client mystère, analyse de données et publicité digitale.',
 };
