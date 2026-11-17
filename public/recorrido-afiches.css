@@ -905,3 +905,6 @@ details.lang-menu{display:none;position:relative;overflow:visible;border:0;borde
 /* revisión 15/11: X del pie con el glifo de la marca; pista de desplazamiento en la barra de secciones en celular */
 .ico-x{stroke:none!important}
 @media(max-width:700px){.journey.top{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}}
+
+/* inicio: subtítulo corto sobre el párrafo */
+.hero-copy p.hero-sub{margin:24px auto 8px;font-size:clamp(17px,1.7vw,21px);line-height:1.4;font-weight:600;color:var(--ink)}.hero-copy p.hero-sub+p{margin-top:8px}
