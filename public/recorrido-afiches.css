@@ -872,7 +872,13 @@ html:not([data-theme=dark]),[data-theme=dark]{--type-orange:#f97316;--title-acce
 
 /* ===== Segunda tanda de comentarios: UADE fijo, logos nuevos y más globitos de servicios ===== */
 /* Fila con un solo logo (UADE): gira como las otras, con más aire entre repeticiones */
-.mq-solo .mq-set{gap:120px;padding-right:120px}
+.mq-pair{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"t1 t2" "l1 l2";align-items:center}
+.mq-pair .mq-t1{grid-area:t1}.mq-pair .mq-t2{grid-area:t2}.mq-pair .mq-static{grid-area:l1}.mq-pair .mq{grid-area:l2}
+.mq-sec .mq-pair .mq-title{margin:0;padding-bottom:14px;align-self:stretch}
+.mq-pair .mq-t1,.mq-pair .mq-static{padding-left:clamp(28px,6vw,90px);padding-right:clamp(28px,4vw,56px);border-right:1px solid var(--line)}
+.mq-pair .mq-static{align-self:stretch;justify-content:center;gap:0}
+.mq-sec .mq-pair .mq-t2{align-self:end}
+@media(max-width:700px){.mq-pair{grid-template-columns:118px minmax(0,1fr)}.mq-sec .mq-pair .mq-title{padding-bottom:10px}.mq-pair .mq-t1{padding-left:12px;padding-right:12px}.mq-pair .mq-static{padding-left:0;padding-right:0}.mq-pair .mq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 16%,#000 86%,transparent)}}
 .mq-set img[alt="Cachafaz"]{height:50.2px}
 .mq-set img[alt="FUCA"]{height:30px}
 .mq-set img[alt="Creative Group"]{height:26.5px}
