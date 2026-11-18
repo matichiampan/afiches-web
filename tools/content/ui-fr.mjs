@@ -6,6 +6,8 @@ export const UI_FR = {
   'Inicio': 'Accueil',
   'Servicios': 'Services',
   'Informes': 'Rapports',
+  'Servicios de investigación de mercado y opinión pública': "Services d'études de marché et d'opinion publique",
+  'Informes de opinión pública y mercado': "Rapports d'opinion publique et de marché",
   'Preguntas frecuentes': 'Questions fréquentes',
   'Ruta': "Fil d'Ariane",
   'Seguí explorando Afiches': 'Continuez à explorer Afiches',

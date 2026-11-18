@@ -14,6 +14,7 @@ import { FAQ } from './content/faq.mjs';
 import { UI_PT } from './content/ui-pt.mjs';
 import { UI_FR } from './content/ui-fr.mjs';
 import { langScript, langSwitch } from './lang-redirect.mjs';
+import { analyticsScript } from './analytics.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const pub = path.resolve(here, '../public');
@@ -85,7 +86,7 @@ ${s.themeInit}
 ${robots.startsWith('index') ? langScript(lang, alts) + '\n' : ''}${s.fonts}
 ${s.style}<link rel="stylesheet" href="/recorrido-afiches.css"><link rel="stylesheet" href="/paginas.css">
 ${ld.length ? `<script type="application/ld+json">${JSON.stringify(graph).replace(/</g, '\\u003c')}</script>` : ''}
-</head><body class="subpage">
+${robots.startsWith('index') ? analyticsScript() + '\n' : ''}</head><body class="subpage">
 ${banner}${header}
 <main id="inicio">${body}</main>
 ${s.footer}
@@ -132,7 +133,7 @@ ${ending(lang, t.closing, t.name, sv.related, { service: t.name, note: t.related
 for (const lang of LANGS) {
   const url = servicesIndex(lang), alts = urlsOf(servicesIndex);
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Servicios', 'Services'), url]];
-  const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Servicios', 'Services')}</h1><p class="pg-lead">${L(lang, 'Investigamos opiniones, hábitos y experiencias para ayudarte a tomar decisiones con información. Diseñamos cada proyecto según tus objetivos y combinamos encuestas, entrevistas, trabajo de campo y análisis de datos.', 'We research opinions, habits and experiences to help you make informed decisions. We design each project around your goals and combine surveys, interviews, fieldwork and data analysis.')}</p></div></header>
+  const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Servicios de investigación de mercado y opinión pública', 'Market research and public opinion services')}</h1><p class="pg-lead">${L(lang, 'Investigamos opiniones, hábitos y experiencias para ayudarte a tomar decisiones con información. Diseñamos cada proyecto según tus objetivos y combinamos encuestas, entrevistas, trabajo de campo y análisis de datos.', 'We research opinions, habits and experiences to help you make informed decisions. We design each project around your goals and combine surveys, interviews, fieldwork and data analysis.')}</p></div></header>
 <ol class="pg-list">${SERVICES.map(sv => `<li><a href="${serviceUrl(sv.key, lang)}" style="--c:${sv.color}"><span class="pg-list-dot">${icon(sv.key)}</span><b>${esc(sv[lang].name)}</b><span class="pg-list-txt">${esc(sv[lang].short)}</span><i aria-hidden="true"><span>${L(lang, 'Ver servicio', 'View service')}</span> →</i></a></li>`).join('')}</ol>
 <section class="pg-choose"><p class="pg-end-sub">${L(lang, 'Para elegir entre las opciones online', 'Choosing between the online options')}</p>${balls(lang, ['cuali', 'ia', 'online'])}</section>
 ${ending(lang, L(lang, 'Contanos qué necesitás conocer. Te ayudamos a definir el estudio adecuado.', 'Tell us what you need to know. We’ll help you define the right study.'), L(lang, 'Consulta', 'Inquiry'), null, { button: L(lang, 'Consultar por un estudio', 'Ask about a study') })}</div></article>`;
@@ -159,7 +160,7 @@ ${ending(lang, L(lang, 'Podemos hacer un estudio así para tu marca, tu sector o
 for (const lang of LANGS) {
   const url = reportsIndex(lang), alts = urlsOf(reportsIndex);
   const items = [[L(lang, 'Inicio', 'Home'), home(lang)], [L(lang, 'Informes', 'Reports'), url]];
-  const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Informes', 'Reports')}</h1><p class="pg-lead">${L(lang, 'Estudios de opinión pública y de mercado realizados por Afiches en Argentina y América Latina. Cada resumen incluye los datos principales y la ficha técnica; el informe completo se accede dejando un mail.', 'Public opinion and market studies by Afiches in Argentina and Latin America. Each summary includes key findings and methodology; the full report is available by leaving your email.')}</p></div></header>
+  const body = `<article class="pg"><div class="wrap">${crumbs(lang, items)}<header class="pg-hero pg-hero-plain"><div class="pg-hero-text"><h1>${L(lang, 'Informes de opinión pública y mercado', 'Public opinion and market research reports')}</h1><p class="pg-lead">${L(lang, 'Estudios de opinión pública y de mercado realizados por Afiches en Argentina y América Latina. Cada resumen incluye los datos principales y la ficha técnica; el informe completo se accede dejando un mail.', 'Public opinion and market studies by Afiches in Argentina and Latin America. Each summary includes key findings and methodology; the full report is available by leaving your email.')}</p></div></header>
 <ol class="pg-reports">${listedStudies.map(st => { const t = st[lang]; return `<li><a href="${reportUrl(st.slug, lang)}"><img src="${cover(st)}" alt="" loading="lazy" width="760" height="428"><span class="pg-rep-meta">${esc((t.sample || t.ficha[0][1]))}</span><b>${esc(t.title)}</b><span class="pg-rep-stat"><em>${esc(t.stats[0][0])}</em> ${esc(t.stats[0][1])}</span></a></li>`; }).join('')}</ol></div></article>`;
   const ld = [{ '@type': 'CollectionPage', '@id': SITE + url, url: SITE + url, name: L(lang, 'Informes de Afiches', 'Afiches reports'), inLanguage: lang, about: ORG, hasPart: listedStudies.map(st => ({ '@id': SITE + reportUrl(st.slug, lang) + '#report' })) }, crumbsLd(items)];
   await write(url.slice(1) + 'index.html', page({ lang, url, alts,title: L(lang, 'Informes de opinión pública y mercado | Afiches', 'Public opinion and market research reports | Afiches'), description: L(lang, 'Informes de Afiches sobre streaming, fintech y seguridad comparada en cuatro países.', 'Afiches reports on streaming, fintech and comparative security in four countries.'), body, ld, current: 'estudios' }));

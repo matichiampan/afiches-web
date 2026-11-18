@@ -8,6 +8,7 @@ import { reports, listedReports } from '../src/data/reports.js';
 import { toLang, LANGS } from './site-paths.mjs';
 import { SERVICES as SERVICE_PAGES } from './content/services.mjs';
 import { langScript, langSwitch } from './lang-redirect.mjs';
+import { analyticsScript } from './analytics.mjs';
 
 const SITE = 'https://afiches.net';
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -251,7 +252,7 @@ function build(lang) {
     h = h.replace("theme.setAttribute('aria-label',dark?'Activar modo claro':'Activar modo oscuro');", T(lang, '', "theme.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');", "theme.setAttribute('aria-label',dark?'Ativar modo claro':'Ativar modo escuro');", "theme.setAttribute('aria-label',dark?'Activer le mode clair':'Activer le mode sombre');"));
   }
   const ld = JSON.stringify(jsonLd(lang, faqs(h))).replace(/</g, '\\u003c');
-  h = h.replace('</head>', `<script type="application/ld+json">${ld}</script>\n</head>`);
+  h = h.replace('</head>', `<script type="application/ld+json">${ld}</script>\n${analyticsScript()}\n</head>`);
   if (/class="(es|en|pt|fr)"/.test(h.replace(/<script[\s\S]*?<\/script>/g, ''))) throw new Error('Quedaron textos del otro idioma en ' + lang);
   if (/data-ph-/.test(h)) throw new Error('Quedaron placeholders sin resolver en ' + lang + ': ' + h.slice(h.indexOf('data-ph-') - 120, h.indexOf('data-ph-') + 40));
   return h;

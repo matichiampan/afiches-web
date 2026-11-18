@@ -5,6 +5,8 @@ export const UI_PT = {
   'Inicio': 'Início',
   'Servicios': 'Serviços',
   'Informes': 'Relatórios',
+  'Servicios de investigación de mercado y opinión pública': 'Serviços de pesquisa de mercado e opinião pública',
+  'Informes de opinión pública y mercado': 'Relatórios de opinião pública e mercado',
   'Preguntas frecuentes': 'Perguntas frequentes',
   'Ruta': 'Trilha de navegação',
   'Seguí explorando Afiches': 'Continue explorando a Afiches',
