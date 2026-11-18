@@ -65,12 +65,26 @@ const ICON = {
 const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">${ICON[k] || ICON.online}</svg>`;
 
 const ORG = { '@id': `${SITE}/#org` };
+// Ficha de empresa (igual @id que la de la portada): cada página interna la lleva, así los
+// buscadores y las IA que entran directo a un servicio o informe igual tienen la identidad de Afiches.
+const ORG_NODE = {
+  '@type': ['Organization', 'ProfessionalService'],
+  '@id': `${SITE}/#org`,
+  name: 'Afiches',
+  alternateName: 'Afiches Consultora',
+  url: `${SITE}/`,
+  logo: `${SITE}/afiches-logo-color.svg`,
+  email: 'info@afiches.net',
+  sameAs: ['https://www.linkedin.com/company/afiches-consultora', 'https://www.instagram.com/afiches_consultora/', 'https://x.com/AfichesAC'],
+  areaServed: [{ '@type': 'Country', name: 'Argentina' }, { '@type': 'Place', name: 'América Latina' }],
+  knowsLanguage: ['es', 'en', 'pt', 'fr'],
+};
 // alts: la dirección de esta misma página en cada idioma { es, en, pt } (selector de idioma, hreflang y redirección automática)
 function page({ lang, url, alts = { es: '/', en: '/en/', pt: '/pt/' }, title, description, body, ld = [], robots = 'index,follow,max-image-preview:large', ogImage, banner = '', current = '' }) {
   const s = shell[lang];
   const header = s.header.replace(/<!--lang-->[\s\S]*?<!--\/lang-->/, () => langSwitch(lang, alts)).replace('</header>', rail(lang, current) + '</header>');
   const og = ogImage || `${SITE}/og-afiches-${lang}.png`;
-  const graph = { '@context': 'https://schema.org', '@graph': ld };
+  const graph = { '@context': 'https://schema.org', '@graph': [ORG_NODE, ...ld] };
   return `<!doctype html>
 <html lang="${lang}" data-theme="dark">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="${robots}">

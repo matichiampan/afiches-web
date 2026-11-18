@@ -159,6 +159,7 @@ function jsonLd(lang, faqList) {
         founder: people.slice(0, 3).map(p => ({ '@id': p['@id'] })),
         employee: people.map(p => ({ '@id': p['@id'] })),
         sameAs: SOCIAL,
+        knowsLanguage: LANGS,
         knowsAbout: T(lang,
           ['Investigación de mercado', 'Opinión pública', 'Encuestas online', 'Encuestas presenciales', 'Exit polls', 'Investigación cualitativa', 'Investigación cuantitativa', 'Entrevistas con inteligencia artificial', 'Reclutamiento en redes sociales'],
           ['Market research', 'Public opinion', 'Online surveys', 'In-person surveys', 'Exit polls', 'Qualitative research', 'Quantitative research', 'AI-assisted interviews', 'Social media recruitment'],
