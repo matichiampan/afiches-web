@@ -40,7 +40,7 @@ for (const lang of LANGS) {
   const fix = s => s.replace(/href="#([a-z]+)"/g, `href="${homeUrl}#$1"`).replace(/href="#"/g, `href="${homeUrl}"`);
   shell[lang] = {
     themeInit: grab(/<script>\(\(\)=>\{let t;try\{t=localStorage\.getItem\("afiches-theme"\)[\s\S]*?<\/script>/),
-    fonts: grab(/<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">[^\n]*/),
+    fonts: grab(/<link rel="preload" href="\/fonts\/poppins-latin-400\.woff2"[^\n]*/),
     style: grab(/<style>[\s\S]*?<\/style>/),
     header: fix(grab(/<header class="site-header">[\s\S]*?<\/header>/)).replace(/<nav class="journey[^"]*"[\s\S]*?<\/nav>/, ''),
     footer: fix(grab(/<footer class="site-footer">[\s\S]*?<\/footer>/)),
