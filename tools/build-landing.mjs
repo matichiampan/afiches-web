@@ -246,8 +246,8 @@ function build(lang) {
   h = h.replace(/<p class="local-note">[\s\S]*?<\/p>/g, '');
   h = h.replace(/<div class="report-grid" id="report-grid">[\s\S]*?<\/div>/, `<div class="report-grid" id="report-grid">${studyCards(lang)}</div>`);
   if (lang !== 'es') {
-    // el video del entrevistador de IA solo existe en español e inglés: el portugués usa el de inglés
-    h = h.replace('src="/videos/afiches-ia.mp4"', 'src="/videos/afiches-ia-en.mp4"'); h = h.replace('poster="/videos/afiches-ia-es.jpg"', 'poster="/videos/afiches-ia-en.jpg"');
+    // el video del entrevistador de IA está en cada idioma: afiches-ia-en/pt/fr.mp4 (el de español es afiches-ia.mp4)
+    h = h.replace('src="/videos/afiches-ia.mp4"', `src="/videos/afiches-ia-${lang}.mp4"`); h = h.replace('poster="/videos/afiches-ia-es.jpg"', `poster="/videos/afiches-ia-${lang}.jpg"`);
     h = toLang(h, lang);
     for (const [a, b] of Object.entries({ en: ARIA_EN, pt: ARIA_PT, fr: ARIA_FR }[lang])) h = h.split(`aria-label="${a}"`).join(`aria-label="${b}"`).split(`alt="${a}"`).join(`alt="${b}"`);
     h = h.replace("theme.setAttribute('aria-label',dark?'Activar modo claro':'Activar modo oscuro');", T(lang, '', "theme.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');", "theme.setAttribute('aria-label',dark?'Ativar modo claro':'Ativar modo escuro');", "theme.setAttribute('aria-label',dark?'Activer le mode clair':'Activer le mode sombre');"));
